@@ -193,6 +193,12 @@ canvas {
     display: none
 }
 
+/** end of normalize.css */
+
+
+/** ///////////////////////////////////////////////////////////////// */
+/** rotate phone tip //////////////////////////////////////////////// */
+
 .flex {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -251,11 +257,6 @@ canvas {
     background-size: contain
 }
 
-.lock-txt {
-    font-size: 1.5em;
-    margin-top: .2rem
-}
-
 @-webkit-keyframes lock {
     0% {
         -webkit-transform: rotate(90deg)
@@ -301,6 +302,9 @@ canvas {
         display: none !important
     }
 }
+
+/** ///////////////////////////////////////////////////////////////// */
+/** ///////////////////////////////////////////////////////////////// */
 
 body, html {
     overflow: hidden;
@@ -432,10 +436,6 @@ container.safariBottomOffset {
     height: 100%;
     position: absolute;
     top: 0
-}
-
-.openPanel {
-
 }
 
 .scan-panel {
