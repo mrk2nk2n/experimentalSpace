@@ -193,12 +193,6 @@ canvas {
     display: none
 }
 
-/** end of normalize.css */
-
-
-/** ///////////////////////////////////////////////////////////////// */
-/** rotate phone tip //////////////////////////////////////////////// */
-
 .flex {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -245,16 +239,21 @@ canvas {
 }
 
 .lock {
-    background-color: black;
+    background-color: #141414;
     color: #fff;
     z-index: 9999
 }
 
 .lock-bg {
-    width: 8.02rem;
-    height: 8.38rem;
+    width: 4.02rem;
+    height: 4.38rem;
     background: url(../img/lock.png) 0 0 no-repeat;
     background-size: contain
+}
+
+.lock-txt {
+    font-size: 1.5em;
+    margin-top: .2rem
 }
 
 @-webkit-keyframes lock {
@@ -297,14 +296,11 @@ canvas {
     }
 }
 
-@media screen and (orientation:landscape) {
+@media screen and (orientation:portrait) {
     .lock {
         display: none !important
     }
 }
-
-/** ///////////////////////////////////////////////////////////////// */
-/** ///////////////////////////////////////////////////////////////// */
 
 body, html {
     overflow: hidden;
@@ -343,78 +339,40 @@ body, html {
     display: none
 }
 
-.container {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 0
-}
-
-container.safariBottomOffset {
-    margin-bottom: 7%
-}
-
-.preload {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    z-index: 20
-}
-
-#video, .preload > img, .openPanel > img {
-    margin: 0 auto;
-    /*position: fixed*/
-    position: absolute;
-    top: 0;
-    left: 0;
+.container, .preload {
     width: 100%;
     height: 100%
 }
 
-
-/* 1. No object-fit support: */
-@media (min-aspect-ratio: 16/9) {
-    #video, .preload > img, .openPanel > img {
-        height: 300%;
-        top: -100%;
-    }
+.preload {
+    position: absolute;
+    z-index: 20;
+    background: url(../img/loading.jpg) no-repeat center 30% #000;
+    background-size: contain;
+    top: 0;
+    left: 0
 }
 
-@media (max-aspect-ratio: 16/9) {
-    #video, .preload > img, .openPanel > img {
-        width: 300%;
-        left: -100%;
-    }
+#video {
+    margin: 0 auto;
+    position: fixed
 }
-
-/* 2. If supporting object-fit, overriding (1): */
-@supports (object-fit: cover) {
-    #video, .preload > img, .openPanel > img {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
 
 .bgbg {
-    /*background: url() no-repeat 50%;
+    background: url(../img/mainbg1.png) no-repeat 50%;
     background-size: 100%;
-    height: 3.31rem;*/
     width: 100%;
+    height: 3.31rem;
     position: absolute;
-    top: 46%
+    top: 56%
 }
 
 .open-camera {
     display: block;
-    background: url(../img/btn_ar.png) no-repeat;
-    background-size: contain;
-    width: 5.38rem;
-    height: 1.5rem;
+    background: url(../img/button.gif) no-repeat;
+    background-size: cover;
+    width: 3.38rem;
+    height: 4.47rem;
     left: 50%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
@@ -431,19 +389,50 @@ container.safariBottomOffset {
     display: none
 }
 
-.ioswxPanel, .openPanel{
+.ioswxPanel, .openPanel {
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0
 }
 
+.openPanel {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background: url(../img/mainbg.jpg) no-repeat center -1rem #000;
+    background-size: contain;
+    z-index: 10
+}
+
+    .openPanel .light {
+        width: 7.2rem;
+        height: 6.83rem;
+        background: url(../img/light.gif) no-repeat top;
+        background-size: 100% 100%;
+        top: -1rem
+    }
+
+    .company, .openPanel .light {
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%)
+    }
+
+.company {
+    bottom: 5%;
+    background: url(../img/mainsuppot.png) no-repeat;
+    background-size: contain;
+    width: 6.21rem;
+    height: .26rem
+}
+
 .scan-panel {
     width: 100%;
     height: 100%;
     position: fixed;
-    /*top: 0;*/
-    bottom: 0;
+    top: 0;
     left: 0;
     display: none;
     z-index: 10
@@ -452,14 +441,14 @@ container.safariBottomOffset {
     .scan-panel .scan-boder {
         background: url(../img/scan.gif) no-repeat;
         background-size: 100% 100%;
-        width: 40vw;
-        height: 55%;
+        width: 5.6rem;
+        height: 7.8rem;
         -webkit-box-sizing: content-box;
         box-sizing: content-box;
-        border-left: 15rem solid rgba(0,0,0,.7);
-        border-right: 15rem solid rgba(0,0,0,.7);
+        border-left: 5rem solid rgba(0,0,0,.7);
+        border-right: 5rem solid rgba(0,0,0,.7);
         border-bottom: 10rem solid rgba(0,0,0,.7);
-        top: 18%
+        top: 16%
     }
 
     .scan-panel .scan-boder, .scan-panel .scan-tip {
@@ -474,19 +463,19 @@ container.safariBottomOffset {
         background-size: 100% 100%;
         width: 4.24rem;
         height: .35rem;
-        top: 7%;
+        top: 8%;
         z-index: 11
     }
 
     .scan-panel .scan-top {
         position: absolute;
         width: 100%;
-        height: 18%;
+        height: 16%;
         background: rgba(0,0,0,.7)
     }
 
     .scan-panel .scan-button {
-        background: url(../img/btn_ready.png) no-repeat;
+        background: url(../img/scanok.png) no-repeat;
         background-size: 100% 100%;
         width: 6.79rem;
         height: 1.2rem;
@@ -494,7 +483,7 @@ container.safariBottomOffset {
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
         position: absolute;
-        top: 78%;
+        top: 85%;
         z-index: 110
     }
 
@@ -502,32 +491,14 @@ container.safariBottomOffset {
     width: 100%;
     height: 100%;
     position: fixed;
-    /*top: 0;*/
-    bottom: 0;
+    top: 0;
     left: 0;
     display: none;
     z-index: 11
 }
 
-    .video-panel .renyu-poster {
-        background: url(../img/renyu-poster.png) no-repeat;
-        background-size: 100% 100%;
-        width: 9.0rem;
-        height: 55vh;
-        -webkit-box-sizing: content-box;
-        box-sizing: content-box;
-        top: 18%
-    }
-
-    .video-panel .renyu-poster {
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        position: absolute
-    }
-
     .video-panel .more-button {
-        background: url(../img/btn_more.png) no-repeat;
+        background: url(../img/more.png) no-repeat;
         background-size: 100% 100%;
         width: 6.79rem;
         height: 1.2rem;
@@ -535,12 +506,12 @@ container.safariBottomOffset {
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
         position: absolute;
-        top: 78%;
+        top: 85%;
         z-index: 1
     }
 
 .intromask {
-    background-color: white;
+    background: rgba(0,0,0,.7);
     width: 100%;
     height: 100%
 }
@@ -551,68 +522,38 @@ container.safariBottomOffset {
 }
 
 .f-rbutton {
-    width: 100%;
-    height: 15%;
-    z-index: 20;
-    background-color: white
+    background: url(../img/pagebutton.png) no-repeat;
+    background-size: contain;
+    width: 1.28rem;
+    height: 4.91rem;
+    right: .3rem;
+    top: .4rem;
+    z-index: 20
 }
 
     .f-rbutton a {
-        width: 20%;
-        height: 70%;
-        background: url(../img/btn_back.png) no-repeat;
-        background-size: contain;
-        margin: auto;
-        margin-top: 3vh
+        width: .81rem;
+        height: 2.24rem
     }
 
     .f-rbutton a, .introPage .f-rbutton, .introPage .intromask {
         display: block
     }
 
-.scrollPanel {
-    width: 100%;
-    height: 150%;
-    z-index: 20;
-    background-color: white;
-    position: fixed;
-    display: none
-}
-
-.scrollPage .scrollPanel {
-    display: block
-}
-
-.scroll {
-    position: absolute;
-    z-index: 101;
-    background-color: white;
-    width: 100%;
-    height: 150%;
-    display: none
-}
-
-    .scroll .scrollTip {
-
-    }
-
-        .scroll .scrollTip img {
-
-        }
-
 .intro {
     position: absolute;
     z-index: 10;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: none;
-    background-color: white
+    height: 100%;
+    display: none
 }
 
     .intro .content {
-        width: 50%;
-        margin-left: 25%;
-        margin-top: 20vh
+        width: 5.05rem;
+        margin-left: .44rem;
+        margin-top: .7rem
     }
 
         .intro .content img {
@@ -620,11 +561,11 @@ container.safariBottomOffset {
         }
 
 .progress {
-    width: 7.85rem;
-    height: 1.54rem;
+    width: 5.85rem;
+    height: .54rem;
     position: absolute;
     left: 50%;
-    top: 40%;
+    top: 70%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     background: url(../img/progress.png) no-repeat 50%;
@@ -633,7 +574,18 @@ container.safariBottomOffset {
 
     .progress .progress-inner {
         width: 0;
-        height: 1.54rem;
+        height: .54rem;
         background: url(../img/progress1.png) no-repeat;
         background-size: 100% 100%
     }
+
+.kqz {
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background: url(../img/kaiqi.png) no-repeat 50%;
+    background-size: 100% 100%;
+    width: 1.1rem;
+    height: .29rem
