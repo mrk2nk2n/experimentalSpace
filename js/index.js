@@ -169,7 +169,6 @@
                     this.pDisplay = $(".pDisplay"),
                     this.bBack = $(".bBack"),
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
-                    this.bgAudioOgg = $("#bg-audio-ogg")
                     this.deviceId,
                     this.supportVideo = !0, 
                     this.app = new o.default, // initThree.js threejs renderer and controls
@@ -329,8 +328,7 @@
                             $("html").addClass("introPage"),
                             n.myvideo[0].pause(),
                             n.myvideo[0].currentTime = 0,
-                            n.bgAudioMp3[0].play(),
-                            n.bgAudioOgg[0].play()
+                            n.bgAudioMp3[0].play()
 
                         }), this.bBack.on("click", function () {
                             if (n.supportVideo) {
