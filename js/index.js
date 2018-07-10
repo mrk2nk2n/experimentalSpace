@@ -203,7 +203,7 @@
                         var e = $("#preload"),
                             t = $("#progress"),
                             n = $(".container"),
-                            r = "img/" + this.oid + ".jpg",
+                            r = "http://www.magicast.xyz/webar/res/media/1.jpg",
                             i = "resources/" + this.oid + ".mp4";
 
                         this.setIntroInfo(), // inserting html and src of video, intro content, intro button according to chosen chapter
@@ -223,19 +223,19 @@
                         }, this),                       
 
                         this.preload.loadManifest([{ // list of items in the manifest that needs to be preloaded
-                            src: "img/scan.gif"
+                            src: "http://www.magicast.xyz/webar/res/media/scan.gif"
                         }, {
-                            src: "img/btn_ar.png"
+                            src: "http://www.magicast.xyz/webar/res/media/btn_ar.png"
                         }, {
-                            src: "img/btn_ready.png"
+                            src: "http://www.magicast.xyz/webar/res/media/btn_ready.png"
                         }, {
-                            src: "img/btn_more.png"
+                            src: "http://www.magicast.xyz/webar/res/media/btn_more.png"
                         }, {
-                            src: "img/renyu-poster.png"
+                            src: "http://www.magicast.xyz/webar/res/media/renyu-poster.png"
                         }, {
-                            src: "img/btn_back.png"
+                            src: "http://www.magicast.xyz/webar/res/media/btn_back.png"
                         }, {
-                            src: "img/openanim-landscape2.jpg"
+                            src: "http://www.magicast.xyz/webar/res/media/openanim-landscape2.jpg"
                         }, {
                             src: i // video of chosen chapter
                         }, {
