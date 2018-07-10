@@ -47,8 +47,8 @@
                         return t.default = e, t
                     }
                 }(e("../libs/three.module.js")),
-                o = s(e("../utils/deviceorientationcontrols.js")),
-                a = s(e("./videomaterial"));
+                o = s(e("../utils/initdevicecontrols.js")),
+                a = s(e("./initvidplane"));
             e("../libs/three.module");
 
             function s(e) {
@@ -80,12 +80,12 @@
                     this.controls = new o.default(this.camera, this.renderer),
                     this.controls.connect(),
                     this.camera.rotation.x = i.Math.degToRad(45),
-                    this.videoMaterial = new a.default(this.camera, this.scene)
+                    this.initvidplane = new a.default(this.camera, this.scene)
                 }
                 return r(n, [{
                     key: "getVideo",
                     value: function () {
-                        return this.videoMaterial
+                        return this.initvidplane
                     }
                 }, {
                     key: "update",
@@ -102,8 +102,8 @@
         }, {
             "../libs/three.module": 6,
             "../libs/three.module.js": 6,
-            "../utils/deviceorientationcontrols.js": 7,
-            "./videomaterial": 3
+            "../utils/initdevicecontrols.js": 7,
+            "./initvidplane": 3
         }],
 
         ///////////////////////////////////////////////////////////////////
@@ -122,8 +122,8 @@
                     return t && r(e.prototype, t), n && r(e, n), e
                 }
             }(),
-                i = a(e("./webar")),
-                o = a(e("./farmerapp.js"));
+                i = a(e("./initAR")),
+                o = a(e("./initThree.js"));
             ! function (e) {
                 {
                     if (e && e.__esModule) return;
@@ -151,28 +151,32 @@
                     this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
                     this.iosversion = e.match(/os\s+(\d+)/i) || !1,
                     this.winHeight = window.innerHeight,
-                    this.webAR = new i.default,
+
+                        // html references
+                        // pages+ buttons
+                    this.initAR = new i.default,
                     this.preload = new createjs.LoadQueue(!1),
                     this.bodyElement = $("#body"),
-                    this.startPanel = $(".openPanel"),
-                    this.scanPanel = $(".scan-panel"),
-                    this.posterPanel = $(".poster-panel"),
-                    this.btnOpenCamera = $("#openCamera"),
+
+                    this.pStartAR = $(".pStartAR"),
+                    this.pScanning = $(".pScanning"),
+                    this.posterBox = $(".posterBox"),
+                    this.bStartAR = $("#bStartAR"),
                     this.video = $("#video")[0],
-                    this.scanButon = $(".scan-button"),
-                    this.introPanel = $(".intro"),
-                    this.moreButton = $(".more-button"), 
-                    this.videoPanel = $(".video-panel"), 
-                    this.returnVideo = $(".returnVideo"), 
+                    this.bReady = $(".bReady"),
+                    this.pIntro = $(".pIntro"),
+                    this.bMore = $(".bMore"),
+                    this.pDisplay = $(".pDisplay"),
+                    this.bBack = $(".bBack"),
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
                     this.bgAudioOgg = $("#bg-audio-ogg")
                     this.deviceId,
                     this.supportVideo = !0, 
-                    this.app = new o.default, // farmerapp.js threejs renderer and controls
+                    this.app = new o.default, // initThree.js threejs renderer and controls
                     this.app.update(), 
                     this.threeContainer = $("#threecontainer"), 
                     this.urlSearch = window.location.search, 
-                    this.myvideo = $("#myvideo"), 
+                    this.myvideo = $("#myvideo"),
                     this.onVideoPlaying = this.onPlaying.bind(this), 
                     this.myvideo[0].addEventListener("playing", this.onVideoPlaying, !1), 
                     this.oid = this.getQueryString("oid") || "1",
@@ -200,9 +204,9 @@
                 }, {
                     key: "preloader",
                     value: function () {
-                        var e = $("#preload"),
+                        var e = $("#pLoading"),
                             t = $("#progress"),
-                            n = $(".container"),
+                            n = $(".contentBox"),
                             r = "http://www.magicast.xyz/webar/res/media/1.jpg",
                             i = "resources/" + this.oid + ".mp4";
 
@@ -251,7 +255,7 @@
                     value: function () {
                         var t = this,
                             n = this;
-                        this.webAR.listCamera().then(function (e) { // call listcamera function from EasyAR module 4
+                        this.initAR.listCamera().then(function (e) { // call listcamera function from EasyAR module 4
                             n.isAndroid ? n.deviceId = e[e.length - 1].deviceId : n.isIphone && (n.deviceId = e[0].deviceId) // choose camera accordingly when iPhone and Android
                         }).catch(function (e) {
                             t.fail()
@@ -288,39 +292,39 @@
                     key: "bindEvent", // event that start displaying the camera feed
                     value: function () {
                         var n = this;
-                        this.btnOpenCamera.on("click", function () {
-                            if (n.startPanel.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
+                        this.bStartAR.on("click", function () {
+                            if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
                                 n.myvideo[0].play(),
                                 n.openCamera(),
-                                n.scanPanel.show();
+                                n.pScanning.show();
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
-                                n.videoPanel.show(),
+                                n.pDisplay.show(),
                                 $("#video").hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
                                 n.app.getVideo().show(e, t), // returns the video material
                                 n.scan() // show demo video display
                             }
-                        }), this.scanButon.on("click", function () { // when button on scanning page is clicked                          
-                            var e = $(".scan-boder").offset().top,
-                                t = $(".scan-boder").height();
+                        }), this.bReady.on("click", function () { // when button on scanning page is clicked                          
+                            var e = $(".scanBody").offset().top,
+                                t = $(".scanBody").height();
                                                             
                             n.scan() // show demo video display
                             
                             window.setTimeout(function () { // wait for two seconds                     
-                                n.posterPanel.hide(),
+                                n.posterBox.hide(),
                                 n.myvideo[0].play(),
                                 n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
                             }, 1000)
 
                             window.setTimeout(function () { // wait for two seconds                     
-                                n.moreButton.show()
+                                n.bMore.show()
                             }, 5000)
 
-                        }), this.moreButton.on("click", function () {
-                            n.videoPanel.hide(),
-                            n.introPanel.show(),
+                        }), this.bMore.on("click", function () {
+                            n.pDisplay.hide(),
+                            n.pIntro.show(),
                             n.app.getVideo().hide(),
                             $("html").addClass("introPage"),
                             n.myvideo[0].pause(),
@@ -328,15 +332,15 @@
                             n.bgAudioMp3[0].play(),
                             n.bgAudioOgg[0].play()
 
-                        }), this.returnVideo.on("click", function () {
+                        }), this.bBack.on("click", function () {
                             if (n.supportVideo) {
-                                n.videoPanel.hide(),
-                                n.introPanel.hide(),
+                                n.pDisplay.hide(),
+                                n.pIntro.hide(),
                                 $("html").removeClass("introPage"),
-                                n.scanPanel.show();
+                                n.pScanning.show();
                             }
                             else {
-                                n.introPanel.hide();
+                                n.pIntro.hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
                                 n.app.getVideo().show(e, t), n.scan()
@@ -359,21 +363,21 @@
                 }, {
                     key: "scan", // to display video and hide scanning gif
                     value: function () {
-                        //this.moreButton.show(),
-                        this.moreButton.hide(),
-                        this.scanPanel.hide(),
-                        this.posterPanel.show(),
-                        this.videoPanel.show(),
+                        //this.bMore.show(),
+                        this.bMore.hide(),
+                        this.pScanning.hide(),
+                        this.posterBox.show(),
+                        this.pDisplay.show(),
                         $("html").removeClass("introPage"),
                         this.myvideo[0].removeEventListener("playing", this.onVideoPlaying),
-                        this.videoPanel.css("background", "none"),
+                        this.pDisplay.css("background", "none"),
                         console.log("started lf app!")
                     }
                 }, {
                     key: "openCamera",
                     value: function () {
                         console.log(this.deviceId),
-                        this.webAR.openCamera(this.video, this.deviceId).then(function (e) {
+                        this.initAR.openCamera(this.video, this.deviceId).then(function (e) {
                             video.setAttribute("height", window.innerHeight.toString() + "px")
                         }).catch(function (e) {
                             alert("打开视频设备失败")
@@ -390,8 +394,8 @@
             }())
         }, {
             "../libs/three.module.js": 6,
-            "./farmerapp.js": 1,
-            "./webar": 4
+            "./initThree.js": 1,
+            "./initAR": 4
         }],
         3: [function (e, t, n) {
             "use strict";
