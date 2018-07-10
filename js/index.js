@@ -217,7 +217,7 @@
                             t = $("#progress"),
                             n = $(".container"),
                             r = "http://www.magicast.xyz/morphomrweba/img/1.jpg",
-                            i = "http://www.magicast.xyz/morphomrweba/resources/1.mp4";
+                            i = "resources/1.mp4";
 
                         this.assignContent(), // inserting html and src of video, intro content, intro button according to chosen chapter
 
@@ -334,9 +334,7 @@
                             n.app.getVideo().hide(),
                             $("html").addClass("introPage"),
                             n.myvideo[0].pause(),
-                            n.myvideo[0].currentTime = 0,
-                            n.bgAudioMp3[0].play(),
-                            n.bgAudioOgg[0].play()
+                            n.myvideo[0].currentTime = 0
 
                         }), this.returnVideo.on("click", function () {
                             if (n.supportVideo) {
@@ -357,7 +355,7 @@
                 }, {
                     key: "assignContent",
                     value: function () {
-                        $("#myvideo").html('<source src="http://www.magicast.xyz/morphomrweba/resources/1.mp4"/>'),
+                        $("#myvideo").html('<source src="resources/1.mp4"/>'),
                         $(".intro .content").html('<img src="http://www.magicast.xyz/morphomrweba/img/1.jpg"/>')
                     }
                 }, {
