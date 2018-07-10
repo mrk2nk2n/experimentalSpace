@@ -280,8 +280,6 @@
                             document.getElementById("scan-button").style.top = "66%",
                             document.getElementById("renyu-poster").style.top = "8%",
                             document.getElementById("more-button").style.top = "66%",
-                            document.getElementById("bg-audio-ogg").removeAttribute("src"),
-                            document.getElementById("bg-audio-mp3").removeAttribute("src"),
                             document.ontouchmove = function (event) {
                                 event.preventDefault();
                             }
@@ -17551,16 +17549,16 @@
                 value: !0
             }), n.default = void 0;
             var r = function () {
-                function r(e, t) {
-                    for (var n = 0; n < t.length; n++) {
-                        var r = t[n];
-                        r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
+                    function r(e, t) {
+                        for (var n = 0; n < t.length; n++) {
+                            var r = t[n];
+                            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
+                        }
                     }
-                }
-                return function (e, t, n) {
-                    return t && r(e.prototype, t), n && r(e, n), e
-                }
-            }(),
+                    return function (e, t, n) {
+                        return t && r(e.prototype, t), n && r(e, n), e
+                    }
+                }(),
                 c = function (e) {
                     {
                         if (e && e.__esModule) return e;
@@ -17574,90 +17572,75 @@
             function i(e, t) {
                 if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
             }
-            var mouseHandler = function () {
-                function n(e, t) {
-                    i(this, n), this.camera = e, this.renderer = t, this.rotating = !1, this.startDirection = new c.Vector3, this.movingDirection = new c.Vector3, this.startCamera = new c.Camera, this.deltaQuaternion = new c.Quaternion, this.onMouseDown = this.createOnMouseDownHandler(), this.onMouseMove = this.createOnMouseMoveHandler(), this.onMouseUp = this.createOnMouseUpHandler()
-                }
-                return r(n, [{
-                    key: "calcDirection",
-                    value: function (e, t) {
-                        var n = this.renderer.domElement.getBoundingClientRect(),
-                            r = (e.pageX - n.left) / n.width * 2 - 1,
-                            i = -(e.pageY - n.top) / n.height * 2 + 1;
-                        return t.set(r, i, .5).unproject(this.startCamera).sub(this.startCamera.position).normalize()
-                    }
-                }, {
-                    key: "createOnMouseDownHandler",
-                    value: function () {
-                        var t = this;
-                        return function (e) {
-                            e.ctrlKey || 0 !== e.button || (t.rotating = !0, t.startCamera.copy(t.camera),
-                                t.calcDirection(e, t.startDirection),
-                                t.deltaQuaternion.set(0, 0, 0, 1),
-                                document.addEventListener("mousemove", t.onMouseMove),
-                                document.addEventListener("mouseup", t.onMouseUp),
-                                e.preventDefault())
-                        }
-                    }
-                }, {
-                    key: "createOnMouseMoveHandler",
-                    value: function () {
-                        var t = this;
-                        return function (e) {
-                            t.rotating && (t.calcDirection(e, t.movingDirection),
-                                t.deltaQuaternion.setFromUnitVectors(t.movingDirection, t.startDirection),
-                                e.preventDefault())
-                        }
-                    }
-                }, {
-                    key: "createOnMouseUpHandler",
-                    value: function () {
-                        var t = this;
-                        return function (e) {
-                            t.rotating = !1, document.removeEventListener("mousemove", t.onMouseMove), document.removeEventListener("mouseup", t.onMouseUp), e.preventDefault()
-                        }
-                    }
-                }, {
-                    key: "connect",
-                    value: function () {
-                        document.addEventListener("mousedown", this.onMouseDown)
-                    }
-                }, {
-                    key: "update",
-                    value: function () {
-                        var e, t, n, r;
-                        this.rotating && (this.camera.quaternion.copy(this.startCamera.quaternion),
-                            this.camera.quaternion.premultiply(this.deltaQuaternion),
-                            e = this.camera.quaternion,
-                            t = new c.Vector3(0, 0, 1).applyQuaternion(e),
-                            n = new c.Vector3(0, 1, 0),
-                            r = (new c.Vector3).crossVectors(n, t).normalize(),
-                            n.crossVectors(t, r).normalize(),
-                            e.setFromRotationMatrix((new c.Matrix4).makeBasis(r, n, t)))
-                    }
-                }, {
-                    key: "disconnect",
-                    value: function () {
-                        document.removeEventListener("mousedown", this.onMouseDown)
-                    }
-                }]), n
-            }(),
-                initdevicecontrols = function () {
+            var o = function () {
                     function n(e, t) {
-                        i(this, n), this.renderers = [t],
-                            this.canvas = t.domElement,
-                            this.camera = e,
-                            this.camera.rotation.reorder("YXZ"),
-                            this.enabled = !0,
-                            this.deviceOrientation = {},
-                            this.alphaOffsetAngle = 0,
-                            this.tagOrientation = 0,
-                            this.tanPerHeight = 2 * Math.tan(c.Math.degToRad(.5 * e.fov)) / this.canvas.offsetHeight,
-                            this.deviceOrientationCallback = this.onDeviceOrientation.bind(this),
-                            this.resizeCallback = this.onResize.bind(this),
-                            this.fallbackControl = new mouseHandler(e, t)
+                        i(this, n), this.camera = e, this.renderer = t, this.rotating = !1, this.startDirection = new c.Vector3, this.movingDirection = new c.Vector3, this.startCamera = new c.Camera, this.deltaQuaternion = new c.Quaternion, this.onMouseDown = this.createOnMouseDownHandler(), this.onMouseMove = this.createOnMouseMoveHandler(), this.onMouseUp = this.createOnMouseUpHandler()
                     }
                     return r(n, [{
+                        key: "calcDirection",
+                        value: function (e, t) {
+                            var n = this.renderer.domElement.getBoundingClientRect(),
+                                r = (e.pageX - n.left) / n.width * 2 - 1,
+                                i = -(e.pageY - n.top) / n.height * 2 + 1;
+                            return t.set(r, i, .5).unproject(this.startCamera).sub(this.startCamera.position).normalize()
+                        }
+                    }, {
+                        key: "createOnMouseDownHandler",
+                        value: function () {
+                            var t = this;
+                            return function (e) {
+                                e.ctrlKey || 0 !== e.button || (t.rotating = !0, t.startCamera.copy(t.camera), t.calcDirection(e, t.startDirection), t.deltaQuaternion.set(0, 0, 0, 1), document.addEventListener("mousemove", t.onMouseMove), document.addEventListener("mouseup", t.onMouseUp), e.preventDefault())
+                            }
+                        }
+                    }, {
+                        key: "createOnMouseMoveHandler",
+                        value: function () {
+                            var t = this;
+                            return function (e) {
+                                t.rotating && (t.calcDirection(e, t.movingDirection), t.deltaQuaternion.setFromUnitVectors(t.movingDirection, t.startDirection), e.preventDefault())
+                            }
+                        }
+                    }, {
+                        key: "createOnMouseUpHandler",
+                        value: function () {
+                            var t = this;
+                            return function (e) {
+                                t.rotating = !1, document.removeEventListener("mousemove", t.onMouseMove), document.removeEventListener("mouseup", t.onMouseUp), e.preventDefault()
+                            }
+                        }
+                    }, {
+                        key: "connect",
+                        value: function () {
+                            document.addEventListener("mousedown", this.onMouseDown)
+                        }
+                    }, {
+                        key: "update",
+                        value: function () {
+                            var e, t, n, r;
+                            this.rotating && (this.camera.quaternion.copy(this.startCamera.quaternion), this.camera.quaternion.premultiply(this.deltaQuaternion), e = this.camera.quaternion, t = new c.Vector3(0, 0, 1).applyQuaternion(e), n = new c.Vector3(0, 1, 0), r = (new c.Vector3).crossVectors(n, t).normalize(), n.crossVectors(t, r).normalize(), e.setFromRotationMatrix((new c.Matrix4).makeBasis(r, n, t)))
+                        }
+                    }, {
+                        key: "disconnect",
+                        value: function () {
+                            document.removeEventListener("mousedown", this.onMouseDown)
+                        }
+                    }, {
+                        key: "dispose",
+                        value: function () {
+                            this.disconnect()
+                        }
+                    }]), n
+                }(),
+                a = function () {
+                    function n(e, t) {
+                        i(this, n), this.renderers = [t], this.canvas = t.domElement, this.camera = e, this.camera.rotation.reorder("YXZ"), this.enabled = !0, this.deviceOrientation = {}, this.alphaOffsetAngle = 0, this.tagOrientation = 0, this.tanPerHeight = 2 * Math.tan(c.Math.degToRad(.5 * e.fov)) / this.canvas.offsetHeight, this.deviceOrientationCallback = this.onDeviceOrientation.bind(this), this.resizeCallback = this.onResize.bind(this), this.fallbackControl = new o(e, t)
+                    }
+                    return r(n, [{
+                        key: "addRenderer",
+                        value: function (e) {
+                            this.renderers.push(e), e.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight, !1)
+                        }
+                    }, {
                         key: "onDeviceOrientation",
                         value: function (e) {
                             this.deviceOrientation = e
@@ -17666,10 +17649,7 @@
                         key: "onResize",
                         value: function () {
                             var t = this;
-                            this.camera.aspect = this.canvas.offsetWidth / this.canvas.offsetHeight,
-                                this.camera.fov = 2 * c.Math.radToDeg(Math.atan(.5 * this.canvas.offsetHeight * this.tanPerHeight)),
-                                this.camera.updateProjectionMatrix(),
-                                this.renderers.forEach(function (e) {
+                            this.camera.aspect = this.canvas.offsetWidth / this.canvas.offsetHeight, this.camera.fov = 2 * c.Math.radToDeg(Math.atan(.5 * this.canvas.offsetHeight * this.tanPerHeight)), this.camera.updateProjectionMatrix(), this.renderers.forEach(function (e) {
                                 e.setSize(t.canvas.offsetWidth, t.canvas.offsetHeight, !1)
                             }), this.onResizeExt && this.onResizeExt(this.canvas.width, this.canvas.height)
                         }
@@ -17680,18 +17660,22 @@
                                 o = new c.Euler,
                                 a = new c.Quaternion,
                                 s = new c.Quaternion(-Math.sqrt(.5), 0, 0, Math.sqrt(.5));
-                            o.set(t, e, -n, "YXZ"),
-                                this.camera.quaternion.setFromEuler(o),
-                                this.camera.quaternion.multiply(s),
-                                this.camera.quaternion.multiply(a.setFromAxisAngle(i, -r))
+                            o.set(t, e, -n, "YXZ"), this.camera.quaternion.setFromEuler(o), this.camera.quaternion.multiply(s), this.camera.quaternion.multiply(a.setFromAxisAngle(i, -r))
                         }
                     }, {
                         key: "connect",
                         value: function () {
-                            window.addEventListener("resize", this.resizeCallback, !1),
-                                window.addEventListener("deviceorientation", this.deviceOrientationCallback, !1),
-                                this.enabled = !0,
-                                this.fallbackControl && this.fallbackControl.connect()
+                            window.addEventListener("resize", this.resizeCallback, !1), window.addEventListener("deviceorientation", this.deviceOrientationCallback, !1), this.enabled = !0, this.fallbackControl && this.fallbackControl.connect()
+                        }
+                    }, {
+                        key: "disconnect",
+                        value: function () {
+                            window.removeEventListener("resize", this.resizeCallback, !1), window.removeEventListener("deviceorientation", this.deviceOrientationCallback, !1), this.enabled = !1, this.fallbackControl && this.fallbackControl.disconnect()
+                        }
+                    }, {
+                        key: "disableOrientation",
+                        value: function () {
+                            window.removeEventListener("deviceorientation", this.deviceOrientationCallback, !1), this.enabled = !1, this.fallbackControl && this.fallbackControl.disconnect()
                         }
                     }, {
                         key: "update",
@@ -17706,9 +17690,24 @@
                                     this.updateCamera(e, t, n, r)
                                 } else this.fallbackControl && this.fallbackControl.update()
                         }
+                    }, {
+                        key: "setAlphaOffsetAngle",
+                        value: function (e) {
+                            this.alphaOffsetAngle = e
+                        }
+                    }, {
+                        key: "updateTagOrientation",
+                        value: function (e) {
+                            this.tagOrientation = e
+                        }
+                    }, {
+                        key: "dispose",
+                        value: function () {
+                            this.disconnect()
+                        }
                     }]), n
                 }();
-            n.default = initdevicecontrols
+            n.default = a
         }, {
             "../libs/three.module.js": 6
         }]
