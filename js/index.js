@@ -1,13 +1,6 @@
 ﻿// JavaScript source code
-        ////////////////////////
-        ////////////////////////
-        ////////////////////////
-        ////////////////////////
-        ////////////////////////
-        ////////////////////////
-        ////////////////////////
-        ////////////////////////
-    ! function o(a, s, c) {
+
+   ! function o(a, s, c) {
         function l(t, e) {
             if (!s[t]) {
                 if (!a[t]) {
@@ -54,8 +47,8 @@
                         return t.default = e, t
                     }
                 }(e("../libs/three.module.js")),
-                o = s(e("../utils/initdevicecontrols.js")),
-                a = s(e("./initvidplane"));
+                o = s(e("../utils/deviceorientationcontrols.js")),
+                a = s(e("./videomaterial"));
             e("../libs/three.module");
 
             function s(e) {
@@ -63,7 +56,7 @@
                     default: e
                 }
             }
-            var initThree = function () {
+            var c = function () {
                 function n() {
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
@@ -85,14 +78,14 @@
                     this.renderer.setSize(this.canvas.offsetWidth,
                     this.canvas.offsetHeight, !1),
                     this.controls = new o.default(this.camera, this.renderer),
-                    // this.controls.connect(),
+                    this.controls.connect(),
                     this.camera.rotation.x = i.Math.degToRad(45),
-                    this.initvidplane = new a.default(this.camera, this.scene)
+                    this.videoMaterial = new a.default(this.camera, this.scene)
                 }
                 return r(n, [{
                     key: "getVideo",
                     value: function () {
-                        return this.initvidplane
+                        return this.videoMaterial
                     }
                 }, {
                     key: "update",
@@ -105,12 +98,12 @@
                     }
                 }]), n
             }();
-            n.default = initThree
+            n.default = c
         }, {
             "../libs/three.module": 6,
             "../libs/three.module.js": 6,
-            "../utils/initdevicecontrols.js": 7,
-            "./initvidplane": 3
+            "../utils/deviceorientationcontrols.js": 7,
+            "./videomaterial": 3
         }],
 
         ///////////////////////////////////////////////////////////////////
@@ -129,8 +122,8 @@
                     return t && r(e.prototype, t), n && r(e, n), e
                 }
             }(),
-                i = a(e("./initAR")),
-                o = a(e("./initThree.js"));
+                i = a(e("./webar")),
+                o = a(e("./farmerapp.js"));
             ! function (e) {
                 {
                     if (e && e.__esModule) return;
@@ -151,7 +144,6 @@
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, t);
-                    // check compatibility
                     var e = navigator.userAgent.toLowerCase();
                     this.isAndroid = /android/i.test(e),
                     this.isIphone = /(iPhone|iPad|iPod|iOS)/i.test(e),
@@ -159,67 +151,62 @@
                     this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent),
                     this.iosversion = e.match(/os\s+(\d+)/i) || !1,
                     this.winHeight = window.innerHeight,
-                        // html references
-                        // pages + buttons
-                    this.initAR = new i.default,
+                    this.webAR = new i.default,
                     this.preload = new createjs.LoadQueue(!1),
                     this.bodyElement = $("#body"),
-                    this.pStart = $(".openPanel"),
-                    this.bStartAR = $("#openCamera"),
-                    this.pScan = $(".scan-panel"),
-                    this.bReady = $(".scan-button"),
-                    this.pDisplay = $(".video-panel"),
-                    this.posterBox = $(".poster-panel"),
-                    this.bMore = $(".more-button"),
-
-                    this.pIntro = $(".intro"),
-
+                    this.startPanel = $(".openPanel"),
+                    this.scanPanel = $(".scan-panel"),
+                    this.posterPanel = $(".poster-panel"),
+                    this.btnOpenCamera = $("#openCamera"),
                     this.video = $("#video")[0],
+                    this.scanButon = $(".scan-button"),
+                    this.introPanel = $(".intro"),
+                    this.moreButton = $(".more-button"), 
+                    this.videoPanel = $(".video-panel"), 
                     this.returnVideo = $(".returnVideo"), 
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
                     this.bgAudioOgg = $("#bg-audio-ogg")
                     this.deviceId,
                     this.supportVideo = !0, 
-                    this.app = new o.default, // initThree.js threejs renderer and controls
+                    this.app = new o.default, // farmerapp.js threejs renderer and controls
                     this.app.update(), 
                     this.threeContainer = $("#threecontainer"), 
-                    this.urlSearch = window.location.search,
-                    this.myvideo = $("#myvideo"),
-                    this.onVideoPlaying = this.vidPlaying.bind(this),
-                    this.myvideo[0].addEventListener("playing", this.onVideoPlaying, !1),
+                    this.urlSearch = window.location.search, 
+                    this.myvideo = $("#myvideo"), 
+                    this.onVideoPlaying = this.onPlaying.bind(this), 
+                    this.myvideo[0].addEventListener("playing", this.onVideoPlaying, !1), 
                     this.oid = this.getQueryString("oid") || "1",
                     this.urlMap = {
                         1: "http://news.sina.com.cn/c/2012-05-28/010024488046.shtml",
                         2: "http://news.sina.com.cn/c/2012-05-28/010024488046.shtml"
                     }, this.handleSafariCheck(),
                     //this.getWindowSize(),
-                    this.loadController(),
-                    this.checkCamera(),
-                    this.pageEventController(),
-                    this.isAndroid && (this.resizeCallback = this.setVidHeight.bind(this),
+                    this.preloader(), 
+                    this.checkCamera(), 
+                    this.bindEvent(),
+                    this.isAndroid && (this.resizeCallback = this.onResize.bind(this), 
                     window.addEventListener("resize", this.resizeCallback, !1))
                 }
                 return r(t, [{
-                    key: "vidPlaying",
+                    key: "onPlaying",
                     value: function () {
                         this.myvideo[0].pause()
                     }
                 }, {
-                    key: "setVidHeight",
+                    key: "onResize",
                     value: function () {
-                        console.log("window height = " + window.innerHeight);
-                        this.video.style.height = window.innerHeight + "px";
+                        console.log("window height = " + window.innerHeight), this.video.style.height = window.innerHeight + "px"
                     }
                 }, {
-                    key: "loadController",
+                    key: "preloader",
                     value: function () {
                         var e = $("#preload"),
                             t = $("#progress"),
                             n = $(".container"),
-                            r = "http://www.magicast.xyz/morphomrweba/img/1.jpg",
-                            i = "resources/1.mp4";
+                            r = "img/" + this.oid + ".jpg",
+                            i = "resources/" + this.oid + ".mp4";
 
-                        this.assignContent(), // inserting html and src of video, intro content, intro button according to chosen chapter
+                        this.setIntroInfo(), // inserting html and src of video, intro content, intro button according to chosen chapter
 
                         this.preload.installPlugin(createjs.Sound),
 
@@ -236,19 +223,19 @@
                         }, this),                       
 
                         this.preload.loadManifest([{ // list of items in the manifest that needs to be preloaded
-                            src: "http://www.magicast.xyz/morphomrweba/img/scan.gif"
+                            src: "img/scan.gif"
                         }, {
-                            src: "http://www.magicast.xyz/morphomrweba/img/btn_ar.png"
+                            src: "img/btn_ar.png"
                         }, {
-                            src: "http://www.magicast.xyz/morphomrweba/img/btn_ready.png"
+                            src: "img/btn_ready.png"
                         }, {
-                            src: "http://www.magicast.xyz/morphomrweba/img/btn_more.png"
+                            src: "img/btn_more.png"
                         }, {
-                            src: "http://www.magicast.xyz/morphomrweba/img/renyu-poster.png"
+                            src: "img/renyu-poster.png"
                         }, {
-                            src: "http://www.magicast.xyz/morphomrweba/img/btn_back.png"
+                            src: "img/btn_back.png"
                         }, {
-                            src: "http://www.magicast.xyz/morphomrweba/img/openanim-landscape2.jpg"
+                            src: "img/openanim-landscape2.jpg"
                         }, {
                             src: i // video of chosen chapter
                         }, {
@@ -260,7 +247,7 @@
                     value: function () {
                         var t = this,
                             n = this;
-                        this.initAR.listCamera().then(function (e) { // call listcamera function from EasyAR module 4
+                        this.webAR.listCamera().then(function (e) { // call listcamera function from EasyAR module 4
                             n.isAndroid ? n.deviceId = e[e.length - 1].deviceId : n.isIphone && (n.deviceId = e[0].deviceId) // choose camera accordingly when iPhone and Android
                         }).catch(function (e) {
                             t.fail()
@@ -280,6 +267,7 @@
                             document.getElementById("scan-button").style.top = "66%",
                             document.getElementById("renyu-poster").style.top = "8%",
                             document.getElementById("more-button").style.top = "66%",
+                            document.getElementById("bg-audio-mp3").removeAttribute("src"),
                             document.ontouchmove = function (event) {
                                 event.preventDefault();
                             }
@@ -293,68 +281,70 @@
                         alert("windowHeight: " + t + " windowWidth: " + n + " windowOuterHeight " + o);
                     }
                 }, {
-                    key: "pageEventController", // event that start displaying the camera feed
+                    key: "bindEvent", // event that start displaying the camera feed
                     value: function () {
                         var n = this;
-                        this.bStartAR.on("click", function () {
-                            if (n.pStart.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
+                        this.btnOpenCamera.on("click", function () {
+                            if (n.startPanel.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
                                 n.myvideo[0].play(),
-                                n.startARDisplay(),
-                                n.pScan.show();
+                                n.openCamera(),
+                                n.scanPanel.show();
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
-                                n.pDisplay.show(),
+                                n.videoPanel.show(),
                                 $("#video").hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
                                 n.app.getVideo().show(e, t), // returns the video material
-                                n.scanController() // show demo video display
+                                n.scan() // show demo video display
                             }
-                        }), this.bReady.on("click", function () { // when button on scanning page is clicked
+                        }), this.scanButon.on("click", function () { // when button on scanning page is clicked                          
                             var e = $(".scan-boder").offset().top,
                                 t = $(".scan-boder").height();
                                                             
-                            n.scanController() // show demo video display
+                            n.scan() // show demo video display
                             
                             window.setTimeout(function () { // wait for two seconds                     
-                                n.posterBox.hide(),
+                                n.posterPanel.hide(),
                                 n.myvideo[0].play(),
                                 n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
                             }, 1000)
 
                             window.setTimeout(function () { // wait for two seconds                     
-                                n.bMore.show()
+                                n.moreButton.show()
                             }, 5000)
 
-                        }), this.bMore.on("click", function () {
-                            n.pDisplay.hide(),
-                            n.pIntro.show(),
+                        }), this.moreButton.on("click", function () {
+                            n.videoPanel.hide(),
+                            n.introPanel.show(),
                             n.app.getVideo().hide(),
                             $("html").addClass("introPage"),
                             n.myvideo[0].pause(),
-                            n.myvideo[0].currentTime = 0
+                            n.myvideo[0].currentTime = 0,
+                            n.bgAudioMp3[0].play(),
+                            n.bgAudioOgg[0].play()
 
                         }), this.returnVideo.on("click", function () {
                             if (n.supportVideo) {
-                                n.pDisplay.hide(),
-                                n.pIntro.hide(),
+                                n.videoPanel.hide(),
+                                n.introPanel.hide(),
                                 $("html").removeClass("introPage"),
-                                n.pScan.show();
+                                n.scanPanel.show();
                             }
                             else {
-                                n.pIntro.hide();
+                                n.introPanel.hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
-                                n.app.getVideo().show(e, t);
-                                n.scanController();
+                                n.app.getVideo().show(e, t), n.scan()
                             }
                         })
                     }
                 }, {
-                    key: "assignContent",
+                    key: "setIntroInfo",
                     value: function () {
-                        $("#myvideo").html('<source src="resources/1.mp4"/>'),
-                        $(".intro .content").html('<img src="http://www.magicast.xyz/morphomrweba/img/1.jpg"/>')
+                        $("#myvideo").html('<source src="resources/' + this.oid + '.mp4"/>'),
+                        $(".intro .content").html('<img src="img/' + this.oid + '.jpg"/>'),
+                        $(".intro .introbutton").attr("href", this.urlMap[this.oid])
                     }
                 }, {
                     key: "fail",
@@ -363,23 +353,23 @@
                         this.isIphone && this.isWeChat && this.iosversion ? $(".ioswxPanel").show() : this.supportVideo = !1
                     }
                 }, {
-                    key: "scanController", // to display video and hide scanning gif
+                    key: "scan", // to display video and hide scanning gif
                     value: function () {
-                        //this.bMore.show(),
-                        this.bMore.hide(),
-                        this.pScan.hide(),
-                        this.posterBox.show(),
-                        this.pDisplay.show(),
+                        //this.moreButton.show(),
+                        this.moreButton.hide(),
+                        this.scanPanel.hide(),
+                        this.posterPanel.show(),
+                        this.videoPanel.show(),
                         $("html").removeClass("introPage"),
                         this.myvideo[0].removeEventListener("playing", this.onVideoPlaying),
-                        this.pDisplay.css("background", "none"),
+                        this.videoPanel.css("background", "none"),
                         console.log("started lf app!")
                     }
                 }, {
-                    key: "startARDisplay",
+                    key: "openCamera",
                     value: function () {
                         console.log(this.deviceId),
-                        this.initAR.openCamera(this.video, this.deviceId).then(function (e) {
+                        this.webAR.openCamera(this.video, this.deviceId).then(function (e) {
                             video.setAttribute("height", window.innerHeight.toString() + "px")
                         }).catch(function (e) {
                             alert("打开视频设备失败")
@@ -396,10 +386,9 @@
             }())
         }, {
             "../libs/three.module.js": 6,
-            "./initThree.js": 1,
-            "./initAR": 4
+            "./farmerapp.js": 1,
+            "./webar": 4
         }],
-        // initVidPlane
         3: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -431,13 +420,11 @@
                     }
                 }(e("../libs/three.module.js"));
 
-            var initvidplane = function () {
+            var c = function () {
                 function n(e, t) {
-
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, n),
-
                     this.width = 512,
                     this.height = 201,
                     this.scale = 368 / this.width,
@@ -455,9 +442,9 @@
                 }
                 return i(n, [{
                     key: "show",
-                    value: function (k, e) {
-                        var n = this.height * (.5 * window.innerHeight - (k + .5 * e)) / e,
-                            r = -this.height * window.innerHeight / (2 * e * Math.tan(s.Math.degToRad(.5 * this.camera.fov)));
+                    value: function (e, t) {
+                        var n = this.height * (.5 * window.innerHeight - (e + .5 * t)) / t,
+                            r = -this.height * window.innerHeight / (2 * t * Math.tan(s.Math.degToRad(.5 * this.camera.fov)));
                         this.mesh.position.set(0, n, r),
                         this.camera.updateMatrixWorld(!0),
                         this.camera.localToWorld(this.mesh.position),
@@ -471,7 +458,7 @@
                     }
                 }]), n
             }();
-            n.default = initvidplane
+            n.default = c
         }, {
             "../libs/jquery-3.3.1.js": 5,
             "../libs/three.module.js": 6
@@ -481,8 +468,8 @@
             Object.defineProperty(n, "__esModule", {
                 value: !0
             });
-
-            n.default = function initAR () {
+            n.default = function (e, r) {
+                e = e || 1e3, r = r || "";
                 var i = {
                     width: 320,
                     height: 240
@@ -494,12 +481,7 @@
                     l = !1;
                 this.unSupport = void 0, this.devices = [];
                 var t = document.createElement("div");
-                t.setAttribute("id", "debug"),
-                    t.setAttribute("width", (window.innerWidth / 2).toString()),
-                    t.setAttribute("height", window.innerHeight.toString()),
-                    document.body.appendChild(t),
-
-                    this.listCamera = function () {
+                t.setAttribute("id", "debug"), t.setAttribute("width", (window.innerWidth / 2).toString()), t.setAttribute("height", window.innerHeight.toString()), document.body.appendChild(t), this.listCamera = function () {
                     var r = this;
                     return new Promise(function (t, n) {
                         navigator.mediaDevices.enumerateDevices().then(function (e) {
@@ -515,8 +497,7 @@
                         })
                     })
                 }, this.openCamera = function (e, t, n) {
-                    o = e,
-                    n && (i = n);
+                    o = e, n && (i = n);
                     var r = {
                         audio: !1,
                         video: {
@@ -525,8 +506,7 @@
                             }
                         }
                     };
-                    return a.setAttribute("width", i.width + "px"), a.setAttribute("height", i.height + "px"),
-                    o.srcObject && o.srcObject.getTracks().forEach(function (e) {
+                    return a.setAttribute("width", i.width + "px"), a.setAttribute("height", i.height + "px"), o.srcObject && o.srcObject.getTracks().forEach(function (e) {
                         e.stop()
                     }), new Promise(function (t, n) {
                         navigator.mediaDevices.getUserMedia(r).then(function (e) {
@@ -535,6 +515,41 @@
                             n(e)
                         })
                     })
+                }, this.captureVideo = function () {
+                    return s.drawImage(o, 0, 0, i.width, i.height), a.toDataURL("image/jpeg", .5).split("base64,")[1]
+                }, this.startRecognize = function (t) {
+                    var n = this;
+                    c = window.setInterval(function () {
+                        if (!l) {
+                            l = !0;
+                            var e = {
+                                image: n.captureVideo()
+                            };
+                            n.httpPost(r, e).then(function (e) {
+                                n.stopRecognize(), t(e)
+                            }).catch(function (e) {
+                                l = !1, n.trace(e)
+                            })
+                        }
+                    }, e)
+                }, this.stopRecognize = function () {
+                    c && (window.clearInterval(c), l = !1)
+                }, this.httpPost = function (e, i) {
+                    return new Promise(function (t, n) {
+                        var r = new XMLHttpRequest;
+                        r.onload = function () {
+                            try {
+                                var e = JSON.parse(r.responseText);
+                                200 === r.status && 0 === e.statusCode ? t(e.result) : n(e)
+                            } catch (e) {
+                                n(e)
+                            }
+                        }, r.onerror = function (e) {
+                            n(e)
+                        }, r.open("POST", e), r.setRequestHeader("Content-Type", "application/json;Charset=UTF-8"), r.send(JSON.stringify(i))
+                    })
+                }, this.trace = function (e) {
+                    t.innerHTML += "string" == typeof e ? e : JSON.stringify(e), t.innerHTML += "<br />"
                 }
             }
         }, {}],
@@ -17549,16 +17564,16 @@
                 value: !0
             }), n.default = void 0;
             var r = function () {
-                    function r(e, t) {
-                        for (var n = 0; n < t.length; n++) {
-                            var r = t[n];
-                            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
-                        }
+                function r(e, t) {
+                    for (var n = 0; n < t.length; n++) {
+                        var r = t[n];
+                        r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
                     }
-                    return function (e, t, n) {
-                        return t && r(e.prototype, t), n && r(e, n), e
-                    }
-                }(),
+                }
+                return function (e, t, n) {
+                    return t && r(e.prototype, t), n && r(e, n), e
+                }
+            }(),
                 c = function (e) {
                     {
                         if (e && e.__esModule) return e;
@@ -17573,64 +17588,64 @@
                 if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
             }
             var o = function () {
-                    function n(e, t) {
-                        i(this, n), this.camera = e, this.renderer = t, this.rotating = !1, this.startDirection = new c.Vector3, this.movingDirection = new c.Vector3, this.startCamera = new c.Camera, this.deltaQuaternion = new c.Quaternion, this.onMouseDown = this.createOnMouseDownHandler(), this.onMouseMove = this.createOnMouseMoveHandler(), this.onMouseUp = this.createOnMouseUpHandler()
+                function n(e, t) {
+                    i(this, n), this.camera = e, this.renderer = t, this.rotating = !1, this.startDirection = new c.Vector3, this.movingDirection = new c.Vector3, this.startCamera = new c.Camera, this.deltaQuaternion = new c.Quaternion, this.onMouseDown = this.createOnMouseDownHandler(), this.onMouseMove = this.createOnMouseMoveHandler(), this.onMouseUp = this.createOnMouseUpHandler()
+                }
+                return r(n, [{
+                    key: "calcDirection",
+                    value: function (e, t) {
+                        var n = this.renderer.domElement.getBoundingClientRect(),
+                            r = (e.pageX - n.left) / n.width * 2 - 1,
+                            i = -(e.pageY - n.top) / n.height * 2 + 1;
+                        return t.set(r, i, .5).unproject(this.startCamera).sub(this.startCamera.position).normalize()
                     }
-                    return r(n, [{
-                        key: "calcDirection",
-                        value: function (e, t) {
-                            var n = this.renderer.domElement.getBoundingClientRect(),
-                                r = (e.pageX - n.left) / n.width * 2 - 1,
-                                i = -(e.pageY - n.top) / n.height * 2 + 1;
-                            return t.set(r, i, .5).unproject(this.startCamera).sub(this.startCamera.position).normalize()
+                }, {
+                    key: "createOnMouseDownHandler",
+                    value: function () {
+                        var t = this;
+                        return function (e) {
+                            e.ctrlKey || 0 !== e.button || (t.rotating = !0, t.startCamera.copy(t.camera), t.calcDirection(e, t.startDirection), t.deltaQuaternion.set(0, 0, 0, 1), document.addEventListener("mousemove", t.onMouseMove), document.addEventListener("mouseup", t.onMouseUp), e.preventDefault())
                         }
-                    }, {
-                        key: "createOnMouseDownHandler",
-                        value: function () {
-                            var t = this;
-                            return function (e) {
-                                e.ctrlKey || 0 !== e.button || (t.rotating = !0, t.startCamera.copy(t.camera), t.calcDirection(e, t.startDirection), t.deltaQuaternion.set(0, 0, 0, 1), document.addEventListener("mousemove", t.onMouseMove), document.addEventListener("mouseup", t.onMouseUp), e.preventDefault())
-                            }
+                    }
+                }, {
+                    key: "createOnMouseMoveHandler",
+                    value: function () {
+                        var t = this;
+                        return function (e) {
+                            t.rotating && (t.calcDirection(e, t.movingDirection), t.deltaQuaternion.setFromUnitVectors(t.movingDirection, t.startDirection), e.preventDefault())
                         }
-                    }, {
-                        key: "createOnMouseMoveHandler",
-                        value: function () {
-                            var t = this;
-                            return function (e) {
-                                t.rotating && (t.calcDirection(e, t.movingDirection), t.deltaQuaternion.setFromUnitVectors(t.movingDirection, t.startDirection), e.preventDefault())
-                            }
+                    }
+                }, {
+                    key: "createOnMouseUpHandler",
+                    value: function () {
+                        var t = this;
+                        return function (e) {
+                            t.rotating = !1, document.removeEventListener("mousemove", t.onMouseMove), document.removeEventListener("mouseup", t.onMouseUp), e.preventDefault()
                         }
-                    }, {
-                        key: "createOnMouseUpHandler",
-                        value: function () {
-                            var t = this;
-                            return function (e) {
-                                t.rotating = !1, document.removeEventListener("mousemove", t.onMouseMove), document.removeEventListener("mouseup", t.onMouseUp), e.preventDefault()
-                            }
-                        }
-                    }, {
-                        key: "connect",
-                        value: function () {
-                            document.addEventListener("mousedown", this.onMouseDown)
-                        }
-                    }, {
-                        key: "update",
-                        value: function () {
-                            var e, t, n, r;
-                            this.rotating && (this.camera.quaternion.copy(this.startCamera.quaternion), this.camera.quaternion.premultiply(this.deltaQuaternion), e = this.camera.quaternion, t = new c.Vector3(0, 0, 1).applyQuaternion(e), n = new c.Vector3(0, 1, 0), r = (new c.Vector3).crossVectors(n, t).normalize(), n.crossVectors(t, r).normalize(), e.setFromRotationMatrix((new c.Matrix4).makeBasis(r, n, t)))
-                        }
-                    }, {
-                        key: "disconnect",
-                        value: function () {
-                            document.removeEventListener("mousedown", this.onMouseDown)
-                        }
-                    }, {
-                        key: "dispose",
-                        value: function () {
-                            this.disconnect()
-                        }
-                    }]), n
-                }(),
+                    }
+                }, {
+                    key: "connect",
+                    value: function () {
+                        document.addEventListener("mousedown", this.onMouseDown)
+                    }
+                }, {
+                    key: "update",
+                    value: function () {
+                        var e, t, n, r;
+                        this.rotating && (this.camera.quaternion.copy(this.startCamera.quaternion), this.camera.quaternion.premultiply(this.deltaQuaternion), e = this.camera.quaternion, t = new c.Vector3(0, 0, 1).applyQuaternion(e), n = new c.Vector3(0, 1, 0), r = (new c.Vector3).crossVectors(n, t).normalize(), n.crossVectors(t, r).normalize(), e.setFromRotationMatrix((new c.Matrix4).makeBasis(r, n, t)))
+                    }
+                }, {
+                    key: "disconnect",
+                    value: function () {
+                        document.removeEventListener("mousedown", this.onMouseDown)
+                    }
+                }, {
+                    key: "dispose",
+                    value: function () {
+                        this.disconnect()
+                    }
+                }]), n
+            }(),
                 a = function () {
                     function n(e, t) {
                         i(this, n), this.renderers = [t], this.canvas = t.domElement, this.camera = e, this.camera.rotation.reorder("YXZ"), this.enabled = !0, this.deviceOrientation = {}, this.alphaOffsetAngle = 0, this.tagOrientation = 0, this.tanPerHeight = 2 * Math.tan(c.Math.degToRad(.5 * e.fov)) / this.canvas.offsetHeight, this.deviceOrientationCallback = this.onDeviceOrientation.bind(this), this.resizeCallback = this.onResize.bind(this), this.fallbackControl = new o(e, t)
