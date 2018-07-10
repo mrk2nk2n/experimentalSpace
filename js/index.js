@@ -237,6 +237,10 @@
                         }, {
                             src: "http://www.magicast.xyz/webar/res/media/openanim-landscape2.jpg"
                         }, {
+                            src: "http://www.magicast.xyz/webar/res/media/text.png"
+                        }, {
+                            src: "http://www.magicast.xyz/webar/res/media/openanim-landscape2.jpg"
+                        }, {
                             src: i // video of chosen chapter
                         }, {
                             src: r // intro of chosen chapter
@@ -343,7 +347,7 @@
                     key: "setIntroInfo",
                     value: function () {
                         $("#myvideo").html('<source src="resources/' + this.oid + '.mp4"/>'),
-                        $(".intro .content").html('<img src="img/' + this.oid + '.jpg"/>'),
+                        $(".intro .content").html('<img src="http://www.magicast.xyz/webar/res/media/1.jpg"/>'),
                         $(".intro .introbutton").attr("href", this.urlMap[this.oid])
                     }
                 }, {

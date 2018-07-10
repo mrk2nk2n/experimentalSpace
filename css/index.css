@@ -627,13 +627,13 @@ container.safariBottomOffset {
     top: 40%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
-    background: url(http://www.magicast.xyz/webar/res/media/progress.png) no-repeat 50%;
+    background: url(../img/progress.png) no-repeat 50%;
     background-size: 5.41rem .07rem
 }
 
     .progress .progress-inner {
         width: 0;
         height: 1.54rem;
-        background: url(http://www.magicast.xyz/webar/res/media/progress1.png) no-repeat;
+        background: url(../img/progress1.png) no-repeat;
         background-size: 100% 100%
     }
