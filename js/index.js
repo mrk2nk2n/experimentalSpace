@@ -198,7 +198,8 @@
                 }, {
                     key: "onResize",
                     value: function () {
-                        console.log("window height = " + window.innerHeight), this.video.style.height = window.innerHeight + "px"
+                        console.log("window height = " + window.innerHeight),
+                            this.video.style.height = window.innerHeight + "px"
                     }
                 }, {
                     key: "preloader",
@@ -484,25 +485,37 @@
                     s = null,
                     c = null,
                     l = !1;
-                this.unSupport = void 0, this.devices = [];
+                this.unSupport = void 0,
+                    this.devices = [];
                 var t = document.createElement("div");
-                t.setAttribute("id", "debug"), t.setAttribute("width", (window.innerWidth / 2).toString()), t.setAttribute("height", window.innerHeight.toString()), document.body.appendChild(t), this.listCamera = function () {
+                t.setAttribute("id", "debug"),
+                    t.setAttribute("width", (window.innerWidth / 2).toString()),
+                    t.setAttribute("height", window.innerHeight.toString()),
+                    document.body.appendChild(t),
+
+                    this.listCamera = function () {
                     var r = this;
                     return new Promise(function (t, n) {
                         navigator.mediaDevices.enumerateDevices().then(function (e) {
-                            console.log(e), e.find(function (e) {
+                            console.log(e),
+                                e.find(function (e) {
                                 if ("videoinput" === e.kind) {
                                     console.log(e);
                                     var t = {};
-                                    t.name = e.label || "camera", t.deviceId = e.deviceId, r.devices.push(t)
+                                    t.name = e.label || "camera",
+                                        t.deviceId = e.deviceId,
+                                        r.devices.push(t)
                                 }
-                            }), 0 === r.devices.length ? n("没有摄像头") : (a = document.createElement("canvas"), s = a.getContext("2d"), t(r.devices))
+                            }), 0 === r.devices.length ? n("没有摄像头") : (a = document.createElement("canvas"),
+                                s = a.getContext("2d"),
+                                t(r.devices))
                         }).catch(function (e) {
                             n(e)
                         })
                     })
                 }, this.openCamera = function (e, t, n) {
-                    o = e, n && (i = n);
+                    o = e,
+                    n && (i = n);
                     var r = {
                         audio: !1,
                         video: {
@@ -511,11 +524,15 @@
                             }
                         }
                     };
-                    return a.setAttribute("width", i.width + "px"), a.setAttribute("height", i.height + "px"), o.srcObject && o.srcObject.getTracks().forEach(function (e) {
+                    return a.setAttribute("width", i.width + "px"),
+                        a.setAttribute("height", i.height + "px"),
+                        o.srcObject && o.srcObject.getTracks().forEach(function (e) {
                         e.stop()
                     }), new Promise(function (t, n) {
                         navigator.mediaDevices.getUserMedia(r).then(function (e) {
-                            o.srcObject = e, o.style.display = "block", o.play(), t(!0)
+                            o.srcObject = e,
+                            o.style.display = "block",
+                            o.play(), t(!0)
                         }).catch(function (e) {
                             n(e)
                         })
