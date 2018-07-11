@@ -155,7 +155,7 @@
                         // html references
                         // pages+ buttons
                     this.initAR = new i.default,
-                    this.preload = new createjs.LoadQueue(!1),
+                    // this.preload = new createjs.LoadQueue(!1),
                     this.bodyElement = $("#body"),
 
                     this.pStartAR = $(".pStartAR"),
