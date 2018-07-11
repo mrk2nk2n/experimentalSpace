@@ -251,7 +251,7 @@ canvas {
 .lock-bg {
     width: 8.02rem;
     height: 8.38rem;
-    background: url(../img/lock.png) 0 0 no-repeat;
+    background: url(https://www.magicast.xyz/webar/res/media/lock.png) 0 0 no-repeat;
     background-size: contain
 }
 
@@ -427,7 +427,7 @@ contentBox.safariBottomOffset {
 }
 
 .ioswxPanel {
-    background: url(../img/01.jpg) no-repeat #fff center 30%;
+    background: url(https://www.magicast.xyz/webar/res/media/01.jpg) no-repeat #fff center 30%;
     background-size: 7.5rem 9.87rem;
     left: 0;
     z-index: 200;
@@ -634,13 +634,13 @@ contentBox.safariBottomOffset {
     top: 40%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
-    background: url(../img/progress.png) no-repeat 50%;
+    background: url(https://www.magicast.xyz/webar/res/media/progress.png) no-repeat 50%;
     background-size: 5.41rem .07rem
 }
 
     .progress .progressBar {
         width: 0;
         height: 1.54rem;
-        background: url(../img/progress1.png) no-repeat;
+        background: url(https://www.magicast.xyz/webar/res/media/progress1.png) no-repeat;
         background-size: 100% 100%
     }
