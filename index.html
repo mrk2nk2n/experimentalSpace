@@ -2,9 +2,6 @@
 <html class="">
 
 <head>
-        <script>
-                alert("start of html")
-                </script>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -98,15 +95,30 @@
         })(window);
     </script>
     <!-- lib-flexible end-->
-    <link rel="stylesheet" href="https://www.magicast.xyz/webar/merman/css/index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
     <div class="ioswxPanel"></div>
     <div class="pLoading" id="pLoading">
-        <img src="https://www.magicast.xyz/webar/res/media/openanim-landscape2.jpg" />
+        <img src="img/openanim-landscape2.jpg" />
         <div class="progress" id="progress">
             <div class="progressBar"></div>
+        </div>
+    </div>
+
+    <div class="pSelect" id="pSelect" style="display: none">
+        <img src="resources/selectChapter.png" />
+        <div class="optionBox1">
+            <a class="bOption1" id="bOption1" style="background-color: black"></a>
+        </div>
+
+        <div class="optionBox2">
+            <div class="bOption2" id="bOption2" style="background-color: black"></div>
+        </div>
+
+        <div class="optionBox3">
+            <a class="bOption3" id="bOption3" style="background-color: black"></a>
         </div>
     </div>
 
@@ -131,7 +143,7 @@
             <div class="bgbg">
                 <a id="bStartAR" class="bStartAR" href="javascript:;" /></a>
             </div>
-            <img src="https://www.magicast.xyz/webar/res/media/openanim-landscape2.jpg" />
+            <img src="img/openanim-landscape2.jpg" />
         </div>
 
         <!--safari-->
@@ -173,27 +185,19 @@
     <!-- Background Audio ///////////////////////////////////////////////    -->
 
     <div class="div-audio" style="z-index: -100;">
-        <audio id="bg-audio-mp3" src="https://www.magicast.xyz/webar/res/media/renyu-bg-mp3.mp3" autoplay loop></audio>
+        <audio id="bg-audio-mp3" src="resources/renyu-bg-mp3.mp3" autoplay loop></audio>
     </div>
 
-    <script>
-    alert("before script references");
-    </script>
 <!--    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/6.2.1/adapter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"></script>-->
 
-    <!-- <script src="https://www.magicast.xyz/webar/res/scripts/createjs.min.js"></script> -->
-    <script src="https://www.magicast.xyz/webar/res/scripts/jquery-3.3.1.min.js"></script>
-    <script src="https://www.magicast.xyz/webar/res/scripts/adapter.min.js"></script>
-    <script src="https://www.magicast.xyz/webar/res/scripts/three.min.js"></script>
-    <!-- <script src="https://www.magicast.xyz/webar/merman/js/index.js"></script> -->
+    <script src="js/createjs.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/adapter.min.js"></script>
+    <script src="js/three.min.js"></script>
     <script src="js/index.js"></script>
-
-    <script>
-    alert("end of html")
-    </script>
 </body>
 
-</html>
+</html>  

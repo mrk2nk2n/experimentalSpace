@@ -69,22 +69,24 @@
                         this.scene = new i.Scene,
                         this.scene.add(this.camera),
                         this.renderer = new i.WebGLRenderer({
-                        canvas: this.canvas,
-                        antialias: !1,
-                        alpha: !0,
-                        premultipliedAlpha: !0
-                    }), this.renderer.setClearColor(0, 0),
-                    this.renderer.setPixelRatio(window.devicePixelRatio),
-                    this.renderer.setSize(this.canvas.offsetWidth,
-                    this.canvas.offsetHeight, !1),
-                    this.controls = new o.default(this.camera, this.renderer),
-                    this.controls.connect(),
-                    this.camera.rotation.x = i.Math.degToRad(45),
-                    this.initvidplane = new a.default(this.camera, this.scene)
+                            canvas: this.canvas,
+                            antialias: !1,
+                            alpha: !0,
+                            premultipliedAlpha: !0
+                        }),
+                        this.renderer.setClearColor(0, 0),
+                        this.renderer.setPixelRatio(window.devicePixelRatio),
+                        this.renderer.setSize(this.canvas.offsetWidth,
+                        this.canvas.offsetHeight, !1),
+                        this.controls = new o.default(this.camera, this.renderer),
+                        this.controls.connect(),
+                        this.camera.rotation.x = i.Math.degToRad(45),
+                        this.initvidplane = new a.default(this.camera, this.scene)
                 }
                 return r(n, [{
                     key: "getVideo",
                     value: function () {
+                        console.log(this.k);
                         return this.initvidplane
                     }
                 }, {
@@ -155,9 +157,17 @@
                         // html references
                         // pages+ buttons
                     this.initAR = new i.default,
-                    // this.preload = new createjs.LoadQueue(!1),
+                    this.preload = new createjs.LoadQueue(!1),
+                        this.preloadOption = new createjs.LoadQueue(!1),
                     this.bodyElement = $("#body"),
 
+                        this.chosenOption = 0,
+
+                        this.pSelect = $(".pSelect"),
+                        this.bOption1 = $("#bOption1"),
+                        this.bOption2 = $("#bOption2"),
+                        this.bOption3 = $("#bOption3"),
+                        this.pLoading = $(".pLoading"),
                     this.pStartAR = $(".pStartAR"),
                     this.pScanning = $(".pScanning"),
                     this.posterBox = $(".posterBox"),
@@ -170,7 +180,8 @@
                     this.bBack = $(".bBack"),
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
                     this.deviceId,
-                    this.supportVideo = !0, 
+                    this.supportVideo = !0,
+
                     this.app = new o.default, // initThree.js threejs renderer and controls
                     this.app.update(), 
                     this.threeContainer = $("#threecontainer"), 
@@ -183,13 +194,10 @@
                         1: "http://news.sina.com.cn/c/2012-05-28/010024488046.shtml",
                         2: "http://news.sina.com.cn/c/2012-05-28/010024488046.shtml"
                     }, this.handleSafariCheck(),
-                    this.getWindowSize(),
-                    // this.preloader(),
-                    $("#pLoading").hide(), // hide preload bar on preloading complete
-                    $("#contentBox").show(), // show main container that contains all the content 
-                    this.setIntroInfo(),
+                    //this.getWindowSize(),
+                    this.preloader(),
                     this.checkCamera(), 
-                    this.bindEvent(),
+                    this.eventController(),
                     this.isAndroid && (this.resizeCallback = this.onResize.bind(this), 
                     window.addEventListener("resize", this.resizeCallback, !1))
                 }
@@ -204,58 +212,67 @@
                         console.log("window height = " + window.innerHeight),
                             this.video.style.height = window.innerHeight + "px"
                     }
-                }, 
-                // {
-                //     key: "preloader",
-                //     value: function () {
-                //         var e = $("#pLoading"),
-                //             t = $("#progress"),
-                //             n = $(".contentBox"),
-                //             r = "https://www.magicast.xyz/webar/res/media/1.jpg",
-                //             i = "resources/1.mp4";
+                }, {
+                    key: "optionLoader",
+                    value: function () {
+                        var ken = this,
+                            contentBox = $(".contentBox"),
+                            demoVid = "resources/" + this.chosenOption + ".mp4";
 
-                //         this.setIntroInfo(), // inserting html and src of video, intro content, intro button according to chosen chapter
+                        this.preloadOption.on("complete", function () {
+                            console.log("optionLoader completed");
+                            contentBox.show();
+                            ken.beginAR();
 
-                //         this.preload.installPlugin(createjs.Sound),
+                        }),
 
-                //         this.preload.on("complete", function () {
-                //             setTimeout(function () {
-                //                 e.hide() // hide preload bar on preloading complete
-                //                 n.show() // show main container that contains all the content        
-                //             }, 200)
-                //         }, this),                    
+                        this.preloadOption.loadManifest([
+                            { src: "resources/2.mp4" },
+                            { src: "resources/3.mp4" }
+                        ])
+
+                    }
+                }, {
+                    key: "preloader",
+                    value: function () {
+                        var ken = this,
+                            pSelect = $(".pSelect"),
+                            pLoading = $("#pLoading"),
+                            progressBar = $("#progress"),
+                            contentBox = $(".contentBox"),
+                            demoIntro = "img/1.jpg",
+                            demoVid = "resources/1.mp4";
+
+                        this.setIntroInfo(), // inserting html and src of video, intro content, intro button according to chosen chapter
+
+                        this.preload.installPlugin(createjs.Sound),
+
+                        this.preload.on("complete", function () {
+                            setTimeout(function () {
+                                pLoading.hide() // hide preload bar on preloading complete
+                                pSelect.show() // show main container that contains all the content
+                            }, 200)
+                        }, this),                    
                         
-                //         this.preload.on("progress", function () { // update progress of preloading
-                //             var e = Math.floor(100 * this.preload.progress);
-                //             $("div", t).css("width", e + "%")
-                //         }, this),                       
+                        this.preload.on("progress", function () { // update progress of preloading
+                            var e = Math.floor(100 * this.preload.progress);
+                            $("div", progressBar).css("width", e + "%")
+                        }, this),                       
 
-                //         this.preload.loadManifest([{ // list of items in the manifest that needs to be preloaded
-                //             src: "https://www.magicast.xyz/webar/res/media/scan.gif"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/btn_ar.png"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/btn_ready.png"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/btn_more.png"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/renyu-poster.png"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/btn_back.png"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/openanim-landscape2.jpg"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/text.png"
-                //         }, {
-                //             src: "https://www.magicast.xyz/webar/res/media/openanim-landscape2.jpg"
-                //         }, {
-                //             src: i // video of chosen chapter
-                //         }, {
-                //             src: r // intro of chosen chapter
-                //         }])
-                //     }
-                // }, 
-                {
+                        this.preload.loadManifest([ // list of items in the manifest that needs to be preloaded
+                            { src: "img/scan.gif" },
+                            { src: "img/btn_ar.png" },
+                            { src: "img/btn_ready.png" },
+                            { src: "img/btn_more.png" },
+                            { src: "img/renyu-poster.png" },
+                            { src: "img/btn_back.png" },
+                            { src: "img/text.png"},
+                            { src: "img/openanim-landscape2.jpg" },
+                            { src: demoIntro },  // video of chosen chapter
+                            { src: demoVid } // intro of chosen chapter
+                        ])
+                    }
+                }, {
                     key: "checkCamera",
                     value: function () {
                         var t = this,
@@ -274,12 +291,12 @@
                 }, {
                     key: "resizeSafariBrowser",
                     value: function () {
-                        document.getElementById("scan-tip").style.top = "2%",
-                            document.getElementById("scan-top").style.height = "8%",
-                            document.getElementById("scan-boder").style.top = "8%",
-                            document.getElementById("scan-button").style.top = "66%",
-                            document.getElementById("renyu-poster").style.top = "8%",
-                            document.getElementById("more-button").style.top = "66%",
+                        document.getElementById("scanTip").style.top = "2%",
+                            document.getElementById("scanTop").style.height = "8%",
+                            document.getElementById("scanBody").style.top = "8%",
+                            document.getElementById("bReady").style.top = "66%",
+                            document.getElementById("posterPic").style.top = "8%",
+                            document.getElementById("bMore").style.top = "66%",
                             document.getElementById("bg-audio-mp3").removeAttribute("src"),
                             document.ontouchmove = function (event) {
                                 event.preventDefault();
@@ -294,36 +311,69 @@
                         alert("windowHeight: " + t + " windowWidth: " + n + " windowOuterHeight " + o);
                     }
                 }, {
-                    key: "bindEvent", // event that start displaying the camera feed
+                   key: "beginAR",
+                   value: function () {
+                       var n = this;
+                       if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
+                           n.myvideo[0].play(),
+                               n.openCamera(),
+                               n.pScanning.show();
+                       }
+                       else { // if camera feed not supported, bypass scanning page and display demo video directly
+                           n.pDisplay.show(),
+                               $("#video").hide();
+                           var e = .16 * window.innerHeight,
+                               t = .6 * window.innerHeight;
+                           n.app.getVideo().show(e, t), // returns the video material
+                               n.scan() // show demo video display
+                       }
+                   }
+                }, {
+                    key: "eventController", // event that start displaying the camera feed
                     value: function () {
                         var n = this;
-                        this.bStartAR.on("click", function () {
+                        console.log(this.chosenOption);
+
+                        this.bOption1.on("click", function() {
+                           console.log("option 1 chosen");
+                           n.chosenOption = 1;
+                           console.log("option chosen: " + n.chosenOption);
+                           n.pSelect.hide();
+                           n.optionLoader();
+
+                        }), this.bOption2.on("click", function() {
+                            console.log("option 2 chosen");
+
+                        }), this.bOption3.on("click", function() {
+                            console.log("option 3 chosen");
+
+                        }), this.bStartAR.on("click", function () {
                             if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
                                 n.myvideo[0].play(),
-                                n.openCamera(),
-                                n.pScanning.show();
+                                    n.openCamera(),
+                                    n.pScanning.show();
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
                                 n.pDisplay.show(),
-                                $("#video").hide();
+                                    $("#video").hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
                                 n.app.getVideo().show(e, t), // returns the video material
-                                n.scan() // show demo video display
+                                    n.scan() // show demo video display
                             }
-                        }), this.bReady.on("click", function () { // when button on scanning page is clicked                          
+                        }), this.bReady.on("click", function () { // when button on scanning page is clicked
                             var e = $(".scanBody").offset().top,
                                 t = $(".scanBody").height();
-                                                            
+
                             n.scan() // show demo video display
-                            
-                            window.setTimeout(function () { // wait for two seconds                     
+
+                            window.setTimeout(function () { // wait for two seconds
                                 n.posterBox.hide(),
                                 n.myvideo[0].play(),
                                 n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
                             }, 1000)
 
-                            window.setTimeout(function () { // wait for two seconds                     
+                            window.setTimeout(function () { // wait for two seconds
                                 n.bMore.show()
                             }, 5000)
 
@@ -355,7 +405,7 @@
                     key: "setIntroInfo",
                     value: function () {
                         $("#myvideo").html('<source src="resources/1.mp4"/>'),
-                        $(".pIntro .content").html('<img src="https://www.magicast.xyz/webar/res/media/1.jpg"/>')
+                        $(".pIntro .content").html('<img src="img/1.jpg"/>')
                     }
                 }, {
                     key: "fail",
@@ -439,10 +489,13 @@
                     this.width = 512,
                     this.height = 201,
                     this.scale = 368 / this.width,
+
                     this.camera = e,
                     this.scene = t,
+
                     this.video = (0, a.default)("#myvideo")[0], // demo display video
                     this.texture = new s.VideoTexture(this.video, s.UVMapping, s.ClampToEdgeWrapping, s.ClampToEdgeWrapping, s.LinearFilter, s.LinearFilter, s.RGBFormat, s.UnsignedByteType),
+
                     this.material = new s.MeshBasicMaterial({
                         map: this.texture,
                         overdraw: .5
