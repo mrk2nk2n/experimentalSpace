@@ -22,6 +22,7 @@
         for (var u = "function" == typeof require && require, e = 0; e < c.length; e++) l(c[e]);
         return l
     }({
+       // initThree module
         1: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -56,16 +57,23 @@
                     default: e
                 }
             }
-            var c = function () {
+            var initThree = function () {
                 function n() {
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, n),
+
+
+                        // setting up the threejs environment
+                        //defining the canvas for threejs to be create on
                     this.canvas = $("#three_container")[0];
-                    var e = 50,
+                    var e = 50, // i believe this is 50% of the windowWidth
                         t = 2 * Math.tan(i.Math.degToRad(e / 2)) / Math.max(document.documentElement.clientWidth, document.documentElement.clientHeight);
-                        e = 2 * i.Math.radToDeg(Math.atan(t * this.canvas.offsetHeight / 2)),
+                        e = 2 * i.Math.radToDeg(Math.atan(t * this.canvas.offsetHeight / 2)), // the final FOV value
+
+                            // first define the camera, scene and add camera and create the renderer
                         this.camera = new i.PerspectiveCamera(e, this.canvas.offsetWidth / this.canvas.offsetHeight, .1, 1e4),
+                        this.camera.rotation.x = i.Math.degToRad(45),
                         this.scene = new i.Scene,
                         this.scene.add(this.camera),
                         this.renderer = new i.WebGLRenderer({
@@ -73,14 +81,17 @@
                             antialias: !1,
                             alpha: !0,
                             premultipliedAlpha: !0
-                        }),
+                        }), // change settings of renderer
                         this.renderer.setClearColor(0, 0),
                         this.renderer.setPixelRatio(window.devicePixelRatio),
-                        this.renderer.setSize(this.canvas.offsetWidth,
-                        this.canvas.offsetHeight, !1),
+                        this.renderer.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight, !1),
+
+                           // define the controls and connect it
                         this.controls = new o.default(this.camera, this.renderer),
                         this.controls.connect(),
-                        this.camera.rotation.x = i.Math.degToRad(45),
+
+
+                            // initialising videoplane, refer to initvidplane module for more
                         this.initvidplane = new a.default(this.camera, this.scene)
                 }
                 return r(n, [{
@@ -100,7 +111,7 @@
                     }
                 }]), n
             }();
-            n.default = c
+            n.default = initThree
         }, {
             "../libs/three.module": 6,
             "../libs/three.module.js": 6,
@@ -110,7 +121,7 @@
 
         ///////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////
-
+        // pageControl module
         2: [function (e, t, n) {
             "use strict";
             var r = function () {
@@ -181,11 +192,13 @@
                     this.supportVideo = !0,
 
                     this.app = new o.default, // initThree.js threejs renderer and controls
-                    this.app.update(), 
+                        // calling on the threejs renderer to animate
+
+                    this.app.update(),
                     this.threeContainer = $("#threecontainer"), 
                     this.urlSearch = window.location.search, 
                     this.myvideo = $("#myvideo"),
-                    this.onVideoPlaying = this.onPlaying.bind(this), 
+                    this.onVideoPlaying = this.vidPlaying.bind(this),
                     this.myvideo[0].addEventListener("playing", this.onVideoPlaying, !1), 
                     this.oid = this.getQueryString("oid") || "1",
                     this.urlMap = {
@@ -193,14 +206,14 @@
                         2: "http://news.sina.com.cn/c/2012-05-28/010024488046.shtml"
                     }, this.handleSafariCheck(),
                     //this.getWindowSize(),
-                    this.preloader(),
+                    this.loadController(),
                     this.checkCamera(), 
                     this.eventController(),
                     this.isAndroid && (this.resizeCallback = this.onResize.bind(this), 
                     window.addEventListener("resize", this.resizeCallback, !1))
                 }
                 return r(t, [{
-                    key: "onPlaying",
+                    key: "vidPlaying",
                     value: function () {
                         this.myvideo[0].pause()
                     }
@@ -217,7 +230,7 @@
                         // clickHandler function must be defined before
                         // being called in for loop below
                             return function() {
-                                ken.chosenOption = arg;
+                                ken.chosenOption = arg; //更新全局变量
                                 console.log("chapter " + arg + " chosen " + ken.chosenOption);
                                 ken.pSelect.hide();
                                 ken.optionLoader();
@@ -227,7 +240,6 @@
                     key: "selectController",
                     value: function () {
                         let ken = this;
-                        console.log("selectController called");
                         <!--Initialize Chapters as Buttons-->
                         for (var a = 0; a < 10; a++) {
                             var b = $(".slide" + a);
@@ -237,19 +249,20 @@
                 }, {
                         key: "optionLoader",
                         value: function () {
-                            this.openCamera();
-                            this.pLoadVid.show();
-
                             console.log("optionLoader called" + this.chosenOption);
                             var ken = this,
                                 contentBox = $(".contentBox"),
                                 demoVid = "resources/" + this.chosenOption + ".mp4";
-                            this.setIntroInfo();
+
+                            contentBox.show();
+                            this.openCamera();
+                            this.pLoadVid.show();
+                            this.assignContent();
 
                             this.preloadOption.on("complete", function () {
                                 console.log("optionLoader completed");
-                                contentBox.show();
                                 ken.pLoadVid.hide();
+                                ken.pScanning.show();
                                 ken.beginAR();
                             });
 
@@ -259,7 +272,7 @@
                                 ]);
                         }
             }, {
-                    key: "preloader",
+                    key: "loadController",
                     value: function () {
                         var ken = this,
                             pSelect = $(".pSelect"),
@@ -272,7 +285,7 @@
                         // without select function, uncomment below
                         // this.chosenOption = 1;
                         // // inserting html and src of video, intro content, intro button according to chosen chapter
-                        // this.setIntroInfo(),
+                        // this.assignContent(),
 
                         this.preload.installPlugin(createjs.Sound),
 
@@ -371,7 +384,7 @@
                            var e = .16 * window.innerHeight,
                                t = .6 * window.innerHeight;
                            n.app.getVideo().show(e, t), // returns the video material
-                               n.scan() // show demo video display
+                               n.startARDisplay() // show demo video display
                        }
                    }
                 }, {
@@ -392,13 +405,13 @@
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
                                 n.app.getVideo().show(e, t), // returns the video material
-                                    n.scan() // show demo video display
+                                    n.startARDisplay() // show demo video display
                             }
                         }), this.bReady.on("click", function () { // when button on scanning page is clicked
                             var e = $(".scanBody").offset().top,
                                 t = $(".scanBody").height();
 
-                            n.scan() // show demo video display
+                            n.startARDisplay() // show demo video display
 
                             window.setTimeout(function () { // wait for two seconds
                                 n.posterBox.hide(),
@@ -430,12 +443,12 @@
                                 n.pIntro.hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
-                                n.app.getVideo().show(e, t), n.scan()
+                                n.app.getVideo().show(e, t), n.startARDisplay()
                             }
                         })
                     }
                 }, {
-                    key: "setIntroInfo",
+                    key: "assignContent",
                     value: function () {
                         $("#myvideo").html('<source src="resources/' + this.chosenOption + '.mp4"/>'),
                         $(".pIntro .content").html('<img src="img/1.jpg"/>')
@@ -447,7 +460,7 @@
                         this.isIphone && this.isWeChat && this.iosversion ? $(".ioswxPanel").show() : this.supportVideo = !1
                     }
                 }, {
-                    key: "scan", // to display video and hide scanning gif
+                    key: "startARDisplay", // to display video and hide scanning gif
                     value: function () {
                         //this.bMore.show(),
                         this.bMore.hide(),
@@ -483,6 +496,7 @@
             "./initThree.js": 1,
             "./initAR": 4
         }],
+       //  initvidplane module
         3: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -514,7 +528,7 @@
                     }
                 }(e("../libs/three.module.js"));
 
-            var c = function () {
+            var initvidplane = function () {
                 function n(e, t) {
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
@@ -555,17 +569,18 @@
                     }
                 }]), n
             }();
-            n.default = c
+            n.default = initvidplane
         }, {
             "../libs/jquery-3.3.1.js": 5,
             "../libs/three.module.js": 6
         }],
+       // initAR module
         4: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
                 value: !0
             });
-            n.default = function (e, r) {
+            n.default = function initAR(e, r) {
                 e = e || 1e3, r = r || "";
                 var i = {
                     width: 320,
@@ -666,6 +681,7 @@
                 }
             }
         }, {}],
+       // jQuery-3.3.1 module
         5: [function (e, t, n) {
             "use strict";
             var r, i, Xt = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (e) {
@@ -3779,6 +3795,7 @@
                 return i(e)
             } : i(r)
         }, {}],
+       // three module
         6: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -17671,6 +17688,7 @@
                 console.error("THREE.LensFlare has been moved to /examples/js/objects/Lensflare.js")
             }
         }, {}],
+       // initdevicecontrols module
         7: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -17700,6 +17718,7 @@
             function i(e, t) {
                 if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
             }
+            // mouseHandler
             var o = function () {
                 function n(e, t) {
                     i(this, n), this.camera = e, this.renderer = t, this.rotating = !1, this.startDirection = new c.Vector3, this.movingDirection = new c.Vector3, this.startCamera = new c.Camera, this.deltaQuaternion = new c.Quaternion, this.onMouseDown = this.createOnMouseDownHandler(), this.onMouseMove = this.createOnMouseMoveHandler(), this.onMouseUp = this.createOnMouseUpHandler()
@@ -17759,6 +17778,7 @@
                     }
                 }]), n
             }(),
+                // initDeviceControls
                 a = function () {
                     function n(e, t) {
                         i(this, n), this.renderers = [t], this.canvas = t.domElement, this.camera = e, this.camera.rotation.reorder("YXZ"), this.enabled = !0, this.deviceOrientation = {}, this.alphaOffsetAngle = 0, this.tagOrientation = 0, this.tanPerHeight = 2 * Math.tan(c.Math.degToRad(.5 * e.fov)) / this.canvas.offsetHeight, this.deviceOrientationCallback = this.onDeviceOrientation.bind(this), this.resizeCallback = this.onResize.bind(this), this.fallbackControl = new o(e, t)
