@@ -213,26 +213,50 @@
                             this.video.style.height = window.innerHeight + "px"
                     }
                 }, {
-                    key: "optionLoader",
-                    value: function () {
-                        var ken = this,
-                            contentBox = $(".contentBox"),
-                            demoVid = "resources/" + this.chosenOption + ".mp4";
-
-                        this.preloadOption.on("complete", function () {
-                            console.log("optionLoader completed");
-                            contentBox.show();
-                            ken.beginAR();
-
-                        }),
-
-                        this.preloadOption.loadManifest([
-                            { src: "resources/2.mp4" },
-                            { src: "resources/3.mp4" }
-                        ])
-
+                    key: "clickHandler",
+                    value: function (arg) {
+                        let ken = this;
+                        // clickHandler function must be defined before
+                        // being called in for loop below
+                            return function() {
+                                ken.chosenOption = arg;
+                                console.log("chapter " + arg + " chosen " + ken.chosenOption);
+                                ken.pSelect.hide();
+                                ken.optionLoader();
+                            };
                     }
                 }, {
+                    key: "selectController",
+                    value: function () {
+                        let ken = this;
+                        console.log("selectController called");
+                        <!--Initialize Chapters as Buttons-->
+                        for (var a = 0; a < 10; a++) {
+                            var b = $(".slide" + a);
+                            b.on("click", ken.clickHandler(a));
+                        }
+                    }
+                }, {
+                        key: "optionLoader",
+                        value: function () {
+                            console.log("optionLoader called" + this.chosenOption);
+                            var ken = this,
+                                contentBox = $(".contentBox"),
+                                demoVid = "resources/" + this.chosenOption + ".mp4";
+                            this.setIntroInfo();
+
+                            this.preloadOption.on("complete", function () {
+                                console.log("optionLoader completed");
+                                contentBox.show();
+                                ken.beginAR();
+                            });
+
+                                this.preloadOption.loadManifest([
+                                    {src: demoVid },
+                                    {src: " "}
+                                ]);
+                        }
+            }, {
                     key: "preloader",
                     value: function () {
                         var ken = this,
@@ -240,17 +264,26 @@
                             pLoading = $("#pLoading"),
                             progressBar = $("#progress"),
                             contentBox = $(".contentBox"),
-                            demoIntro = "img/1.jpg",
-                            demoVid = "resources/1.mp4";
+                            demoIntro = "img/1.jpg";
+                            // demoVid = "resources/1.mp4";
 
-                        this.setIntroInfo(), // inserting html and src of video, intro content, intro button according to chosen chapter
+                        // without select function, uncomment below
+                        // this.chosenOption = 1;
+                        // // inserting html and src of video, intro content, intro button according to chosen chapter
+                        // this.setIntroInfo(),
 
                         this.preload.installPlugin(createjs.Sound),
 
                         this.preload.on("complete", function () {
                             setTimeout(function () {
-                                pLoading.hide() // hide preload bar on preloading complete
-                                pSelect.show() // show main container that contains all the content
+                                pLoading.hide(); // hide preload bar on preloading complete
+
+                                // without select function, uncomment below
+                                // contentBox.show();
+
+                                // with select function, uncomment below
+                                pSelect.show(); // show main container that contains all the content
+                                ken.selectController();
                             }, 200)
                         }, this),                    
                         
@@ -268,8 +301,8 @@
                             { src: "img/btn_back.png" },
                             { src: "img/text.png"},
                             { src: "img/openanim-landscape2.jpg" },
-                            { src: demoIntro },  // video of chosen chapter
-                            { src: demoVid } // intro of chosen chapter
+                            { src: demoIntro }  // video of chosen chapter
+                            // { src: demoVid } // intro of chosen chapter
                         ])
                     }
                 }, {
@@ -404,7 +437,7 @@
                 }, {
                     key: "setIntroInfo",
                     value: function () {
-                        $("#myvideo").html('<source src="resources/1.mp4"/>'),
+                        $("#myvideo").html('<source src="resources/' + this.chosenOption + '.mp4"/>'),
                         $(".pIntro .content").html('<img src="img/1.jpg"/>')
                     }
                 }, {

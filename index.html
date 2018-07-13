@@ -95,6 +95,8 @@
         })(window);
     </script>
     <!-- lib-flexible end-->
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
@@ -109,16 +111,21 @@
 
     <div class="pSelect" id="pSelect" style="display: none">
         <img src="resources/selectChapter.png" />
-        <div class="optionBox1">
-            <a class="bOption1" id="bOption1" style="background-color: black"></a>
-        </div>
-
-        <div class="optionBox2">
-            <div class="bOption2" id="bOption2" style="background-color: black"></div>
-        </div>
-
-        <div class="optionBox3">
-            <a class="bOption3" id="bOption3" style="background-color: black"></a>
+        <!-- Swiper -->
+        <div style="margin-top: 25vh; height: 50vh;">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide slide1">Slide 1</div>
+                    <div class="swiper-slide slide2">Slide 2</div>
+                    <div class="swiper-slide slide3">Slide 3</div>
+                    <div class="swiper-slide slide4">Slide 4</div>
+                    <div class="swiper-slide slide5">Slide 5</div>
+                    <div class="swiper-slide slide6">Slide 6</div>
+                    <div class="swiper-slide slide7">Slide 7</div>
+                    <div class="swiper-slide slide8">Slide 8</div>
+                    <div class="swiper-slide slide9">Slide 9</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -197,6 +204,19 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/adapter.min.js"></script>
     <script src="js/three.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            centeredSlides: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
     <script src="js/index.js"></script>
 </body>
 
