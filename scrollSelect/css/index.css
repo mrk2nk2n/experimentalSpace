@@ -1,4 +1,4 @@
-﻿} /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
+﻿/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 
 html {
     line-height: 1.15;
@@ -251,7 +251,7 @@ canvas {
 .lock-bg {
     width: 8.02rem;
     height: 8.38rem;
-    background: url(../../a/media/lock.png) 0 0 no-repeat;
+    background: url(../img/lock.png) 0 0 no-repeat;
     background-size: contain
 }
 
@@ -356,16 +356,23 @@ contentBox.safariBottomOffset {
     margin-bottom: 7%
 }
 
-.pLoading {
+.pLoading, .pSelect {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     overflow: hidden;
-    z-index: 20
 }
 
-#video, .pLoading > img, .pStartAR > img {
+.pLoading {
+    z-index: 100
+}
+
+.pSelect {
+    z-index: 20;
+}
+
+#video, .pLoading > img, .pStartAR > img, .pSelect > img {
     margin: 0 auto;
     /*position: fixed*/
     position: absolute;
@@ -375,17 +382,16 @@ contentBox.safariBottomOffset {
     height: 100%
 }
 
-
 /* 1. No object-fit support: */
 @media (min-aspect-ratio: 16/9) {
-    #video, .pLoading > img, .pStartAR > img {
+    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
         height: 300%;
         top: -100%;
     }
 }
 
 @media (max-aspect-ratio: 16/9) {
-    #video, .pLoading > img, .pStartAR > img {
+    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
         width: 300%;
         left: -100%;
     }
@@ -393,7 +399,7 @@ contentBox.safariBottomOffset {
 
 /* 2. If supporting object-fit, overriding (1): */
 @supports (object-fit: cover) {
-    #video, .pLoading > img, .pStartAR > img {
+    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
         top: 0;
         left: 0;
         width: 100%;
@@ -414,7 +420,7 @@ contentBox.safariBottomOffset {
 
 .bStartAR {
     display: block;
-    background: url(../../a/media/btn_ar.png) no-repeat;
+    background: url(../img/btn_ar.png) no-repeat;
     background-size: contain;
     width: 5.38rem;
     height: 1.5rem;
@@ -427,7 +433,7 @@ contentBox.safariBottomOffset {
 }
 
 .ioswxPanel {
-    background: url(../../a/media/01.jpg) no-repeat #fff center 30%;
+    background: url(../img/01.jpg) no-repeat #fff center 30%;
     background-size: 7.5rem 9.87rem;
     left: 0;
     z-index: 200;
@@ -457,16 +463,16 @@ contentBox.safariBottomOffset {
 }
 
     .pScanning .scanBody {
-        background: url(../../a/media/scan.gif) no-repeat;
+        background: url(../img/scan.gif) no-repeat;
         background-size: 100% 100%;
-        width: 40%;
-        height: 50%;
+        width: 40vw;
+        height: 55%;
         -webkit-box-sizing: content-box;
         box-sizing: content-box;
         border-left: 15rem solid rgba(0,0,0,.7);
         border-right: 15rem solid rgba(0,0,0,.7);
         border-bottom: 10rem solid rgba(0,0,0,.7);
-        top: 24%
+        top: 18%
     }
 
     .pScanning .scanBody, .pScanning .scanTip {
@@ -477,23 +483,23 @@ contentBox.safariBottomOffset {
     }
 
     .pScanning .scanTip {
-        background: url(../../a/media/text.png) no-repeat;
+        background: url(../img/text.png) no-repeat;
         background-size: 100% 100%;
-        width: 3.5rem;
-        height: 0.5rem;
-        top: 16%;
+        width: 4.24rem;
+        height: .35rem;
+        top: 7%;
         z-index: 11
     }
 
     .pScanning .scanTop {
         position: absolute;
         width: 100%;
-        height: 24%;
+        height: 18%;
         background: rgba(0,0,0,.7)
     }
 
     .pScanning .bReady {
-        background: url(../../a/media/btn_ready.png) no-repeat;
+        background: url(../img/btn_ready.png) no-repeat;
         background-size: 100% 100%;
         width: 6.79rem;
         height: 1.2rem;
@@ -501,7 +507,7 @@ contentBox.safariBottomOffset {
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
         position: absolute;
-        top: 78%;
+        top: 75%;
         z-index: 110
     }
 
@@ -517,13 +523,19 @@ contentBox.safariBottomOffset {
 }
 
     .pDisplay .posterPic {
-        background: url(../resources/1.jpg) no-repeat;
-        background-size: contain;
-        min-width: 40%;
-        min-height: 60%;
+        /*background: url(../img/renyu-poster.png) no-repeat;*/
+        /*background-size: contain;*/
+        width: 0vw;
+        height: 55%;
         -webkit-box-sizing: content-box;
         box-sizing: content-box;
-        top: 24%
+        top: 18%
+    }
+
+    #posterImage {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .pDisplay .posterPic {
@@ -534,7 +546,7 @@ contentBox.safariBottomOffset {
     }
 
     .pDisplay .bMore {
-        background: url(../../a/media/btn_more.png) no-repeat;
+        background: url(../img/btn_more.png) no-repeat;
         background-size: 100% 100%;
         width: 6.79rem;
         height: 1.2rem;
@@ -567,7 +579,7 @@ contentBox.safariBottomOffset {
     .bIntroBox a {
         width: 20%;
         height: 70%;
-        background: url(../../a/media/btn_back.png) no-repeat;
+        background: url(../img/btn_back.png) no-repeat;
         background-size: contain;
         margin: auto;
         margin-top: 3vh
@@ -617,9 +629,9 @@ contentBox.safariBottomOffset {
 }
 
     .pIntro .content {
-        width: 80%;
-        margin-left: 11%;
-        margin-top: 0vh
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 20vh
     }
 
         .pIntro .content img {
@@ -634,13 +646,168 @@ contentBox.safariBottomOffset {
     top: 40%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
-    background: url(../../a/media/progress.png) no-repeat 50%;
+    background: url(../img/progress.png) no-repeat 50%;
     background-size: 5.41rem .07rem
 }
 
     .progress .progressBar {
         width: 0;
         height: 1.54rem;
-        background: url(../../a/media/progress1.png) no-repeat;
+        background: url(../img/progress1.png) no-repeat;
         background-size: 100% 100%
     }
+
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -- swiper css */
+
+.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.swiper-slide {
+    width: 300px;
+    height: 300px;
+}
+.select1 {
+    background: url(../resources/select1.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.select2 {
+    background: url(../resources/select2.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.select3 {
+    background: url(../resources/select3.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.select4 {
+    background: url(../resources/select4.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -- loading of video -- */
+.loader{
+    margin:200px auto;
+}
+h1{
+    font-family: 'Actor', sans-serif;
+    color:#00FFFF;
+    font-size:16px;
+    letter-spacing:1px;
+    font-weight:200;
+    text-align:center;
+}
+.loader span{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    display:inline-block;
+    position:absolute;
+    left:50%;
+    margin-left:-10px;
+    -webkit-animation:3s infinite linear;
+    -moz-animation:3s infinite linear;
+    -o-animation:3s infinite linear;
+
+}
+
+
+.loader span:nth-child(2){
+    background:#00FFFF;
+    -webkit-animation:kiri 1.2s infinite linear;
+    -moz-animation:kiri 1.2s infinite linear;
+    -o-animation:kiri 1.2s infinite linear;
+
+}
+.loader span:nth-child(3){
+    background:#00FFFF;
+    z-index:100;
+}
+.loader span:nth-child(4){
+    background:#00FFFF;
+    -webkit-animation:kanan 1.2s infinite linear;
+    -moz-animation:kanan 1.2s infinite linear;
+    -o-animation:kanan 1.2s infinite linear;
+}
+
+
+@-webkit-keyframes kanan {
+    0% {-webkit-transform:translateX(20px);
+    }
+
+    50%{-webkit-transform:translateX(-20px);
+    }
+
+    100%{-webkit-transform:translateX(20px);
+        z-index:200;
+    }
+}
+@-moz-keyframes kanan {
+    0% {-moz-transform:translateX(20px);
+    }
+
+    50%{-moz-transform:translateX(-20px);
+    }
+
+    100%{-moz-transform:translateX(20px);
+        z-index:200;
+    }
+}
+@-o-keyframes kanan {
+    0% {-o-transform:translateX(20px);
+    }
+
+    50%{-o-transform:translateX(-20px);
+    }
+
+    100%{-o-transform:translateX(20px);
+        z-index:200;
+    }
+}
+
+
+
+
+@-webkit-keyframes kiri {
+    0% {-webkit-transform:translateX(-20px);
+        z-index:200;
+    }
+    50%{-webkit-transform:translateX(20px);
+    }
+    100%{-webkit-transform:translateX(-20px);
+    }
+}
+
+@-moz-keyframes kiri {
+    0% {-moz-transform:translateX(-20px);
+        z-index:200;
+    }
+    50%{-moz-transform:translateX(20px);
+    }
+    100%{-moz-transform:translateX(-20px);
+    }
+}
+@-o-keyframes kiri {
+    0% {-o-transform:translateX(-20px);
+        z-index:200;
+    }
+    50%{-o-transform:translateX(20px);
+    }
+    100%{-o-transform:translateX(-20px);
+    }
+}

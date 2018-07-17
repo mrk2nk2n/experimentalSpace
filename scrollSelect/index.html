@@ -9,7 +9,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="yes" name="apple-touch-fullscreen" />
     <meta content="telephone=no,email=no" name="format-detection" />
-    <title>MRH5 千年曙光</title>
+    <title>MorphoMRweb</title>
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!--lib-flexible (https://github.com/amfe/lib-flexible)-->
@@ -95,15 +95,40 @@
         })(window);
     </script>
     <!-- lib-flexible end-->
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/index.css">
+
 </head>
 
 <body>
     <div class="ioswxPanel"></div>
     <div class="pLoading" id="pLoading">
-        <img src="../a/media/openanim-landscape2.jpg" />
+        <img src="img/openanim-landscape2.jpg" />
         <div class="progress" id="progress">
             <div class="progressBar"></div>
+        </div>
+    </div>
+
+    <div class="pSelect" id="pSelect" style="display: none">
+        <img src="resources/selectChapter.jpg" />
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide select1" ></div>
+                <div class="swiper-slide select2"></div>
+                <div class="swiper-slide select3"></div>
+                <div class="swiper-slide select4"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pLoadVid" style="display: none">
+        <div class="loader">
+            <h1>LOADING</h1>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
 
@@ -128,12 +153,12 @@
             <div class="bgbg">
                 <a id="bStartAR" class="bStartAR" href="javascript:;" /></a>
             </div>
-            <img src="../a/media/openanim-landscape2.jpg" />
+            <img src="img/openanim-landscape2.jpg" />
         </div>
 
         <!--safari-->
         <!--scanning page-->
-        <div class="pScanning">
+        <div class="pScanning" style="display: none;">
             <div class="scanTip" id="scanTip"></div>
             <div class="scanTop" id="scanTop"></div>
             <div class="scanBody" id="scanBody"></div>
@@ -143,7 +168,9 @@
         <!--display page (poster + videoPlane)-->
         <div class="pDisplay">
             <div class="posterBox">
-                <div class="posterPic" id="posterPic"></div>
+                <div class="posterPic" id="posterPic">
+                    <img id="posterImage" src="" />
+                </div>
             </div>
             <div class="bMore" id="bMore"></div>
         </div>
@@ -167,21 +194,11 @@
         <canvas class="wrap" id="three_container"></canvas>
     </div>
 
-    <!-- Background Audio ///////////////////////////////////////////////    -->
-
-    <!--<div class="div-audio" style="z-index: -100;">-->
-        <!--<audio id="bg-audio-mp3" src="../a/media/renyu-bg-mp3.mp3" autoplay loop></audio>-->
-    <!--</div>-->
-
-<!--    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/6.2.1/adapter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"></script>-->
-
-    <script src="../a/libs/createjs.min.js"></script>
-    <script src="../a/libs/jquery-3.3.1.min.js"></script>
-    <script src="../a/libs/adapter.min.js"></script>
-    <script src="../a/libs/three.min.js"></script>
+    <script src="js/createjs.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/adapter.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/swiper.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 
