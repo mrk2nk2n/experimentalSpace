@@ -289,7 +289,7 @@
                             if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
                                 n.openCamera();
                                 n.myvideo[0].play();
-                                
+
                                 window.setTimeout(function () {
                                     n.pScanning.show()
                                 }, 500)
