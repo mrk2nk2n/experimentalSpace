@@ -341,6 +341,25 @@
 
                                 this.preloadOption.loadManifest([
                                     {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
+                                    {src: demoVid },
                                     {src: " "}
                                 ]);
                         }
