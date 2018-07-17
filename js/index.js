@@ -22,7 +22,6 @@
         for (var u = "function" == typeof require && require, e = 0; e < c.length; e++) l(c[e]);
         return l
     }({
-       // initThree module
         1: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -57,47 +56,35 @@
                     default: e
                 }
             }
-            var initThree = function () {
+            var c = function () {
                 function n() {
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, n),
-
-
-                        // setting up the threejs environment
-                        //defining the canvas for threejs to be create on
                     this.canvas = $("#three_container")[0];
-                    var e = 50, // i believe this is 50% of the windowWidth
+                    var e = 50,
                         t = 2 * Math.tan(i.Math.degToRad(e / 2)) / Math.max(document.documentElement.clientWidth, document.documentElement.clientHeight);
-                        e = 2 * i.Math.radToDeg(Math.atan(t * this.canvas.offsetHeight / 2)), // the final FOV value
-
-                            // first define the camera, scene and add camera and create the renderer
+                        e = 2 * i.Math.radToDeg(Math.atan(t * this.canvas.offsetHeight / 2)),
                         this.camera = new i.PerspectiveCamera(e, this.canvas.offsetWidth / this.canvas.offsetHeight, .1, 1e4),
-                        this.camera.rotation.x = i.Math.degToRad(45),
                         this.scene = new i.Scene,
                         this.scene.add(this.camera),
                         this.renderer = new i.WebGLRenderer({
-                            canvas: this.canvas,
-                            antialias: !1,
-                            alpha: !0,
-                            premultipliedAlpha: !0
-                        }), // change settings of renderer
-                        this.renderer.setClearColor(0, 0),
-                        this.renderer.setPixelRatio(window.devicePixelRatio),
-                        this.renderer.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight, !1),
-
-                           // define the controls and connect it
-                        this.controls = new o.default(this.camera, this.renderer),
-                        this.controls.connect(),
-
-
-                            // initialising videoplane, refer to initvidplane module for more
-                        this.initvidplane = new a.default(this.camera, this.scene)
+                        canvas: this.canvas,
+                        antialias: !1,
+                        alpha: !0,
+                        premultipliedAlpha: !0
+                    }), this.renderer.setClearColor(0, 0),
+                    this.renderer.setPixelRatio(window.devicePixelRatio),
+                    this.renderer.setSize(this.canvas.offsetWidth,
+                    this.canvas.offsetHeight, !1),
+                    this.controls = new o.default(this.camera, this.renderer),
+                    this.controls.connect(),
+                    this.camera.rotation.x = i.Math.degToRad(45),
+                    this.initvidplane = new a.default(this.camera, this.scene)
                 }
                 return r(n, [{
                     key: "getVideo",
                     value: function () {
-                        console.log(this.k);
                         return this.initvidplane
                     }
                 }, {
@@ -111,7 +98,7 @@
                     }
                 }]), n
             }();
-            n.default = initThree
+            n.default = c
         }, {
             "../libs/three.module": 6,
             "../libs/three.module.js": 6,
@@ -121,7 +108,7 @@
 
         ///////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////
-        // pageControl module
+
         2: [function (e, t, n) {
             "use strict";
             var r = function () {
@@ -169,14 +156,8 @@
                         // pages+ buttons
                     this.initAR = new i.default,
                     this.preload = new createjs.LoadQueue(!1),
-                        this.preloadOption = new createjs.LoadQueue(!1),
                     this.bodyElement = $("#body"),
 
-                        this.chosenOption = 0,
-
-                        this.pSelect = $(".pSelect"),
-                        this.pLoadVid = $(".pLoadVid"),
-                        this.pLoading = $(".pLoading"),
                     this.pStartAR = $(".pStartAR"),
                     this.pScanning = $(".pScanning"),
                     this.posterBox = $(".posterBox"),
@@ -189,31 +170,25 @@
                     this.bBack = $(".bBack"),
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
                     this.deviceId,
-                    this.supportVideo = !0,
-
+                    this.supportVideo = !0, 
                     this.app = new o.default, // initThree.js threejs renderer and controls
-                        // calling on the threejs renderer to animate
-
-                    this.app.update(),
+                    this.app.update(), 
                     this.threeContainer = $("#threecontainer"), 
                     this.urlSearch = window.location.search, 
                     this.myvideo = $("#myvideo"),
-                    this.onVideoPlaying = this.vidPlaying.bind(this),
+                    this.onVideoPlaying = this.onPlaying.bind(this), 
                     this.myvideo[0].addEventListener("playing", this.onVideoPlaying, !1), 
                     this.oid = this.getQueryString("oid") || "1",
-                    this.urlMap = {
-                        1: "http://news.sina.com.cn/c/2012-05-28/010024488046.shtml",
-                        2: "http://news.sina.com.cn/c/2012-05-28/010024488046.shtml"
-                    }, this.handleSafariCheck(),
+                    this.handleSafariCheck(),
                     //this.getWindowSize(),
-                    this.loadController(),
+                    this.preloader(), 
                     this.checkCamera(), 
-                    this.eventController(),
+                    this.bindEvent(),
                     this.isAndroid && (this.resizeCallback = this.onResize.bind(this), 
                     window.addEventListener("resize", this.resizeCallback, !1))
                 }
                 return r(t, [{
-                    key: "vidPlaying",
+                    key: "onPlaying",
                     value: function () {
                         this.myvideo[0].pause()
                     }
@@ -224,112 +199,50 @@
                             this.video.style.height = window.innerHeight + "px"
                     }
                 }, {
-                    key: "clickHandler",
-                    value: function (arg) {
-                        let ken = this;
-                        // clickHandler function must be defined before
-                        // being called in for loop below
-                            return function() {
-                                ken.chosenOption = arg; //更新全局变量
-                                console.log("chapter " + arg + " chosen " + ken.chosenOption);
-                                ken.pSelect.hide();
-                                ken.optionLoader();
-                            };
-                    }
-                }, {
-                    key: "selectController",
+                    key: "preloader",
                     value: function () {
-                        let ken = this;
-                        <!--Initialize Chapters as Buttons-->
-                        for (var a = 0; a < 10; a++) {
-                            var b = $(".slide" + a);
-                            b.on("click", ken.clickHandler(a));
-                        }
-                    }
-                }, {
-                        key: "optionLoader",
-                        value: function () {
-                            console.log("optionLoader called" + this.chosenOption);
-                            var ken = this,
-                                contentBox = $(".contentBox"),
-                                demoVid = "resources/" + this.chosenOption + ".mp4";
+                        var e = $("#pLoading"),
+                            t = $("#progress"),
+                            n = $(".contentBox"),
+                            i = "resources/1.mp4";
 
-                            contentBox.show();
-                            this.openCamera();
-                            this.pLoadVid.show();
-                            this.assignContent();
-
-                            this.preloadOption.on("complete", function () {
-                                console.log("optionLoader completed");
-                                ken.pLoadVid.hide();
-                                ken.pScanning.show();
-                                ken.beginAR();
-                            });
-
-                                this.preloadOption.loadManifest([
-                                    {src: demoVid },
-                                    {src: " "}
-                                ]);
-                        }
-            }, {
-                    key: "loadController",
-                    value: function () {
-                        var ken = this,
-                            pSelect = $(".pSelect"),
-                            pLoading = $("#pLoading"),
-                            progressBar = $("#progress"),
-                            contentBox = $(".contentBox"),
-                            demoIntro = "img/1.jpg";
-                            // demoVid = "resources/1.mp4";
-
-                        // without select function, uncomment below
-                        // this.chosenOption = 1;
-                        // // inserting html and src of video, intro content, intro button according to chosen chapter
-                        // this.assignContent(),
+                        this.setIntroInfo(), // inserting html and src of video, intro content, intro button according to chosen chapter
 
                         this.preload.installPlugin(createjs.Sound),
 
                         this.preload.on("complete", function () {
                             setTimeout(function () {
-                                pLoading.hide(); // hide preload bar on preloading complete
-
-                                // without select function, uncomment below
-                                // contentBox.show();
-
-                                // with select function, uncomment below
-                                pSelect.show(); // show main container that contains all the content
-                                ken.selectController();
+                                e.hide() // hide preload bar on preloading complete
+                                n.show() // show main container that contains all the content        
                             }, 200)
-                        }, this);
+                        }, this),                    
                         
                         this.preload.on("progress", function () { // update progress of preloading
                             var e = Math.floor(100 * this.preload.progress);
-                            $("div", progressBar).css("width", e + "%")
-                        }, this);
+                            $("div", t).css("width", e + "%")
+                        }, this),                       
 
-                        this.preload.loadManifest([ // list of items in the manifest that needs to be preloaded
-                            { src: "img/scan.gif" },
-                            { src: "img/btn_ar.png" },
-                            { src: "img/btn_ready.png" },
-                            { src: "img/btn_more.png" },
-                            { src: "img/renyu-poster.png" },
-                            { src: "img/btn_back.png" },
-                            { src: "img/text.png"},
-                            { src: "img/openanim-landscape2.jpg" },
-                            { src: "resources/ch1.png" },
-                            { src: "resources/ch2.png" },
-                            { src: "resources/ch3.png" },
-                            { src: "resources/ch4.png" },
-                            { src: "resources/ch5.png" },
-                            { src: "resources/ch6.png" },
-                            { src: "resources/ch7.png" },
-                            { src: "resources/ch8.png" },
-                            { src: "resources/ch9.png" },
-                            { src: "resources/selectChapter.png" },
-                            { src: "resources/renyu-bg-mp3.mp3"},
-                            { src: demoIntro }  // video of chosen chapter
-                            // { src: demoVid } // intro of chosen chapter
-                        ])
+                        this.preload.loadManifest([{ // list of items in the manifest that needs to be preloaded
+                            src: "../a/media/scan.gif"
+                        }, {
+                            src: "../a/media/btn_ar.png"
+                        }, {
+                            src: "../a/media/btn_ready.png"
+                        }, {
+                            src: "../a/media/btn_more.png"
+                        }, {
+                            src: "resources/1.jpg"
+                        }, {
+                            src: "../a/media/btn_back.png"
+                        }, {
+                            src: "../a/media/openanim-landscape2.jpg"
+                        }, {
+                            src: "../a/media/text.png"
+                        }, {
+                            src: "../a/media/openanim-landscape2.jpg"
+                        }, {
+                            src: i // video of chosen chapter
+                        }])
                     }
                 }, {
                     key: "checkCamera",
@@ -356,7 +269,6 @@
                             document.getElementById("bReady").style.top = "66%",
                             document.getElementById("posterPic").style.top = "8%",
                             document.getElementById("bMore").style.top = "66%",
-                            document.getElementById("bg-audio-mp3").removeAttribute("src"),
                             document.ontouchmove = function (event) {
                                 event.preventDefault();
                             }
@@ -370,67 +282,53 @@
                         alert("windowHeight: " + t + " windowWidth: " + n + " windowOuterHeight " + o);
                     }
                 }, {
-                   key: "beginAR",
-                   value: function () {
-                       var n = this;
-                       if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
-                           n.myvideo[0].play(),
-                               // n.openCamera(),
-                               n.pScanning.show();
-                       }
-                       else { // if camera feed not supported, bypass scanning page and display demo video directly
-                           n.pDisplay.show(),
-                               $("#video").hide();
-                           var e = .16 * window.innerHeight,
-                               t = .6 * window.innerHeight;
-                           n.app.getVideo().show(e, t), // returns the video material
-                               n.startARDisplay() // show demo video display
-                       }
-                   }
-                }, {
-                    key: "eventController", // event that start displaying the camera feed
+                    key: "bindEvent", // event that start displaying the camera feed
                     value: function () {
                         var n = this;
-                        console.log(this.chosenOption);
-
                         this.bStartAR.on("click", function () {
                             if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
-                                n.myvideo[0].play(),
-                                    n.openCamera(),
-                                    n.pScanning.show();
+                                n.openCamera();
+                                n.myvideo[0].play();
+                                
+                                window.setTimeout(function () {
+                                    n.pScanning.show()
+                                }, 500)
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
                                 n.pDisplay.show(),
-                                    $("#video").hide();
+                                $("#video").hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
                                 n.app.getVideo().show(e, t), // returns the video material
-                                    n.startARDisplay() // show demo video display
+                                n.scan() // show demo video display
                             }
-                        }), this.bReady.on("click", function () { // when button on scanning page is clicked
+                        }), this.bReady.on("click", function () { // when button on scanning page is clicked                          
                             var e = $(".scanBody").offset().top,
                                 t = $(".scanBody").height();
-
-                            n.startARDisplay() // show demo video display
-
-                            window.setTimeout(function () { // wait for two seconds
+                                                            
+                            n.scan(); // show demo video display
+                            
+                            window.setTimeout(function () { // wait for two seconds                     
                                 n.posterBox.hide(),
                                 n.myvideo[0].play(),
                                 n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
-                            }, 1000)
+                            }, 1200);
 
-                            window.setTimeout(function () { // wait for two seconds
+                            window.setTimeout(function () { // wait for two seconds                     
                                 n.bMore.show()
-                            }, 5000)
+                            }, 5000);
 
                         }), this.bMore.on("click", function () {
-                            n.pDisplay.hide(),
-                            n.pIntro.show(),
-                            n.app.getVideo().hide(),
-                            $("html").addClass("introPage"),
-                            n.myvideo[0].pause(),
-                            n.myvideo[0].currentTime = 0,
-                            n.bgAudioMp3[0].play()
+                            window.open('http://piao.qunar.com/ticket/detail_730204532.html?from=mpd_recommend_sight')
+
+                            // n.pDisplay.hide(),
+                            // n.pIntro.show(),
+                            // n.app.getVideo().hide(),
+                            // $("html").addClass("introPage"),
+                            // n.myvideo[0].pause(),
+                            // n.myvideo[0].currentTime = 0
+
+                            // n.bgAudioMp3[0].play()
 
                         }), this.bBack.on("click", function () {
                             if (n.supportVideo) {
@@ -443,15 +341,15 @@
                                 n.pIntro.hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
-                                n.app.getVideo().show(e, t), n.startARDisplay()
+                                n.app.getVideo().show(e, t), n.scan()
                             }
                         })
                     }
                 }, {
-                    key: "assignContent",
+                    key: "setIntroInfo",
                     value: function () {
-                        $("#myvideo").html('<source src="resources/' + this.chosenOption + '.mp4"/>'),
-                        $(".pIntro .content").html('<img src="img/1.jpg"/>')
+                        $("#myvideo").html('<source src="resources/1.mp4"/>'),
+                        $(".pIntro .content").html('<img src="resources/intro.png"/>')
                     }
                 }, {
                     key: "fail",
@@ -460,7 +358,7 @@
                         this.isIphone && this.isWeChat && this.iosversion ? $(".ioswxPanel").show() : this.supportVideo = !1
                     }
                 }, {
-                    key: "startARDisplay", // to display video and hide scanning gif
+                    key: "scan", // to display video and hide scanning gif
                     value: function () {
                         //this.bMore.show(),
                         this.bMore.hide(),
@@ -496,7 +394,6 @@
             "./initThree.js": 1,
             "./initAR": 4
         }],
-       //  initvidplane module
         3: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -528,7 +425,7 @@
                     }
                 }(e("../libs/three.module.js"));
 
-            var initvidplane = function () {
+            var c = function () {
                 function n(e, t) {
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
@@ -536,13 +433,10 @@
                     this.width = 512,
                     this.height = 201,
                     this.scale = 368 / this.width,
-
                     this.camera = e,
                     this.scene = t,
-
                     this.video = (0, a.default)("#myvideo")[0], // demo display video
                     this.texture = new s.VideoTexture(this.video, s.UVMapping, s.ClampToEdgeWrapping, s.ClampToEdgeWrapping, s.LinearFilter, s.LinearFilter, s.RGBFormat, s.UnsignedByteType),
-
                     this.material = new s.MeshBasicMaterial({
                         map: this.texture,
                         overdraw: .5
@@ -569,18 +463,17 @@
                     }
                 }]), n
             }();
-            n.default = initvidplane
+            n.default = c
         }, {
             "../libs/jquery-3.3.1.js": 5,
             "../libs/three.module.js": 6
         }],
-       // initAR module
         4: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
                 value: !0
             });
-            n.default = function initAR(e, r) {
+            n.default = function (e, r) {
                 e = e || 1e3, r = r || "";
                 var i = {
                     width: 320,
@@ -681,7 +574,6 @@
                 }
             }
         }, {}],
-       // jQuery-3.3.1 module
         5: [function (e, t, n) {
             "use strict";
             var r, i, Xt = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (e) {
@@ -3795,7 +3687,6 @@
                 return i(e)
             } : i(r)
         }, {}],
-       // three module
         6: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -17688,7 +17579,6 @@
                 console.error("THREE.LensFlare has been moved to /examples/js/objects/Lensflare.js")
             }
         }, {}],
-       // initdevicecontrols module
         7: [function (e, t, n) {
             "use strict";
             Object.defineProperty(n, "__esModule", {
@@ -17718,7 +17608,6 @@
             function i(e, t) {
                 if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
             }
-            // mouseHandler
             var o = function () {
                 function n(e, t) {
                     i(this, n), this.camera = e, this.renderer = t, this.rotating = !1, this.startDirection = new c.Vector3, this.movingDirection = new c.Vector3, this.startCamera = new c.Camera, this.deltaQuaternion = new c.Quaternion, this.onMouseDown = this.createOnMouseDownHandler(), this.onMouseMove = this.createOnMouseMoveHandler(), this.onMouseUp = this.createOnMouseUpHandler()
@@ -17778,7 +17667,6 @@
                     }
                 }]), n
             }(),
-                // initDeviceControls
                 a = function () {
                     function n(e, t) {
                         i(this, n), this.renderers = [t], this.canvas = t.domElement, this.camera = e, this.camera.rotation.reorder("YXZ"), this.enabled = !0, this.deviceOrientation = {}, this.alphaOffsetAngle = 0, this.tagOrientation = 0, this.tanPerHeight = 2 * Math.tan(c.Math.degToRad(.5 * e.fov)) / this.canvas.offsetHeight, this.deviceOrientationCallback = this.onDeviceOrientation.bind(this), this.resizeCallback = this.onResize.bind(this), this.fallbackControl = new o(e, t)
