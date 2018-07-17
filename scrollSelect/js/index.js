@@ -277,6 +277,7 @@
 
                             contentBox.show();
                             this.openCamera();
+                            this.beginAR();
                             this.pLoadVid.show();
                             this.assignContent();
 
@@ -335,19 +336,10 @@
                                 console.log("optionLoader completed");
                                 ken.pLoadVid.hide();
                                 ken.pScanning.show();
-                                ken.beginAR();
+                                // ken.beginAR();
                             });
 
                                 this.preloadOption.loadManifest([
-                                    {src: demoVid },
-                                    {src: demoVid },
-                                    {src: demoVid },
-                                    {src: demoVid },
-                                    {src: demoVid },
-                                    {src: demoVid },
-                                    {src: demoVid },
-                                    {src: demoVid },
-                                    {src: demoVid },
                                     {src: demoVid },
                                     {src: " "}
                                 ]);
@@ -465,9 +457,9 @@
                    value: function () {
                        var n = this;
                        if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
-                           n.myvideo[0].play(),
+                           n.myvideo[0].play()
                                // n.openCamera(),
-                               n.pScanning.show();
+                               // n.pScanning.show();
                        }
                        else { // if camera feed not supported, bypass scanning page and display demo video directly
                            n.pDisplay.show(),
