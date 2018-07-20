@@ -17666,8 +17666,10 @@
             }(),
                 a = function () {
                     function n(e, t) {
-                        i(this, n), this.renderers = [t], this.canvas = t.domElement, this.camera = e, this.camera.rotation.reorder("YXZ"), this.enabled = !0, this.deviceOrientation = {}, this.alphaOffsetAngle = 0, this.tagOrientation = 0, this.tanPerHeight = 2 * Math.tan(c.Math.degToRad(.5 * e.fov)) / this.canvas.offsetHeight, this.deviceOrientationCallback = this.onDeviceOrientation.bind(this), this.resizeCallback = this.onResize.bind(this),
-                            this.fallbackControl = new o(e, t)
+                        i(this, n), this.renderers = [t], this.canvas = t.domElement, this.camera = e, this.camera.rotation.reorder("YXZ"), this.enabled = !0, this.deviceOrientation = {}, this.alphaOffsetAngle = 0, this.tagOrientation = 0, this.tanPerHeight = 2 * Math.tan(c.Math.degToRad(.5 * e.fov)) / this.canvas.offsetHeight, this.deviceOrientationCallback = this.onDeviceOrientation.bind(this),
+                            this.resizeCallback = this.onResize.bind(this)
+
+                            // this.fallbackControl = new o(e, t)
                     }
                     return r(n, [{
                         key: "addRenderer",
@@ -17709,21 +17711,21 @@
                     }, {
                         key: "disableOrientation",
                         value: function () {
-                            window.removeEventListener("deviceorientation", this.deviceOrientationCallback, !1), this.enabled = !1,
-                            this.fallbackControl && this.fallbackControl.disconnect()
+                            window.removeEventListener("deviceorientation", this.deviceOrientationCallback, !1), this.enabled = !1
+                            // this.fallbackControl && this.fallbackControl.disconnect()
                         }
                     }, {
                         key: "update",
                         value: function () {
                             if (!1 !== this.enabled)
                                 if (this.deviceOrientation.alpha) {
-                                    this.fallbackControl && this.fallbackControl.disconnect();
+                                    // this.fallbackControl && this.fallbackControl.disconnect();
                                     var e = c.Math.degToRad(this.deviceOrientation.alpha + this.alphaOffsetAngle + this.tagOrientation),
                                         t = this.deviceOrientation.beta ? c.Math.degToRad(this.deviceOrientation.beta) : 1.57,
                                         n = this.deviceOrientation.gamma ? c.Math.degToRad(this.deviceOrientation.gamma) : 0,
                                         r = window.orientation ? c.Math.degToRad(window.orientation) : 0;
                                     this.updateCamera(e, t, n, r)
-                                } else alert("else wtf")
+                                } else console.log("else wtf")
                                     // this.fallbackControl && this.fallbackControl.update()
                         }
                     }, {
