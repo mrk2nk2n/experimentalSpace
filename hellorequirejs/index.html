@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="">
 
 <head>
@@ -9,6 +9,9 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="yes" name="apple-touch-fullscreen" />
     <meta content="telephone=no,email=no" name="format-detection" />
+
+    <script data-main="js/config" src="js/require.js"></script>
+
     <title>MorphoMRweb</title>
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -95,113 +98,79 @@
         })(window);
     </script>
     <!-- lib-flexible end-->
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/index.css">
-
 </head>
 
+
 <body>
-    <div class="ioswxPanel"></div>
-    <div class="pLoading" id="pLoading">
+<div class="ioswxPanel"></div>
+<div class="pLoading" id="pLoading">
+    <img src="img/openanim-landscape2.jpg" />
+    <div class="progress" id="progress">
+        <div class="progressBar"></div>
+    </div>
+</div>
+
+<div class="contentBox" id="contentBox">
+    <div id="newPage"></div>
+
+    <!--background camera feed-->
+    <video id="video" playsinline=""></video>
+
+    <!--videoPlane-->
+    <div class="videobox" ontouchmove="return false;" style="display: none;z-index: -1">
+        <video id="myvideo" x5-video-player-type="h5" style="display:none" height="512" width="256" loop
+               x5-playsinline="" playsinline="" webkit-playsinline="" poster=""
+               preload="auto"></video>
+    </div>
+
+    <div class="pStartAR">
+        <!-- <div class="s-title"></div>
+        <div class="m-title"></div>
+        <div class="arrow">
+        </div> -->
+        <div class="bgbg">
+            <a id="bStartAR" class="bStartAR" href="javascript:;" /></a>
+        </div>
         <img src="img/openanim-landscape2.jpg" />
-        <div class="progress" id="progress">
-            <div class="progressBar"></div>
-        </div>
     </div>
 
-    <div class="pSelect" id="pSelect" style="display: none">
-        <img src="resources/selectChapter.jpg" />
-        <!-- Swiper -->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide select1" ></div>
-                <div class="swiper-slide select2"></div>
-                <div class="swiper-slide select3"></div>
-                <div class="swiper-slide select4"></div>
-            </div>
-        </div>
+    <!--safari-->
+    <!--scanning page-->
+    <div class="pScanning">
+        <div class="scanTip" id="scanTip"></div>
+        <div class="scanTop" id="scanTop"></div>
+        <div class="scanBody" id="scanBody"></div>
+        <div class="bReady" id="bReady"></div>
     </div>
 
-
-    <div class="contentBox" id="contentBox">
-        <div class="pLoadVid" style="display: none">
-            <div class="load-wrapp">
-                <div class="load-3">
-                    <p>Loading Content</p>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-            </div>
+    <!--display page (poster + videoPlane)-->
+    <div class="pDisplay">
+        <div class="posterBox">
+            <div class="posterPic" id="posterPic"></div>
         </div>
-        <div id="newPage"></div>
-
-        <!--background camera feed-->
-        <video id="video" playsinline=""></video>
-
-        <!--videoPlane-->
-        <div class="videobox" ontouchmove="return false;" style="display: none;z-index: -1">
-            <video id="myvideo" x5-video-player-type="h5" style="display:none" height="512" width="256" loop
-                   x5-playsinline="" playsinline="" webkit-playsinline="" poster=""
-                   preload="auto"></video>
-        </div>
-
-        <div class="pStartAR">
-            <!-- <div class="s-title"></div>
-            <div class="m-title"></div>
-            <div class="arrow">
-            </div> -->
-            <div class="bgbg">
-                <a id="bStartAR" class="bStartAR" href="javascript:;" /></a>
-            </div>
-            <img src="img/openanim-landscape2.jpg" />
-        </div>
-
-        <!--safari-->
-        <!--scanning page-->
-        <div class="pScanning" style="display: none;">
-            <div class="scanTip" id="scanTip"></div>
-            <div class="scanTop" id="scanTop"></div>
-            <div class="scanBody" id="scanBody"></div>
-            <div class="bReady" id="bReady"></div>
-        </div>
-
-        <!--display page (poster + videoPlane)-->
-        <div class="pDisplay">
-            <div class="posterBox">
-                <div class="posterPic" id="posterPic">
-                    <img id="posterImage" src="" />
-                </div>
-            </div>
-            <div class="bMore" id="bMore"></div>
-        </div>
-
-        <!--intro page-->
-        <div class="introMask"></div>
-        <div class="bIntroBox">
-            <a href="javascript:;" class="bBack"></a>
-        </div>
-        <div class="pIntro">
-            <div class="content"></div>
-        </div>
-
-    </div>
-    <!--横竖屏提示-->
-    <div class="mask lock flex flex-v flex-align-center flex-pack-center">
-        <div class="lock-bg">
-        </div>
-    </div>
-    <div class='wrap' id="threecontainer">
-        <canvas class="wrap" id="three_container"></canvas>
+        <div class="bMore" id="bMore"></div>
     </div>
 
-    <script src="js/createjs.min.js"></script>
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/adapter.min.js"></script>
-    <script src="js/three.min.js"></script>
-    <script src="js/swiper.min.js"></script>
-    <script src="js/index.js"></script>
+    <!--intro page-->
+    <div class="introMask"></div>
+    <div class="bIntroBox">
+        <a href="javascript:;" class="bBack"></a>
+    </div>
+    <div class="pIntro">
+        <div class="content"></div>
+    </div>
+
+</div>
+<!--横竖屏提示-->
+<div class="mask lock flex flex-v flex-align-center flex-pack-center">
+    <div class="lock-bg">
+    </div>
+</div>
+<div class='wrap' id="threecontainer">
+    <canvas class="wrap" id="three_container"></canvas>
+</div>
+
 </body>
 
-</html>  
+</html>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/scrollSelect.iml" filepath="$PROJECT_DIR$/.idea/scrollSelect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hellorequirejs.iml" filepath="$PROJECT_DIR$/.idea/hellorequirejs.iml" />
     </modules>
   </component>
 </project>

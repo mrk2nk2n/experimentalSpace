@@ -1,4 +1,4 @@
-﻿/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
+﻿} /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 
 html {
     line-height: 1.15;
@@ -91,10 +91,10 @@ audio, video {
     display: inline-block
 }
 
-    audio:not([controls]) {
-        display: none;
-        height: 0
-    }
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
 
 img {
     border-style: none
@@ -123,14 +123,14 @@ button, select {
     -webkit-appearance: button
 }
 
-    [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner, button::-moz-focus-inner {
-        border-style: none;
-        padding: 0
-    }
+[type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner, button::-moz-focus-inner {
+    border-style: none;
+    padding: 0
+}
 
-    [type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring, button:-moz-focusring {
-        outline: 1px dotted ButtonText
-    }
+[type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring, button:-moz-focusring {
+    outline: 1px dotted ButtonText
+}
 
 fieldset {
     padding: .35em .75em .625em
@@ -168,9 +168,9 @@ textarea {
     outline-offset: -2px
 }
 
-    [type=search]::-webkit-search-cancel-button, [type=search]::-webkit-search-decoration {
-        -webkit-appearance: none
-    }
+[type=search]::-webkit-search-cancel-button, [type=search]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
 
 ::-webkit-file-upload-button {
     -webkit-appearance: button;
@@ -315,10 +315,10 @@ body, html {
     background: #000
 }
 
-    html.introPage, html.introPage body {
-        overflow: auto;
-        overflow-x: hidden
-    }
+html.introPage, html.introPage body {
+    overflow: auto;
+    overflow-x: hidden
+}
 
 .wrap {
     position: absolute;
@@ -356,23 +356,16 @@ contentBox.safariBottomOffset {
     margin-bottom: 7%
 }
 
-.pLoading, .pSelect {
+.pLoading {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     overflow: hidden;
+    z-index: 20
 }
 
-.pLoading {
-    z-index: 100
-}
-
-.pSelect {
-    z-index: 20;
-}
-
-#video, .pLoading > img, .pStartAR > img, .pSelect > img {
+#video, .pLoading > img, .pStartAR > img {
     margin: 0 auto;
     /*position: fixed*/
     position: absolute;
@@ -382,16 +375,17 @@ contentBox.safariBottomOffset {
     height: 100%
 }
 
+
 /* 1. No object-fit support: */
 @media (min-aspect-ratio: 16/9) {
-    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
+    #video, .pLoading > img, .pStartAR > img {
         height: 300%;
         top: -100%;
     }
 }
 
 @media (max-aspect-ratio: 16/9) {
-    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
+    #video, .pLoading > img, .pStartAR > img {
         width: 300%;
         left: -100%;
     }
@@ -399,7 +393,7 @@ contentBox.safariBottomOffset {
 
 /* 2. If supporting object-fit, overriding (1): */
 @supports (object-fit: cover) {
-    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
+    #video, .pLoading > img, .pStartAR > img {
         top: 0;
         left: 0;
         width: 100%;
@@ -451,68 +445,65 @@ contentBox.safariBottomOffset {
 
 }
 
-.pLoadVid {
-    top: 30%;
-}
-
-.pScanning, .pLoadVid {
+.pScanning {
     width: 100%;
     height: 100%;
     position: fixed;
+    /*top: 0;*/
     bottom: 0;
     left: 0;
     display: none;
     z-index: 10
 }
 
-    .pScanning .scanBody {
-        background: url(../img/scan.gif) no-repeat;
-        background-size: 100% 100%;
-        width: 40vw;
-        height: 55%;
-        -webkit-box-sizing: content-box;
-        box-sizing: content-box;
-        border-left: 15rem solid rgba(0,0,0,.7);
-        border-right: 15rem solid rgba(0,0,0,.7);
-        border-bottom: 10rem solid rgba(0,0,0,.7);
-        top: 18%
-    }
+.pScanning .scanBody {
+    background: url(../img/scan.gif) no-repeat;
+    background-size: 100% 100%;
+    width: 40vw;
+    height: 55%;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    border-left: 15rem solid rgba(0,0,0,.7);
+    border-right: 15rem solid rgba(0,0,0,.7);
+    border-bottom: 10rem solid rgba(0,0,0,.7);
+    top: 18%
+}
 
-    .pScanning .scanBody, .pScanning .scanTip {
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        position: absolute
-    }
+.pScanning .scanBody, .pScanning .scanTip {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute
+}
 
-    .pScanning .scanTip {
-        background: url(../img/text.png) no-repeat;
-        background-size: 100% 100%;
-        width: 4.24rem;
-        height: .35rem;
-        top: 7%;
-        z-index: 11
-    }
+.pScanning .scanTip {
+    background: url(../img/text.png) no-repeat;
+    background-size: 100% 100%;
+    width: 4.24rem;
+    height: .35rem;
+    top: 7%;
+    z-index: 11
+}
 
-    .pScanning .scanTop {
-        position: absolute;
-        width: 100%;
-        height: 18%;
-        background: rgba(0,0,0,.7)
-    }
+.pScanning .scanTop {
+    position: absolute;
+    width: 100%;
+    height: 18%;
+    background: rgba(0,0,0,.7)
+}
 
-    .pScanning .bReady {
-        background: url(../img/btn_ready.png) no-repeat;
-        background-size: 100% 100%;
-        width: 6.79rem;
-        height: 1.2rem;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        position: absolute;
-        top: 75%;
-        z-index: 110
-    }
+.pScanning .bReady {
+    background: url(../img/btn_ready.png) no-repeat;
+    background-size: 100% 100%;
+    width: 6.79rem;
+    height: 1.2rem;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute;
+    top: 78%;
+    z-index: 110
+}
 
 .pDisplay {
     width: 100%;
@@ -525,41 +516,35 @@ contentBox.safariBottomOffset {
     z-index: 11
 }
 
-    .pDisplay .posterPic {
-        /*background: url(../img/renyu-poster.png) no-repeat;*/
-        /*background-size: contain;*/
-        width: 0vw;
-        height: 55%;
-        -webkit-box-sizing: content-box;
-        box-sizing: content-box;
-        top: 18%
-    }
+.pDisplay .posterPic {
+    background: url(../img/renyu-poster.png) no-repeat;
+    background-size: 100% 100%;
+    width: 9.0rem;
+    height: 55vh;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    top: 18%
+}
 
-    #posterImage {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+.pDisplay .posterPic {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute
+}
 
-    .pDisplay .posterPic {
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        position: absolute
-    }
-
-    .pDisplay .bMore {
-        background: url(../img/btn_more.png) no-repeat;
-        background-size: 100% 100%;
-        width: 6.79rem;
-        height: 1.2rem;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        position: absolute;
-        top: 78%;
-        z-index: 1
-    }
+.pDisplay .bMore {
+    background: url(../img/btn_more.png) no-repeat;
+    background-size: 100% 100%;
+    width: 6.79rem;
+    height: 1.2rem;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute;
+    top: 78%;
+    z-index: 1
+}
 
 .introMask {
     background-color: white;
@@ -579,18 +564,18 @@ contentBox.safariBottomOffset {
     background-color: white
 }
 
-    .bIntroBox a {
-        width: 20%;
-        height: 70%;
-        background: url(../img/btn_back.png) no-repeat;
-        background-size: contain;
-        margin: auto;
-        margin-top: 3vh
-    }
+.bIntroBox a {
+    width: 20%;
+    height: 70%;
+    background: url(../img/btn_back.png) no-repeat;
+    background-size: contain;
+    margin: auto;
+    margin-top: 3vh
+}
 
-    .bIntroBox a, .introPage .bIntroBox, .introPage .introMask {
-        display: block
-    }
+.bIntroBox a, .introPage .bIntroBox, .introPage .introMask {
+    display: block
+}
 
 .scrollPanel {
     width: 100%;
@@ -614,13 +599,13 @@ contentBox.safariBottomOffset {
     display: none
 }
 
-    .scroll .scrollTip {
+.scroll .scrollTip {
 
-    }
+}
 
-        .scroll .scrollTip img {
+.scroll .scrollTip img {
 
-        }
+}
 
 .pIntro {
     position: absolute;
@@ -631,15 +616,15 @@ contentBox.safariBottomOffset {
     background-color: white
 }
 
-    .pIntro .content {
-        width: 50%;
-        margin-left: 25%;
-        margin-top: 20vh
-    }
+.pIntro .content {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 20vh
+}
 
-        .pIntro .content img {
-            width: 100%
-        }
+.pIntro .content img {
+    width: 100%
+}
 
 .progress {
     width: 7.85rem;
@@ -653,103 +638,9 @@ contentBox.safariBottomOffset {
     background-size: 5.41rem .07rem
 }
 
-    .progress .progressBar {
-        width: 0;
-        height: 1.54rem;
-        background: url(../img/progress1.png) no-repeat;
-        background-size: 100% 100%
-    }
-
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -- swiper css */
-
-.swiper-container {
-    width: 100%;
-    padding-top: 15vh;
-    padding-bottom: 15vh;
-}
-.swiper-slide {
-    width: 40vw;
-    height: 70vh;
-}
-.select1 {
-    background: url(../resources/select1.png) no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-.select2 {
-    background: url(../resources/select2.jpg) no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-.select3 {
-    background: url(../resources/select3.jpg) no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-.select4 {
-    background: url(../resources/select4.jpg) no-repeat;
-    background-size: contain;
-    background-position: center;
-}
-
-
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -------------------------------------------------------- */
-/* -- loading of video -- */
-/* -----------------------------------------
-  =Default css to make the demo more pretty
--------------------------------------------- */
-
-body {
-    font-family: 'Open Sans',sans-serif;
-    color: #777;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-}
-
-/* -----------------------------------------
-  =CSS3 Loading animations
--------------------------------------------- */
-
-/* =Elements style
----------------------- */
-.load-wrapp {
-    float: left;
-    width: 100%;
-    height: 100%;
-    margin: auto 0;
-    text-align: center;
-}
-
-.line {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    background-color: #4b9cdb;
-}
-
-
-/* =Animate the stuff
------------------------- */
-
-.load-3 .line:nth-last-child(1) {animation: loadingC .6s .1s linear infinite;}
-.load-3 .line:nth-last-child(2) {animation: loadingC .6s .2s linear infinite;}
-.load-3 .line:nth-last-child(3) {animation: loadingC .6s .3s linear infinite;}
-
-
-
-@keyframes loadingC {
-0 {transform: translate(0,0);}
-50% {transform: translate(0,15px);}
-100% {transform: translate(0,0);}
+.progress .progressBar {
+    width: 0;
+    height: 1.54rem;
+    background: url(../img/progress1.png) no-repeat;
+    background-size: 100% 100%
 }
