@@ -95,7 +95,8 @@ define(['jquery','createjs','threejs'], function($, cjs,tjs) {
                 window.setTimeout(function () {
                     ken.posterBox.hide()
                     // ken.myvideo[0].play(),
-                    initThree.getVideo()
+                    initThree.setupEnvironment();
+                    initThree.init3Dmodel();
                 }, 1000)
 
                 window.setTimeout(function () {
