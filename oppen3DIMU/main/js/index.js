@@ -275,9 +275,6 @@
                             setTimeout(function () {
                                 // e.hide() // hide preload bar on preloading complete
                                 // n.show() // show main container that contains all the content
-                                
-
-                                document.getElementById("openLoadingPercent").innerHTML = "";
 
                                     // return the video material into the height of the scanning border and offset from the top
                                     ke.app.getVideo().show(e, t);
@@ -360,11 +357,11 @@
                                     t = $(".scanBody").height();
 
                                 n.myvideo[0].play(),
-                                // n.openCamera(),
-                                // n.pScanning.show();
+                                n.openCamera(),
+                                n.pScanning.show();
 
-                                    n.bgShade.show(),
-                                    n.pLoadContent.show();
+                                    // n.bgShade.show(),
+                                    // n.pLoadContent.show();
 
                                     // n.myvideo[0].play(),
                                     //
@@ -601,9 +598,16 @@
                                 console.log( f + '% loaded' );
                                 if (e.loaded === e.total) {
                                     console.log("content all loaded");
-                                    document.getElementById("pLoadContent").style.display = "none";
-                                    document.getElementById("bgShade").style.display = "none";
-                                    document.getElementById("pScanning").style.display = "block";
+                                    // document.getElementById("pLoadContent").style.display = "none";
+                                    // document.getElementById("bgShade").style.display = "none";
+                                    // document.getElementById("pScanning").style.display = "block";
+                                    // window.setTimeout(function () {
+                                    //     $(".pStartAR").show();
+                                    //     $(".contentBox").show();
+                                    // }, 500);
+
+                                    $(".pStartAR").show();
+                                    $(".contentBox").show();
 
                                 }
                             },
