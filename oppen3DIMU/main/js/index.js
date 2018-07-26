@@ -261,6 +261,7 @@
                 }, {
                     key: "preloader",
                     value: function () {
+                        let ke = this;
                         var e = $("#pLoading"),
                             t = $("#progress"),
                             n = $(".contentBox"),
@@ -272,14 +273,22 @@
 
                         this.preload.on("complete", function () {
                             setTimeout(function () {
-                                e.hide() // hide preload bar on preloading complete
-                                n.show() // show main container that contains all the content
+                                // e.hide() // hide preload bar on preloading complete
+                                // n.show() // show main container that contains all the content
+                                
+
+                                document.getElementById("openLoadingPercent").innerHTML = "";
+
+                                    // return the video material into the height of the scanning border and offset from the top
+                                    ke.app.getVideo().show(e, t);
+
                             }, 200)
                         }, this),
 
                         this.preload.on("progress", function () { // update progress of preloading
                             var e = Math.floor(100 * this.preload.progress);
-                            $("div", t).css("width", e + "%")
+                            $("div", t).css("width", ((e / 100) * 50) + "%")
+                            document.getElementById("openLoadingPercent").innerHTML = ((e / 100) * 50) + "%";
                         }, this),
 
                         this.preload.loadManifest([{ // list of items in the manifest that needs to be preloaded
@@ -351,15 +360,16 @@
                                     t = $(".scanBody").height();
 
                                 n.myvideo[0].play(),
-                                n.openCamera(),
+                                // n.openCamera(),
                                 // n.pScanning.show();
 
                                     n.bgShade.show(),
-                                    n.pLoadContent.show(),
-                                    n.myvideo[0].play(),
+                                    n.pLoadContent.show();
 
-                                    // return the video material into the height of the scanning border and offset from the top
-                                    n.app.getVideo().show(e, t);
+                                    // n.myvideo[0].play(),
+                                    //
+                                    // // return the video material into the height of the scanning border and offset from the top
+                                    // n.app.getVideo().show(e, t);
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
                                 n.pDisplay.show(),
@@ -583,7 +593,11 @@
                             // called when loading is in progress
                             function (e) {
                                 var f = Math.floor(e.loaded / e.total * 100);
-                                document.getElementById("loadingPercent").innerHTML = f + "%";
+                                // $("div", t).css("width", ((f / 100) * 50) + "%");
+                                document.getElementById("openLoadingPercent").innerHTML = (Math.floor((f / 100) * 50) + 50) + "%";
+
+
+
                                 console.log( f + '% loaded' );
                                 if (e.loaded === e.total) {
                                     console.log("content all loaded");

@@ -17,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="186" column="50" selection-start-line="186" selection-start-column="50" selection-end-line="186" selection-end-column="50" />
+            <state relative-caret-position="341">
+              <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -26,8 +26,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="547" column="49" lean-forward="true" selection-start-line="547" selection-start-column="49" selection-end-line="547" selection-end-column="49" />
+            <state relative-caret-position="249">
+              <caret line="595" column="84" lean-forward="true" selection-start-line="595" selection-start-column="84" selection-end-line="595" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -38,6 +38,10 @@
     <findStrings>
       <find>3: [f</find>
       <find>Audi.fbx</find>
+      <find>show(e</find>
+      <find>pstarta</find>
+      <find>document.getElementById</find>
+      <find>innerhtml</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -95,7 +99,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/UnityWorkspace/WebAR6/05-modelThreeInRequireTest" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -126,10 +130,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5768000" />
+    <option name="totallyTimeSpent" value="6726000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="752" y="48" width="1183" height="1044" extended-state="0" />
+    <frame x="686" y="44" width="1183" height="1044" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2105644" />
@@ -145,10 +149,12 @@
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.2105644" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,15 +171,36 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="186" column="50" selection-start-line="186" selection-start-column="50" selection-end-line="186" selection-end-column="50" />
+        <state relative-caret-position="387">
+          <caret line="151" column="44" selection-start-line="151" selection-start-column="44" selection-end-line="151" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="547" column="49" lean-forward="true" selection-start-line="547" selection-start-column="49" selection-end-line="547" selection-end-column="49" />
+        <state relative-caret-position="571">
+          <caret line="384" column="37" lean-forward="true" selection-start-line="384" selection-start-column="37" selection-end-line="384" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="772">
+          <caret line="699" column="21" selection-start-line="699" selection-start-column="21" selection-end-line="699" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="595" column="84" lean-forward="true" selection-start-line="595" selection-start-column="84" selection-end-line="595" selection-end-column="84" />
         </state>
       </provider>
     </entry>
