@@ -114,21 +114,20 @@
                     key: "getVideo",
                     value: function () {
                         console.log("getVideo");
-                        let ke = this;
-                        this.mtlLoader = new THREE.MTLLoader(),
-                            this.mtlLoader.setBaseUrl('assets/'),
-                            this.mtlLoader.setPath('assets/'),
-                            this.mtlLoader.load('shelf.mtl', function (materials) {
-                                materials.preload(),
-                                    ke.objLoader = new THREE.OBJLoader(),
-                                    ke.objLoader.setMaterials(materials),
-                                    ke.objLoader.setPath('assets/')
-                                ke.objLoader.load('shelf.obj', function (object) {
-                                    let modelObject = object;
-                                    ke.scene.add(modelObject),
-                                        modelObject.position.y -= 30
-                                })
-                            })
+                        // let ke = this;
+                        // this.mtlLoader = new THREE.MTLLoader(),
+                        //     this.mtlLoader.setBaseUrl('assets/'),
+                        //     this.mtlLoader.setPath('assets/'),
+                        //     this.mtlLoader.load('shelf.mtl', function (materials) {
+                        //         materials.preload(),
+                        //             ke.objLoader = new THREE.OBJLoader(),
+                        //             ke.objLoader.setMaterials(materials),
+                        //             ke.objLoader.setPath('assets/')
+                        //         ke.objLoader.load('shelf.obj', function (object) {
+                        //             let modelObject = object;
+                        //             ke.scene.add(modelObject)
+                        //         })
+                        //     })
                         return this.initvidplane
                     }
                 }, {
@@ -493,11 +492,37 @@
                     value: function (e, t) {
                         var n = this.height * (.5 * window.innerHeight - (e + .5 * t)) / t,
                             r = -this.height * window.innerHeight / (2 * t * Math.tan(s.Math.degToRad(.5 * this.camera.fov)));
+
+                        console.log(n);
+                        console.log(r);
+
+                        let ke = this;
+                        this.mtlLoader = new THREE.MTLLoader(),
+                            this.mtlLoader.setBaseUrl('assets/'),
+                            this.mtlLoader.setPath('assets/'),
+                            this.mtlLoader.load('shelf.mtl', function (materials) {
+                                materials.preload(),
+                                    ke.objLoader = new THREE.OBJLoader(),
+                                    ke.objLoader.setMaterials(materials),
+                                    ke.objLoader.setPath('assets/')
+                                ke.objLoader.load('shelf.obj', function (object) {
+                                    let modelObject = object;
+                                    modelObject.position.set(0, -30, 0);
+                                    ke.scene.add(modelObject);
+                                })
+                            }),
+
                         this.mesh.position.set(0, n, r),
-                        this.camera.updateMatrixWorld(!0),
-                        this.camera.localToWorld(this.mesh.position),
-                        this.camera.getWorldQuaternion(this.mesh.quaternion)
+                        // this.camera.updateMatrixWorld(!0),
+                        // this.camera.localToWorld(this.mesh.position),
+                        // this.camera.getWorldQuaternion(this.mesh.quaternion),
                         this.scene.add(this.mesh)
+
+
+
+
+
+
                     }
                 }, {
                     key: "hide",
