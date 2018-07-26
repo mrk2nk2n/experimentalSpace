@@ -507,7 +507,10 @@
                                     ke.objLoader.setPath('assets/')
                                 ke.objLoader.load('shelf.obj', function (object) {
                                     let modelObject = object;
-                                    modelObject.position.set(0, -30, 0);
+                                    modelObject.position.set(0, -30, -200);
+                                    ke.camera.updateMatrixWorld(!0);
+                                    ke.camera.localToWorld(modelObject.position);
+                                    ke.camera.getWorldQuaternion(modelObject.quaternion);
                                     ke.scene.add(modelObject);
                                 })
                             }),
