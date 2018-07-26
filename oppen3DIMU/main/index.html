@@ -110,6 +110,22 @@
     <div class="contentBox" id="contentBox">
         <div id="newPage"></div>
 
+        <div class="bgShade" id="bgShade" style="display: none"></div>
+        <div class="pLoadContent" id="pLoadContent" style="display: none">
+            <span id="loadingPercent"></span>
+            <div class="load-wrapp">
+                <div class="load-3">
+
+                    <div class="loadingTip">
+                        <img src="../a/media/loadingTip.png" />
+                    </div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+
         <!--background camera feed-->
         <video id="video" playsinline=""></video>
 
@@ -133,7 +149,7 @@
 
         <!--safari-->
         <!--scanning page-->
-        <div class="pScanning">
+        <div class="pScanning" id="pScanning">
             <div class="scanTip" id="scanTip"></div>
             <div class="scanTop" id="scanTop"></div>
             <div class="scanBody" id="scanBody"></div>

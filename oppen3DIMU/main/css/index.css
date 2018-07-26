@@ -365,7 +365,7 @@ contentBox.safariBottomOffset {
     z-index: 20
 }
 
-#video, .pLoading > img, .pStartAR > img {
+#video, .pLoading > img, .pStartAR > img, .loadingTip > img {
     margin: 0 auto;
     /*position: fixed*/
     position: absolute;
@@ -445,7 +445,7 @@ contentBox.safariBottomOffset {
 
 }
 
-.pScanning {
+.pScanning, .pLoadContent {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -644,3 +644,77 @@ contentBox.safariBottomOffset {
         background: url(../../a/media/progress1.png) no-repeat;
         background-size: 100% 100%
     }
+
+/* -----------------------------------------
+=CSS3 Loading animations
+-------------------------------------------- */
+
+.pLoadContent {
+    top: 30%;
+}
+
+#loadingPercent {
+    position: absolute;
+    color: #4b9cdb;
+    top: 28vh;
+    left: 47vw;
+    font-size: 6vh;
+}
+
+#openLoadingPercent {
+    position: absolute;
+    color: rgb(144,211,255);
+    top: 38vh;
+    left: 47vw;
+    font-size: 6vh;
+}
+
+/* =Elements style
+---------------------- */
+.load-wrapp {
+    float: left;
+    width: 100%;
+    height: 100%;
+    margin: auto 0;
+    text-align: center;
+}
+
+.line {
+    display: inline-block;
+    width: 10px;
+    height: 60px;
+    border-radius: 15px;
+    background-color: #4b9cdb;
+}
+
+.loadingTip {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute;
+    width: 25vw;
+    height: 6vh;
+    top: 40vh;
+}
+
+/* =Animate the stuff
+------------------------ */
+
+.load-3 .line:nth-last-child(1) {animation: loadingC .6s .1s linear infinite;}
+.load-3 .line:nth-last-child(2) {animation: loadingC .6s .2s linear infinite;}
+.load-3 .line:nth-last-child(3) {animation: loadingC .6s .3s linear infinite;}
+
+@keyframes loadingC {
+0 {transform: translate(0,0);}
+50% {transform: translate(0,15px);}
+100% {transform: translate(0,0);}
+}
+
+.bgShade {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    background-color: rgba(0,0,0,.7);
+
+}

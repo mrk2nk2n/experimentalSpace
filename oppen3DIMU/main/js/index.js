@@ -223,6 +223,10 @@
                     this.pIntro = $(".pIntro"),
                     this.bMore = $(".bMore"),
                     this.pDisplay = $(".pDisplay"),
+
+                        this.bgShade = $(".bgShade"),
+                        this.pLoadContent = $(".pLoadContent"),
+
                     this.bBack = $(".bBack"),
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
                     this.deviceId,
@@ -343,9 +347,17 @@
                         var n = this;
                         this.bStartAR.on("click", function () {
                             if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
+                                var e = $(".scanBody").offset().top,
+                                    t = $(".scanBody").height();
+
                                 n.myvideo[0].play(),
                                 n.openCamera(),
-                                n.pScanning.show();
+                                // n.pScanning.show();
+
+                                    n.bgShade.show(),
+                                    n.pLoadContent.show(),
+                                    n.myvideo[0].play(),
+                                    n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
                                 n.pDisplay.show(),
@@ -363,9 +375,9 @@
                             
                             window.setTimeout(function () { // wait for two seconds                     
                                 n.posterBox.hide(),
-                                document.getElementById("threecontainer").style.zIndex = "100",
-                                n.myvideo[0].play(),
-                                n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
+                                document.getElementById("threecontainer").style.zIndex = "100";
+                                // n.myvideo[0].play(),
+                                // n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
                             }, 1200),
 
                             window.setTimeout(function () { // wait for two seconds                     
@@ -563,10 +575,13 @@
                             // called when loading is in progress
                             function (e) {
                                 var f = Math.floor(e.loaded / e.total * 100);
-                                // document.getElementById("loadingPercent").innerHTML = f + "%";
+                                document.getElementById("loadingPercent").innerHTML = f + "%";
                                 console.log( f + '% loaded' );
                                 if (e.loaded === e.total) {
-
+                                    console.log("content all loaded");
+                                    document.getElementById("pLoadContent").style.display = "none";
+                                    document.getElementById("bgShade").style.display = "none";
+                                    document.getElementById("pScanning").style.display = "block";
                                 }
                             },
                             function (error) {
