@@ -508,17 +508,17 @@
                                 ke.objLoader.load('shelf.obj', function (object) {
                                     let modelObject = object;
                                     modelObject.position.set(0, -30, 0);
-                                    // ke.camera.updateMatrixWorld(!0);
-                                    // ke.camera.localToWorld(modelObject.position);
-                                    // ke.camera.getWorldQuaternion(modelObject.quaternion);
+                                    ke.camera.updateMatrixWorld(!0);
+                                    ke.camera.localToWorld(modelObject.position);
+                                    ke.camera.getWorldQuaternion(modelObject.quaternion);
                                     ke.scene.add(modelObject);
                                 })
                             }),
 
                         this.mesh.position.set(0, n, r),
-                        this.camera.updateMatrixWorld(!0),
-                        this.camera.localToWorld(this.mesh.position),
-                        this.camera.getWorldQuaternion(this.mesh.quaternion),
+                        // this.camera.updateMatrixWorld(!0),
+                        // this.camera.localToWorld(this.mesh.position),
+                        // this.camera.getWorldQuaternion(this.mesh.quaternion),
                         this.scene.add(this.mesh)
 
 
