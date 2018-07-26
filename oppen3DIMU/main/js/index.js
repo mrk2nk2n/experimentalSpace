@@ -357,7 +357,9 @@
                                     n.bgShade.show(),
                                     n.pLoadContent.show(),
                                     n.myvideo[0].play(),
-                                    n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
+
+                                    // return the video material into the height of the scanning border and offset from the top
+                                    n.app.getVideo().show(e, t);
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
                                 n.pDisplay.show(),
@@ -370,6 +372,8 @@
                         }), this.bReady.on("click", function () { // when button on scanning page is clicked                          
                             var e = $(".scanBody").offset().top,
                                 t = $(".scanBody").height();
+
+                            n.app.getVideo().set(),
                                                             
                             n.scan(), // show demo video display
                             
@@ -497,7 +501,8 @@
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, n),
-                        this.mixers = m,
+                        this.mixers = m;
+                    var modelObject;
                     this.width = 512,
                     this.height = 201,
                     this.scale = 368 / this.width,
@@ -558,18 +563,21 @@
                         this.fbxLoader.load(
                             'assets/SambaDancing.fbx',
                             function ( object ) {
+                                ke.modelObject = object;
                                 object.mixer = new THREE.AnimationMixer( object );
                                 ke.mixers.push( object.mixer );
 
                                 var action = object.mixer.clipAction( object.animations[ 0 ] );
                                 action.play();
 
-                                object.position.set(0, -100, -300); // SambaDancing
+                                ke.modelObject.position.set(0, -100, -300); // SambaDancing
                                 // object.position.set(0, -2, -30); // Audi
-                                ke.camera.updateMatrixWorld(!0);
-                                ke.camera.localToWorld(object.position);
-                                ke.camera.getWorldQuaternion(object.quaternion);
-                                alert("ref to SambaDancing");
+
+                                // ke.camera.updateMatrixWorld(!0);
+                                // ke.camera.localToWorld(ke.modelObject.position);
+                                // ke.camera.getWorldQuaternion(ke.modelObject.quaternion);
+                                // alert("ref to SambaDancing");
+
                                 ke.scene.add( object );
                             },
                             // called when loading is in progress
@@ -582,6 +590,7 @@
                                     document.getElementById("pLoadContent").style.display = "none";
                                     document.getElementById("bgShade").style.display = "none";
                                     document.getElementById("pScanning").style.display = "block";
+
                                 }
                             },
                             function (error) {
@@ -593,6 +602,15 @@
                     key: "hide",
                     value: function () {
                         this.scene.remove(this.mesh)
+                    }
+                }, {
+                    key: "set",
+                    value: function () {
+                        let ke = this;
+                        this.camera.updateMatrixWorld(!0);
+                        this.camera.localToWorld(ke.modelObject.position);
+                        this.camera.getWorldQuaternion(ke.modelObject.quaternion);
+                        console.log("model set");
                     }
                 }]), n
             }();
