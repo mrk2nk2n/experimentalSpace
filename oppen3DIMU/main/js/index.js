@@ -64,6 +64,10 @@
                     this.canvas = $("#three_container")[0];
                     var ke = this;
                     var modelObject = null;
+
+                    this.clock = new THREE.Clock();
+                    this.mixers = [];
+
                     var e = 50,
                         t = 2 * Math.tan(i.Math.degToRad(e / 2)) / Math.max(document.documentElement.clientWidth, document.documentElement.clientHeight),
                         e = 2 * i.Math.radToDeg(Math.atan(t * this.canvas.offsetHeight / 2));
@@ -108,7 +112,7 @@
 
                         this.controls = new o.default(this.camera, this.renderer),
                         this.controls.connect(),
-                        this.initvidplane = new a.default(this.camera, this.scene)
+                        this.initvidplane = new a.default(this.camera, this.scene, this.mixers)
                 }
                 return r(n, [{
                     key: "getVideo",
@@ -135,7 +139,16 @@
                     value: function () {
                         var e = this;
                         this.renderer.animate(function () {
-                            e.controls.update(),
+                            e.controls.update();
+
+                            // console.log(e.mixers);
+
+                            if ( e.mixers.length > 0 ) {
+                                for ( var i = 0; i < e.mixers.length; i ++ ) {
+                                    e.mixers[ i ].update(e.clock.getDelta() );
+                                }
+                            };
+
                             e.renderer.render(e.scene, e.camera)
                         })
                     }
@@ -468,10 +481,11 @@
                 }(e("../libs/three.module.js"));
 
             var c = function () {
-                function n(e, t) {
+                function n(e, t, m) {
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, n),
+                        this.mixers = m,
                     this.width = 512,
                     this.height = 201,
                     this.scale = 368 / this.width,
@@ -525,30 +539,25 @@
                         //         )
                         //     });
 
+
+                        console.log(this.mixers);
                         // model
                         this.fbxLoader = new THREE.FBXLoader();
                         this.fbxLoader.load(
-                            'assets/Audi.fbx',
+                            'assets/SambaDancing.fbx',
                             function ( object ) {
-                                // object.mixer = new THREE.AnimationMixer( object );
-                                // mixers.push( object.mixer );
-                                //
-                                // var action = object.mixer.clipAction( object.animations[ 0 ] );
-                                // action.play();
-                                //
-                                // object.traverse( function ( child ) {
-                                //     if ( child.isMesh ) {
-                                //         child.castShadow = false;
-                                //         child.receiveShadow = false;
-                                //     }
-                                //
-                                // } );
+                                object.mixer = new THREE.AnimationMixer( object );
+                                ke.mixers.push( object.mixer );
 
-                                object.position.set(0, -2, -25);
+                                var action = object.mixer.clipAction( object.animations[ 0 ] );
+                                action.play();
+
+                                object.position.set(0, -100, -300); // SambaDancing
+                                // object.position.set(0, -2, -30); // Audi
                                 ke.camera.updateMatrixWorld(!0);
                                 ke.camera.localToWorld(object.position);
                                 ke.camera.getWorldQuaternion(object.quaternion);
-                                alert("ref to model Object");
+                                alert("ref to SambaDancing");
                                 ke.scene.add( object );
                             }
                         )
