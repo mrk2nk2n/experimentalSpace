@@ -511,6 +511,7 @@
                                     ke.camera.updateMatrixWorld(!0);
                                     ke.camera.localToWorld(modelObject.position);
                                     ke.camera.getWorldQuaternion(modelObject.quaternion);
+                                    alert("ref to model Object");
                                     ke.scene.add(modelObject);
                                 })
                             }),
@@ -519,6 +520,7 @@
                         // this.camera.updateMatrixWorld(!0),
                         // this.camera.localToWorld(this.mesh.position),
                         // this.camera.getWorldQuaternion(this.mesh.quaternion),
+                        // alert("ref to mesh plane"),
                         this.scene.add(this.mesh)
 
 
