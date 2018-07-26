@@ -559,6 +559,18 @@
                                 ke.camera.getWorldQuaternion(object.quaternion);
                                 alert("ref to SambaDancing");
                                 ke.scene.add( object );
+                            },
+                            // called when loading is in progress
+                            function (e) {
+                                var f = Math.floor(e.loaded / e.total * 100);
+                                // document.getElementById("loadingPercent").innerHTML = f + "%";
+                                console.log( f + '% loaded' );
+                                if (e.loaded === e.total) {
+
+                                }
+                            },
+                            function (error) {
+                                console.log("an error happened: " + error);
                             }
                         )
                     }
