@@ -287,7 +287,7 @@
 
                         this.preload.on("progress", function () { // update progress of preloading
                             var e = Math.floor(100 * this.preload.progress);
-                            $("div", t).css("width", ((e / 100) * 50) + "%")
+                            $("div", t).css("width", ((e / 100) * 50) + "%");
                             document.getElementById("openLoadingPercent").innerHTML = ((e / 100) * 50) + "%";
                         }, this),
 
@@ -593,7 +593,7 @@
                             // called when loading is in progress
                             function (e) {
                                 var f = Math.floor(e.loaded / e.total * 100);
-                                // $("div", t).css("width", ((f / 100) * 50) + "%");
+                                $("div", $("#progress")).css("width", (((f / 100) * 50) + 50) + "%");
                                 document.getElementById("openLoadingPercent").innerHTML = (Math.floor((f / 100) * 50) + 50) + "%";
 
 
