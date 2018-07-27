@@ -352,20 +352,27 @@ body, html {
     margin-bottom: 0
 }
 
-contentBox.safariBottomOffset {
+.contentBox .safariBottomOffset {
     margin-bottom: 7%
 }
 
-.pLoading {
+.pLoading, .pSelect {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     overflow: hidden;
-    z-index: 20
 }
 
-#video, .pLoading > img, .pStartAR > img, .loadingTip > img {
+.pLoading {
+    z-index: 100
+}
+
+.pSelect {
+    z-index: 20;
+}
+
+#video, .pLoading > img, .pStartAR > img, .pSelect > img, .loadingTip > img {
     margin: 0 auto;
     /*position: fixed*/
     position: absolute;
@@ -375,17 +382,16 @@ contentBox.safariBottomOffset {
     height: 100%
 }
 
-
 /* 1. No object-fit support: */
 @media (min-aspect-ratio: 16/9) {
-    #video, .pLoading > img, .pStartAR > img {
+    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
         height: 300%;
         top: -100%;
     }
 }
 
 @media (max-aspect-ratio: 16/9) {
-    #video, .pLoading > img, .pStartAR > img {
+    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
         width: 300%;
         left: -100%;
     }
@@ -393,7 +399,7 @@ contentBox.safariBottomOffset {
 
 /* 2. If supporting object-fit, overriding (1): */
 @supports (object-fit: cover) {
-    #video, .pLoading > img, .pStartAR > img {
+    #video, .pLoading > img, .pStartAR > img, .pSelect > img {
         top: 0;
         left: 0;
         width: 100%;
@@ -717,4 +723,41 @@ contentBox.safariBottomOffset {
     z-index: 10;
     background-color: rgba(0,0,0,.7);
 
+}
+
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -------------------------------------------------------- */
+/* -- swiper css */
+
+.swiper-container {
+    width: 100%;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+}
+.swiper-slide {
+    width: 40vw;
+    height: 70vh;
+}
+.select1 {
+    background: url(../resources/s/s1.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.select2 {
+    background: url(../resources/s/s2.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.select3 {
+    background: url(../resources/s/s3.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.select4 {
+    background: url(../resources/s/s4.png) no-repeat;
+    background-size: contain;
+    background-position: center;
 }

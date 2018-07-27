@@ -95,6 +95,7 @@
         })(window);
     </script>
     <!-- lib-flexible end-->
+    <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
@@ -105,6 +106,19 @@
         <span id="openLoadingPercent"></span>
         <div class="progress" id="progress">
             <div class="progressBar"></div>
+        </div>
+    </div>
+
+    <div class="pSelect" id="pSelect" style="display: none">
+        <img src="resources/selectChapter.jpg" />
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide select1" ></div>
+                <div class="swiper-slide select2"></div>
+                <div class="swiper-slide select3"></div>
+                <div class="swiper-slide select4"></div>
+            </div>
         </div>
     </div>
 
@@ -205,6 +219,9 @@
     <script src="../a/libs/MTLLoader.js"></script>
     <script src="../a/libs/FBXLoader.min.js"></script>
     <script src="../a/libs/inflate.min.js"></script>
+    <script src="../a/libs/GLTFLoader.js"></script>
+
+    <script src="../a/libs/swiper.min.js"></script>
 
     <script src="js/index.js"></script>
 </body>

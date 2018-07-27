@@ -226,6 +226,11 @@
 
                         this.bgShade = $(".bgShade"),
                         this.pLoadContent = $(".pLoadContent"),
+                        this.pSelect = $(".pSelect"),
+                        this.chosenOption = 0,
+                        this.modelType = "",
+                        this.modelName = "",
+                        this.contentBox = $(".contentBox")
 
                     this.bBack = $(".bBack"),
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
@@ -273,19 +278,19 @@
 
                         this.preload.on("complete", function () {
                             setTimeout(function () {
-                                // e.hide() // hide preload bar on preloading complete
-                                // n.show() // show main container that contains all the content
-
-                                    // return the video material into the height of the scanning border and offset from the top
-                                    ke.app.getVideo().show(e, t);
+                                e.hide(); // hide preload bar on preloading complete
+                                // n.show(); // show main container that contains all the content
+                                ke.pSelect.show();
+                                ke.initSwiper();
+                                ke.selectController();
 
                             }, 200)
                         }, this),
 
                         this.preload.on("progress", function () { // update progress of preloading
                             var e = Math.floor(100 * this.preload.progress);
-                            $("div", t).css("width", ((e / 100) * 50) + "%");
-                            document.getElementById("openLoadingPercent").innerHTML = ((e / 100) * 50) + "%";
+                            $("div", t).css("width", e + "%");
+                            document.getElementById("openLoadingPercent").innerHTML = e + "%";
                         }, this),
 
                         this.preload.loadManifest([{ // list of items in the manifest that needs to be preloaded
@@ -352,28 +357,15 @@
                     value: function () {
                         var n = this;
                         this.bStartAR.on("click", function () {
-                            if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 false
-                                var e = $(".scanBody").offset().top,
-                                    t = $(".scanBody").height();
-
-                                n.myvideo[0].play(),
-                                n.openCamera(),
-                                n.pScanning.show();
-
-                                    // n.bgShade.show(),
-                                    // n.pLoadContent.show();
-
-                                    // n.myvideo[0].play(),
-                                    //
-                                    // // return the video material into the height of the scanning border and offset from the top
-                                    // n.app.getVideo().show(e, t);
+                            if (n.pStartAR.hide(), n.supportVideo) { // support video is default !0 true, unless set by "fail" function to be !1 fals
+                                n.startARhandler();
                             }
                             else { // if camera feed not supported, bypass scanning page and display demo video directly
                                 n.pDisplay.show(),
                                 $("#video").hide();
                                 var e = .16 * window.innerHeight,
                                     t = .6 * window.innerHeight;
-                                n.app.getVideo().show(e, t), // returns the video material
+                                n.app.getVideo().show(e, t, n.modelType), // returns the video material
                                 n.scan() // show demo video display
                             }
                         }), this.bReady.on("click", function () { // when button on scanning page is clicked                          
@@ -387,39 +379,12 @@
                             window.setTimeout(function () { // wait for two seconds                     
                                 n.posterBox.hide(),
                                 document.getElementById("threecontainer").style.zIndex = "100";
-                                // n.myvideo[0].play(),
-                                // n.app.getVideo().show(e, t) // return the video material into the height of the scanning border and offset from the top
                             }, 1200),
 
                             window.setTimeout(function () { // wait for two seconds                     
                                 n.bMore.show()
                             }, 5000);
 
-                        }), this.bMore.on("click", function () {
-                            window.open('http://www.magicast.cn/')
-
-                            // n.pDisplay.hide(),
-                            // n.pIntro.show(),
-                            // n.app.getVideo().hide(),
-                            // $("html").addClass("introPage"),
-                            // n.myvideo[0].pause(),
-                            // n.myvideo[0].currentTime = 0
-
-                            // n.bgAudioMp3[0].play()
-
-                        }), this.bBack.on("click", function () {
-                            if (n.supportVideo) {
-                                n.pDisplay.hide(),
-                                n.pIntro.hide(),
-                                $("html").removeClass("introPage"),
-                                n.pScanning.show();
-                            }
-                            else {
-                                n.pIntro.hide();
-                                var e = .16 * window.innerHeight,
-                                    t = .6 * window.innerHeight;
-                                n.app.getVideo().show(e, t), n.scan()
-                            }
                         })
                     }
                 }, {
@@ -458,11 +423,84 @@
                         })
                     }
                 }, {
+                    key: "initSwiper",
+                    value: function() {
+                        var swiper = new Swiper('.swiper-container', {
+                            effect: 'coverflow',
+                            grabCursor: true,
+                            centeredSlides: true,
+                            slidesPerView: 'auto',
+                            loop: true,
+                            initialSlide: 0,
+                            coverflowEffect: {
+                                rotate: 50,
+                                stretch: 0,
+                                depth: 100,
+                                modifier: 1,
+                                slideShadows : false,
+                            },
+                            pagination: {
+                                el: '.swiper-pagination',
+                            },
+                        });
+                    }
+                }, {
                     key: "getQueryString",
                     value: function (e) {
                         var t = new RegExp("(^|&)" + e + "=([^&]*)(&|$)", "i"),
                             n = window.location.search.substr(1).match(t);
                         return null != n ? unescape(n[2]) : null
+                    }
+                }, {
+                    key: "clickHandler",
+                    value: function (arg) {
+                        let ken = this;
+                        // clickHandler function must be defined before
+                        // being called in for loop below
+                        return function() {
+                            ken.chosenOption = arg; //更新全局变量
+                            console.log("chapter " + arg + " chosen " + ken.chosenOption);
+
+                            if (ken.chosenOption === 1) { ken.modelType = "fbx"; ken.modelName = "SambaDancing"; }
+                            if (ken.chosenOption === 2) { ken.modelType = "gltf"; ken.modelName = "SambaDancing"; }
+                            if (ken.chosenOption === 3) { ken.modelType = "obj"; ken.modelName = "shelf"; }
+                            if (ken.chosenOption === 4) { ken.modelType = "dae"; ken.modelName = ""; }
+
+                            ken.startARhandler();
+                            ken.pSelect.hide();
+                        };
+                    }
+                }, {
+                    key: "selectController",
+                    value: function () {
+                        let ken = this;
+                        <!--Initialize Chapters as Buttons-->
+                        for (var a = 0; a < 17; a++) {
+                            var b = $(".select" + a);
+                            ken.chosenOption = a;
+                            b.on("click", ken.clickHandler(a));
+                        }
+                    }
+                }, {
+                    key: "startARhandler",
+                    value: function () {
+                        let ke = this;
+                        var e = $(".scanBody").offset().top,
+                            t = $(".scanBody").height();
+
+                        ke.pStartAR.hide();
+                        ke.contentBox.show();
+
+                        ke.myvideo[0].play(),
+                            ke.openCamera(),
+                            // n.pScanning.show();
+
+                            ke.bgShade.show(),
+                            ke.pLoadContent.show();
+
+                        // // return the video material into the height of the scanning border and offset from the top
+                        console.log("load " + ke.modelType + " model");
+                        ke.app.getVideo().show(e, t, ke.modelType, ke.modelName);
                     }
                 }]), t
             }())
@@ -527,12 +565,11 @@
                 }
                 return i(n, [{
                     key: "show",
-                    value: function (e, t) {
+                    value: function (e, t, type, modelName) {
                         var n = this.height * (.5 * window.innerHeight - (e + .5 * t)) / t,
                             r = -this.height * window.innerHeight / (2 * t * Math.tan(s.Math.degToRad(.5 * this.camera.fov)));
-                        console.log(n);
-                        console.log(r);
                         this.mesh.position.set(0, n, r);
+
                         // this.camera.updateMatrixWorld(!0),
                         // this.camera.localToWorld(this.mesh.position),
                         // this.camera.getWorldQuaternion(this.mesh.quaternion),
@@ -541,80 +578,12 @@
 
                         let ke = this;
 
-                        // this.mtlLoader = new THREE.MTLLoader(),
-                        //     this.mtlLoader.setBaseUrl('assets/'),
-                        //     this.mtlLoader.setPath('assets/'),
-                        //     this.mtlLoader.load('shelf.mtl', function (materials) {
-                        //         materials.preload(),
-                        //             ke.objLoader = new THREE.OBJLoader(),
-                        //             ke.objLoader.setMaterials(materials),
-                        //             ke.objLoader.setPath('assets/')
-                        //         ke.objLoader.load(
-                        //             'shelf.obj',
-                        //             function (object) {
-                        //                 let modelObject = object;
-                        //                 modelObject.position.set(0, -30, -100);
-                        //                 ke.camera.updateMatrixWorld(!0);
-                        //                 ke.camera.localToWorld(modelObject.position);
-                        //                 ke.camera.getWorldQuaternion(modelObject.quaternion);
-                        //                 alert("ref to model Object");
-                        //                 ke.scene.add(modelObject);
-                        //             }
-                        //         )
-                        //     });
 
 
-                        console.log(this.mixers);
-                        // model
-                        this.fbxLoader = new THREE.FBXLoader();
-                        this.fbxLoader.load(
-                            'assets/SambaDancing.fbx',
-                            function ( object ) {
-                                ke.modelObject = object;
-                                object.mixer = new THREE.AnimationMixer( object );
-                                ke.mixers.push( object.mixer );
-
-                                var action = object.mixer.clipAction( object.animations[ 0 ] );
-                                action.play();
-
-                                ke.modelObject.position.set(0, -100, -300); // SambaDancing
-                                // object.position.set(0, -2, -30); // Audi
-
-                                // ke.camera.updateMatrixWorld(!0);
-                                // ke.camera.localToWorld(ke.modelObject.position);
-                                // ke.camera.getWorldQuaternion(ke.modelObject.quaternion);
-                                // alert("ref to SambaDancing");
-
-                                ke.scene.add( object );
-                            },
-                            // called when loading is in progress
-                            function (e) {
-                                var f = Math.floor(e.loaded / e.total * 100);
-                                $("div", $("#progress")).css("width", (((f / 100) * 50) + 50) + "%");
-                                document.getElementById("openLoadingPercent").innerHTML = (Math.floor((f / 100) * 50) + 50) + "%";
-
-
-
-                                console.log( f + '% loaded' );
-                                if (e.loaded === e.total) {
-                                    console.log("content all loaded");
-                                    // document.getElementById("pLoadContent").style.display = "none";
-                                    // document.getElementById("bgShade").style.display = "none";
-                                    // document.getElementById("pScanning").style.display = "block";
-                                    // window.setTimeout(function () {
-                                    //     $(".pStartAR").show();
-                                    //     $(".contentBox").show();
-                                    // }, 500);
-
-                                    $(".pStartAR").show();
-                                    $(".contentBox").show();
-
-                                }
-                            },
-                            function (error) {
-                                console.log("an error happened: " + error);
-                            }
-                        )
+                        if (type === "fbx") { this.loadFBXmodel(modelName); }
+                        if (type === "gltf") { this.loadGLTFmodel(modelName); }
+                        if (type === "obj") { this.loadOBJmodel(modelName); }
+                        if (type === "dae") { this.loadDAEmodel(modelName); }
                     }
                 }, {
                     key: "hide",
@@ -629,6 +598,149 @@
                         this.camera.localToWorld(ke.modelObject.position);
                         this.camera.getWorldQuaternion(ke.modelObject.quaternion);
                         console.log("model set");
+                    }
+                }, {
+                    key: "loadFBXmodel",
+                    value: function (modelName) {
+                        console.log("key: loadFBXmodel");
+                        let ke = this;
+
+                        console.log(this.mixers);
+                        // model
+                        this.fbxLoader = new THREE.FBXLoader();
+                        this.fbxLoader.load(
+                            'assets/fbx/' + modelName + '.fbx',
+                            function ( object ) {
+                                ke.modelObject = object;
+                                object.mixer = new THREE.AnimationMixer( object );
+                                ke.mixers.push( object.mixer );
+
+                                var action = object.mixer.clipAction( object.animations[ 0 ] );
+                                action.play();
+                                ke.modelObject.position.set(0, -100, -300); // SambaDancing
+                                // object.position.set(0, -2, -30); // Audi
+
+                                ke.scene.add( object );
+                            },
+                            // called when loading is in progress
+                            function (e) {
+                                var f = Math.floor(e.loaded / e.total * 100);
+                                $("div", $("#progress")).css("width", f + "%");
+                                document.getElementById("loadingPercent").innerHTML = f + "%";
+
+                                console.log( f + '% loaded' );
+                                if (e.loaded === e.total) {
+                                    console.log("content all loaded");
+                                    document.getElementById("pLoadContent").style.display = "none";
+                                    document.getElementById("bgShade").style.display = "none";
+                                    document.getElementById("pScanning").style.display = "block";
+
+                                    // $(".pStartAR").show();
+                                    // $(".contentBox").show();
+                                }
+                            },
+                            function (error) {
+                                console.log("an error happened: " + error);
+                            }
+                        )
+                    }
+                }, {
+                    key: "loadOBJmodel",
+                    value: function (modelName) {
+                        console.log("key: loadOBJmodel");
+
+                        let ke = this;
+                        this.mtlLoader = new THREE.MTLLoader(),
+                            this.mtlLoader.setPath('assets/obj/'),
+                            this.mtlLoader.load(modelName + '.mtl', function (materials) {
+                                materials.preload(),
+                                    ke.objLoader = new THREE.OBJLoader(),
+                                    ke.objLoader.setMaterials(materials),
+                                    ke.objLoader.setPath('assets/obj/')
+                                ke.objLoader.load(
+                                    modelName + '.obj',
+                                    function (object) {
+                                        ke.modelObject = object;
+                                        ke.modelObject.position.set(0, -30, -100);
+
+                                        ke.scene.add(ke.modelObject);
+                                    },
+                                    // called when loading is in progress
+                                    function (e) {
+                                        var f = Math.floor(e.loaded / e.total * 100);
+                                        $("div", $("#progress")).css("width", f + "%");
+                                        document.getElementById("loadingPercent").innerHTML = f + "%";
+
+                                        console.log( f + '% loaded' );
+                                        if (e.loaded === e.total) {
+                                            console.log("content all loaded");
+                                            document.getElementById("pLoadContent").style.display = "none";
+                                            document.getElementById("bgShade").style.display = "none";
+                                            document.getElementById("pScanning").style.display = "block";
+
+                                            // $(".pStartAR").show();
+                                            // $(".contentBox").show();
+                                        }
+                                    },
+                                    function (error) {
+                                        console.log("an error happened: " + error);
+                                    }
+                                )
+                            });
+                    }
+                }, {
+                    key: "loadGLTFmodel",
+                    value: function (modelName) {
+                        console.log("key: loadGLTFmodel");
+
+                        // let gltfLight = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
+                        // gltfLight.position.set( 0, 1, 10 );
+                        // scene.add( gltfLight );
+
+                        let ke = this;
+                        this.gltfLoader = new THREE.GLTFLoader();
+                        this.gltfLoader.load(
+                            'assets/gltf/' + modelName + '.gltf',
+                            function ( object ) {
+                                ke.modelObject = object.scene;
+
+                                object.mixer = new THREE.AnimationMixer( ke.modelObject );
+                                ke.mixers.push( object.mixer );
+                                var action = object.mixer.clipAction( object.animations[ 0 ] );
+                                action.play();
+
+                                ke.modelObject.position.set(0, -80, -300);
+                                ke.scene.add( object.scene );
+                            },
+                            // called when loading is in progress
+                            function (e) {
+                                var f = Math.floor(e.loaded / e.total * 100);
+                                $("div", $("#progress")).css("width", f + "%");
+                                document.getElementById("loadingPercent").innerHTML = f + "%";
+
+                                console.log( f + '% loaded' );
+                                if (e.loaded === e.total) {
+                                    console.log("content all loaded");
+                                    document.getElementById("pLoadContent").style.display = "none";
+                                    document.getElementById("bgShade").style.display = "none";
+                                    document.getElementById("pScanning").style.display = "block";
+
+                                    // $(".pStartAR").show();
+                                    // $(".contentBox").show();
+                                }
+                            },
+                            function (error) {
+                                console.log("an error happened: " + error);
+                            }
+                        );
+
+
+                    }
+                }, {
+                    key: "loadDAEmodel",
+                    value: function (modelName) {
+
+
                     }
                 }]), n
             }();
