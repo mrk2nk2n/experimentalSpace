@@ -76,7 +76,6 @@
 
                         // add camera
                         this.camera = new i.PerspectiveCamera(45, this.canvas.offsetWidth / this.canvas.offsetHeight, 1, 1e4),
-                        this.camera.position.z = 150,
                         this.scene.add(this.camera),
 
                         // add light
@@ -151,6 +150,11 @@
 
                             e.renderer.render(e.scene, e.camera)
                         })
+                    }
+                }, {
+                    key: "shiftCam",
+                    value: function () {
+                        this.camera.position.z = 150;
                     }
                 }]), n
             }();
@@ -261,7 +265,6 @@
                     key: "onResize",
                     value: function () {
                         console.log("window height = " + window.innerHeight)
-                            // this.video.style.height = window.innerHeight + "px"
                     }
                 }, {
                     key: "preloader",
@@ -385,6 +388,13 @@
                                 n.bMore.show()
                             }, 5000);
 
+                        }), this.bMore.on("click", function () {
+                            console.log("bMore clicked");
+                            // $("#threecontainer").hide();
+                            // ken.pDisplay.hide();
+                            // ken.pIntro.show();
+
+                            window.open("http://www.magicast.cn/");
                         })
                     }
                 }, {
@@ -569,20 +579,22 @@
                         var n = this.height * (.5 * window.innerHeight - (e + .5 * t)) / t,
                             r = -this.height * window.innerHeight / (2 * t * Math.tan(s.Math.degToRad(.5 * this.camera.fov)));
                         this.mesh.position.set(0, n, r);
+                        console.log(n);
+                        console.log(r);
 
                         // this.camera.updateMatrixWorld(!0),
                         // this.camera.localToWorld(this.mesh.position),
                         // this.camera.getWorldQuaternion(this.mesh.quaternion),
                         // alert("ref to mesh plane"),
-                        // this.scene.add(this.mesh)
+                        // this.scene.add(this.mesh);
 
                         let ke = this;
 
 
 
-                        if (type === "fbx") { this.loadFBXmodel(modelName); }
-                        if (type === "gltf") { this.loadGLTFmodel(modelName); }
-                        if (type === "obj") { this.loadOBJmodel(modelName); }
+                        if (type === "fbx") { this.loadFBXmodel(modelName, 0, -100, -300); }
+                        if (type === "gltf") { this.loadGLTFmodel(modelName, 0, -80, -300); }
+                        if (type === "obj") { this.loadOBJmodel(modelName, 0, -30, -300); }
                         if (type === "dae") { this.loadDAEmodel(modelName); }
                     }
                 }, {
@@ -601,7 +613,7 @@
                     }
                 }, {
                     key: "loadFBXmodel",
-                    value: function (modelName) {
+                    value: function (modelName, x, y, z) {
                         console.log("key: loadFBXmodel");
                         let ke = this;
 
@@ -617,7 +629,7 @@
 
                                 var action = object.mixer.clipAction( object.animations[ 0 ] );
                                 action.play();
-                                ke.modelObject.position.set(0, -100, -300); // SambaDancing
+                                ke.modelObject.position.set(x, y, z); // SambaDancing
                                 // object.position.set(0, -2, -30); // Audi
 
                                 ke.scene.add( object );
@@ -646,7 +658,7 @@
                     }
                 }, {
                     key: "loadOBJmodel",
-                    value: function (modelName) {
+                    value: function (modelName, x, y, z) {
                         console.log("key: loadOBJmodel");
 
                         let ke = this;
@@ -661,7 +673,7 @@
                                     modelName + '.obj',
                                     function (object) {
                                         ke.modelObject = object;
-                                        ke.modelObject.position.set(0, -30, -100);
+                                        ke.modelObject.position.set(x, y, z);
 
                                         ke.scene.add(ke.modelObject);
                                     },
@@ -690,7 +702,7 @@
                     }
                 }, {
                     key: "loadGLTFmodel",
-                    value: function (modelName) {
+                    value: function (modelName, x, y, z) {
                         console.log("key: loadGLTFmodel");
 
                         // let gltfLight = new THREE.HemisphereLight( 0xbbbbff, 0x444422 );
@@ -709,11 +721,13 @@
                                 var action = object.mixer.clipAction( object.animations[ 0 ] );
                                 action.play();
 
-                                ke.modelObject.position.set(0, -80, -300);
+                                ke.modelObject.position.set(x, y, z);
                                 ke.scene.add( object.scene );
                             },
                             // called when loading is in progress
                             function (e) {
+                                console.log(e.loaded);
+                                console.log(e.total);
                                 var f = Math.floor(e.loaded / e.total * 100);
                                 $("div", $("#progress")).css("width", f + "%");
                                 document.getElementById("loadingPercent").innerHTML = f + "%";
@@ -17969,7 +17983,10 @@
                        key: "onResize",
                        value: function () {
                            var t = this;
-                           this.camera.aspect = this.canvas.offsetWidth / this.canvas.offsetHeight, this.camera.fov = 2 * c.Math.radToDeg(Math.atan(.5 * this.canvas.offsetHeight * this.tanPerHeight)), this.camera.updateProjectionMatrix(), this.renderers.forEach(function (e) {
+                           this.camera.aspect = this.canvas.offsetWidth / this.canvas.offsetHeight,
+                               this.camera.fov = 2 * c.Math.radToDeg(Math.atan(.5 * this.canvas.offsetHeight * this.tanPerHeight)),
+                               this.camera.updateProjectionMatrix(),
+                               this.renderers.forEach(function (e) {
                                e.setSize(t.canvas.offsetWidth, t.canvas.offsetHeight, !1)
                            }), this.onResizeExt && this.onResizeExt(this.canvas.width, this.canvas.height)
                        }

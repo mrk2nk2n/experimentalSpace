@@ -17,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="209" column="94" selection-start-line="209" selection-start-column="94" selection-end-line="209" selection-end-column="94" />
+            <state relative-caret-position="387">
+              <caret line="196" column="56" selection-start-line="196" selection-start-column="56" selection-end-line="196" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -26,8 +26,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="652" column="63" selection-start-line="652" selection-start-column="63" selection-end-line="652" selection-end-column="63" />
+            <state relative-caret-position="2139">
+              <caret line="156" column="53" lean-forward="true" selection-start-line="156" selection-start-column="53" selection-end-line="156" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -51,6 +51,9 @@
       <find>pSelect</find>
       <find>contentBox</find>
       <find>key: &quot;load</find>
+      <find>key: &quot;show</find>
+      <find>vidplane</find>
+      <find>onResize</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -72,9 +75,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="893" />
+    <option name="x" value="634" />
     <option name="y" value="40" />
-    <option name="width" value="1031" />
+    <option name="width" value="1263" />
     <option name="height" value="1044" />
   </component>
   <component name="ProjectView">
@@ -112,15 +115,15 @@
       <option name="presentableId" value="Default" />
       <updated>1532656463179</updated>
       <workItem from="1532656464537" duration="1806000" />
-      <workItem from="1532664722261" duration="4533000" />
+      <workItem from="1532664722261" duration="8316000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6339000" />
+    <option name="totallyTimeSpent" value="10122000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="893" y="40" width="1031" height="1044" extended-state="0" />
+    <frame x="634" y="40" width="1263" height="1044" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24935733" />
@@ -170,6 +173,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="196" column="56" selection-start-line="196" selection-start-column="56" selection-end-line="196" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
@@ -177,17 +187,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="209" column="94" selection-start-line="209" selection-start-column="94" selection-end-line="209" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="652" column="63" selection-start-line="652" selection-start-column="63" selection-end-line="652" selection-end-column="63" />
+        <state relative-caret-position="2139">
+          <caret line="156" column="53" lean-forward="true" selection-start-line="156" selection-start-column="53" selection-end-line="156" selection-end-column="53" />
         </state>
       </provider>
     </entry>
