@@ -76,7 +76,7 @@
 
                         // add camera
                         this.camera = new i.PerspectiveCamera(45, this.canvas.offsetWidth / this.canvas.offsetHeight, 1, 1e4),
-                        this.scene.add(this.camera),
+                    this.scene.add(this.camera),
 
                         // add light
                         this.ambient = new i.AmbientLight(0xffffff, 1.0),
@@ -154,7 +154,7 @@
                 }, {
                     key: "shiftCam",
                     value: function () {
-                        this.camera.position.z = 150;
+                        this.initvidplane.updateModelPos();
                     }
                 }]), n
             }();
@@ -264,7 +264,7 @@
                 }, {
                     key: "onResize",
                     value: function () {
-                        console.log("window height = " + window.innerHeight)
+                        console.log("window height = " + window.innerHeight);
                     }
                 }, {
                     key: "preloader",
@@ -394,7 +394,10 @@
                             // ken.pDisplay.hide();
                             // ken.pIntro.show();
 
-                            window.open("http://www.magicast.cn/");
+                            // window.open("http://www.magicast.cn/");
+
+                            n.app.shiftCam();
+
                         })
                     }
                 }, {
@@ -594,7 +597,7 @@
 
                         if (type === "fbx") { this.loadFBXmodel(modelName, 0, -100, -300); }
                         if (type === "gltf") { this.loadGLTFmodel(modelName, 0, -80, -300); }
-                        if (type === "obj") { this.loadOBJmodel(modelName, 0, -30, -300); }
+                        if (type === "obj") { this.loadOBJmodel(modelName, 0, -30, -100); }
                         if (type === "dae") { this.loadDAEmodel(modelName); }
                     }
                 }, {
@@ -754,7 +757,11 @@
                     key: "loadDAEmodel",
                     value: function (modelName) {
 
-
+                    }
+                }, {
+                    key: "updateModelPos",
+                    value: function () {
+                        this.modelObject.position.z -= 200
                     }
                 }]), n
             }();

@@ -17,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="196" column="56" selection-start-line="196" selection-start-column="56" selection-end-line="196" selection-end-column="56" />
+            <state relative-caret-position="203">
+              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
             </state>
           </provider>
         </entry>
@@ -26,8 +26,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2139">
-              <caret line="156" column="53" lean-forward="true" selection-start-line="156" selection-start-column="53" selection-end-line="156" selection-end-column="53" />
+            <state relative-caret-position="410">
+              <caret line="767" column="25" lean-forward="true" selection-start-line="767" selection-start-column="25" selection-end-line="767" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -54,6 +54,9 @@
       <find>key: &quot;show</find>
       <find>vidplane</find>
       <find>onResize</find>
+      <find>initvidplane</find>
+      <find>shiftCam</find>
+      <find>updateModelPos</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -115,12 +118,12 @@
       <option name="presentableId" value="Default" />
       <updated>1532656463179</updated>
       <workItem from="1532656464537" duration="1806000" />
-      <workItem from="1532664722261" duration="8316000" />
+      <workItem from="1532664722261" duration="9801000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10122000" />
+    <option name="totallyTimeSpent" value="11607000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="634" y="40" width="1263" height="1044" extended-state="0" />
@@ -173,13 +176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="196" column="56" selection-start-line="196" selection-start-column="56" selection-end-line="196" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
@@ -187,10 +183,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2139">
-          <caret line="156" column="53" lean-forward="true" selection-start-line="156" selection-start-column="53" selection-end-line="156" selection-end-column="53" />
+        <state relative-caret-position="410">
+          <caret line="767" column="25" lean-forward="true" selection-start-line="767" selection-start-column="25" selection-end-line="767" selection-end-column="25" />
         </state>
       </provider>
     </entry>
