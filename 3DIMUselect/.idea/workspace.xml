@@ -17,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+            <state relative-caret-position="663">
+              <caret line="196" column="48" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -26,8 +26,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="767" column="25" lean-forward="true" selection-start-line="767" selection-start-column="25" selection-end-line="767" selection-end-column="25" />
+            <state relative-caret-position="249">
+              <caret line="182" column="21" lean-forward="true" selection-start-line="182" selection-start-column="21" selection-end-line="182" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -35,8 +35,8 @@
       <file leaf-file-name="index.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/css/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="732" column="19" selection-start-line="732" selection-start-column="19" selection-end-line="733" />
+            <state relative-caret-position="180">
+              <caret line="318" column="23" lean-forward="true" selection-start-line="318" selection-start-column="23" selection-end-line="318" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -57,6 +57,14 @@
       <find>initvidplane</find>
       <find>shiftCam</find>
       <find>updateModelPos</find>
+      <find>shiftcam</find>
+      <find>bReady</find>
+      <find>updateModel</find>
+      <find>urlSearch</find>
+      <find>wrap</find>
+      <find>handleSafariCheck</find>
+      <find>preloader</find>
+      <find>setIntroInfo</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -78,9 +86,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="634" />
+    <option name="x" value="698" />
     <option name="y" value="40" />
-    <option name="width" value="1263" />
+    <option name="width" value="1199" />
     <option name="height" value="1044" />
   </component>
   <component name="ProjectView">
@@ -91,7 +99,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/UnityWorkspace/WebAR6/08-oppen3DIMU" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -118,15 +126,15 @@
       <option name="presentableId" value="Default" />
       <updated>1532656463179</updated>
       <workItem from="1532656464537" duration="1806000" />
-      <workItem from="1532664722261" duration="9801000" />
+      <workItem from="1532664722261" duration="17402000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11607000" />
+    <option name="totallyTimeSpent" value="19208000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="634" y="40" width="1263" height="1044" extended-state="0" />
+    <frame x="698" y="40" width="1199" height="1044" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24935733" />
@@ -176,24 +184,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/css/index.css">
+    <entry file="file://$PROJECT_DIR$/main/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="732" column="19" selection-start-line="732" selection-start-column="19" selection-end-line="733" />
+        <state relative-caret-position="663">
+          <caret line="196" column="48" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/index.html">
+    <entry file="file://$PROJECT_DIR$/main/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+        <state relative-caret-position="180">
+          <caret line="318" column="23" lean-forward="true" selection-start-line="318" selection-start-column="23" selection-end-line="318" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="767" column="25" lean-forward="true" selection-start-line="767" selection-start-column="25" selection-end-line="767" selection-end-column="25" />
+        <state relative-caret-position="249">
+          <caret line="182" column="21" lean-forward="true" selection-start-line="182" selection-start-column="21" selection-end-line="182" selection-end-column="21" />
         </state>
       </provider>
     </entry>

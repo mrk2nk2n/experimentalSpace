@@ -100,9 +100,8 @@
                         }),
 
                         this.renderer.setClearColor(0, 0),
-                        this.renderer.setPixelRatio(window.devicePixelRatio),
+                        this.renderer.setPixelRatio(window.devicePixelRatio);
                         this.renderer.setSize(this.canvas.offsetWidth, this.canvas.offsetHeight, !1),
-
 
                             // this.touchControls = new THREE.OrbitControls(this.camera, this.renderer.domElement),
                             // this.touchControls.enableDamping = true,
@@ -152,9 +151,14 @@
                         })
                     }
                 }, {
-                    key: "shiftCam",
+                    key: "shiftModel",
                     value: function () {
                         this.initvidplane.updateModelPos();
+                    }
+                }, {
+                    key: "shiftModel2",
+                    value: function () {
+                        this.initvidplane.updateModelPos2();
                     }
                 }]), n
             }();
@@ -204,6 +208,7 @@
                     ! function (e, t) {
                         if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
                     }(this, t);
+
                     var e = navigator.userAgent.toLowerCase();
                     this.isAndroid = /android/i.test(e),
                     this.isIphone = /(iPhone|iPad|iPod|iOS)/i.test(e),
@@ -234,27 +239,30 @@
                         this.chosenOption = 0,
                         this.modelType = "",
                         this.modelName = "",
-                        this.contentBox = $(".contentBox")
+                        this.contentBox = $(".contentBox"),
+                        this.resizeCheck = !1;
 
                     this.bBack = $(".bBack"),
                     this.bgAudioMp3 = $("#bg-audio-mp3"),
                     this.deviceId,
-                    this.supportVideo = !0, 
+                    this.supportVideo = !0,
                     this.app = new o.default, // initThree.js threejs renderer and controls
-                    this.app.update(), 
-                    this.threeContainer = $("#threecontainer"), 
-                    this.urlSearch = window.location.search, 
+                    this.threeContainer = $("#threecontainer"),
                     this.myvideo = $("#myvideo"),
                     this.onVideoPlaying = this.onPlaying.bind(this), 
                     this.myvideo[0].addEventListener("playing", this.onVideoPlaying, !1), 
                     this.oid = this.getQueryString("oid") || "1",
+
+
                     this.handleSafariCheck(),
                     //this.getWindowSize(),
                     this.preloader(),
                     this.checkCamera(), 
                     this.bindEvent(),
                     this.isAndroid && (this.resizeCallback = this.onResize.bind(this), 
-                    window.addEventListener("resize", this.resizeCallback, !1))
+                    window.addEventListener("resize", this.resizeCallback, !1)),
+                    this.app.update()
+
                 }
                 return r(t, [{
                     key: "onPlaying",
@@ -265,17 +273,20 @@
                     key: "onResize",
                     value: function () {
                         console.log("window height = " + window.innerHeight);
+                        this.resizeCheck = !0;
                     }
                 }, {
                     key: "preloader",
                     value: function () {
                         let ke = this;
                         var e = $("#pLoading"),
-                            t = $("#progress"),
                             n = $(".contentBox"),
                             i = "resources/1.mp4";
 
+                        $("#myvideo").html('<source src="resources/1.mp4"/>')
+
                         this.setIntroInfo(), // inserting html and src of video, intro content, intro button according to chosen chapter
+
 
                         this.preload.installPlugin(createjs.Sound),
 
@@ -292,7 +303,7 @@
 
                         this.preload.on("progress", function () { // update progress of preloading
                             var e = Math.floor(100 * this.preload.progress);
-                            $("div", t).css("width", e + "%");
+                            $("div", $("#progress")).css("width", e + "%");
                             document.getElementById("openLoadingPercent").innerHTML = e + "%";
                         }, this),
 
@@ -337,15 +348,12 @@
                 }, {
                     key: "resizeSafariBrowser",
                     value: function () {
-                        document.getElementById("scanTip").style.top = "2%",
-                            document.getElementById("scanTop").style.height = "8%",
-                            document.getElementById("scanBody").style.top = "8%",
-                            document.getElementById("bReady").style.top = "66%",
-                            document.getElementById("posterPic").style.top = "8%",
-                            document.getElementById("bMore").style.top = "66%",
-                            document.ontouchmove = function (event) {
-                                event.preventDefault();
-                            }
+                        document.getElementById("scanTip").style.top = "2%";
+                        document.getElementById("scanTop").style.height = "8%";
+                        document.getElementById("scanBody").style.top = "8%";
+                        document.getElementById("bReady").style.top = "66%";
+                        document.getElementById("posterPic").style.top = "8%";
+                        document.getElementById("bMore").style.top = "66%";
                     }
                 }, {
                     key: "getWindowSize",
@@ -380,7 +388,8 @@
                             n.scan(), // show demo video display
                             
                             window.setTimeout(function () { // wait for two seconds                     
-                                n.posterBox.hide(),
+                                n.posterBox.hide();
+                                if (n.resizeCheck) { n.app.shiftModel(); }
                                 document.getElementById("threecontainer").style.zIndex = "100";
                             }, 1200),
 
@@ -396,15 +405,13 @@
 
                             // window.open("http://www.magicast.cn/");
 
-                            n.app.shiftCam();
-
+                            n.app.shiftModel2();
                         })
                     }
                 }, {
                     key: "setIntroInfo",
                     value: function () {
-                        $("#myvideo").html('<source src="resources/1.mp4"/>'),
-                        $(".pIntro .content").html('<img src="resources/intro.png"/>')
+
                     }
                 }, {
                     key: "fail",
@@ -762,6 +769,11 @@
                     key: "updateModelPos",
                     value: function () {
                         this.modelObject.position.z -= 200
+                    }
+                }, {
+                    key: "updateModelPos2",
+                    value: function () {
+                        this.modelObject.position.x -= 10
                     }
                 }]), n
             }();
@@ -17995,7 +18007,8 @@
                                this.camera.updateProjectionMatrix(),
                                this.renderers.forEach(function (e) {
                                e.setSize(t.canvas.offsetWidth, t.canvas.offsetHeight, !1)
-                           }), this.onResizeExt && this.onResizeExt(this.canvas.width, this.canvas.height)
+                           })
+                           this.onResizeExt && this.onResizeExt(this.canvas.width, this.canvas.height)
                        }
                    }, {
                        key: "updateCamera",
