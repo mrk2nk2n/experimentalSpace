@@ -481,7 +481,8 @@
                             ken.chosenOption = arg; //更新全局变量
                             console.log("chapter " + arg + " chosen " + ken.chosenOption);
 
-                            if (ken.chosenOption === 1) { ken.modelType = "fbx"; ken.modelName = "SambaDancing"; }
+                            // if (ken.chosenOption === 1) { ken.modelType = "fbx"; ken.modelName = "SambaDancing"; }
+                            if (ken.chosenOption === 1) { ken.modelType = "fbx"; ken.modelName = "MongoFemale"; }
                             if (ken.chosenOption === 2) { ken.modelType = "gltf"; ken.modelName = "SambaDancing"; }
                             if (ken.chosenOption === 3) { ken.modelType = "obj"; ken.modelName = "A-01_SubTool1"; }
                             if (ken.chosenOption === 4) { ken.modelType = "dae"; ken.modelName = ""; }
@@ -602,9 +603,9 @@
 
 
 
-                        if (type === "fbx") { this.loadFBXmodel(modelName, 0, -100, -300); }
+                        if (type === "fbx") { this.loadFBXmodel(modelName, 0, -0.8, -2.5); }
                         if (type === "gltf") { this.loadGLTFmodel(modelName, 0, -80, -300); }
-                        if (type === "obj") { this.loadOBJmodel(modelName, 0, -30, -100); }
+                        if (type === "obj") { this.loadOBJmodel(modelName, -1, -1, -5); }
                         if (type === "dae") { this.loadDAEmodel(modelName); }
                     }
                 }, {
@@ -639,7 +640,7 @@
 
                                 var action = object.mixer.clipAction( object.animations[ 0 ] );
                                 action.play();
-                                ke.modelObject.position.set(x, y, z); // SambaDancing
+                                ke.modelObject.position.set(x, y, z);
                                 // object.position.set(0, -2, -30); // Audi
 
                                 ke.scene.add( object );
