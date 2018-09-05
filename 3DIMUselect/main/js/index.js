@@ -483,7 +483,7 @@
 
                             if (ken.chosenOption === 1) { ken.modelType = "fbx"; ken.modelName = "SambaDancing"; }
                             if (ken.chosenOption === 2) { ken.modelType = "gltf"; ken.modelName = "SambaDancing"; }
-                            if (ken.chosenOption === 3) { ken.modelType = "obj"; ken.modelName = "shelf"; }
+                            if (ken.chosenOption === 3) { ken.modelType = "obj"; ken.modelName = "A-01_SubTool1"; }
                             if (ken.chosenOption === 4) { ken.modelType = "dae"; ken.modelName = ""; }
 
                             ken.startARhandler();
