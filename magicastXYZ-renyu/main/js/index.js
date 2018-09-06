@@ -3,7 +3,7 @@
 
     ////////////////////////
     // 模块二：整体项目的控制器
-    2: [function (e, t, n) { "use strict"; var r = function () {function r(e, t) {for (var n = 0; n < t.length; n++) {var r = t[n];r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)}}return function (e, t, n) {return t && r(e.prototype, t), n && r(e, n), e}}(),i = a(e("./initAR")), initThree = a(e("./initThree.js"));! function (e) { { if (e && e.__esModule) return; var t = {}; if (null != e) for (var n in e) Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]); t.default = e } }(e("../libs/three.module.js")); function a(e) { return e && e.__esModule ? e : { default: e } } new (function () { function t() { ! function (e, t) { if (!(e instanceof t)) throw new TypeError("Class cannot be called as function") }(this, t);
+    2: [function (e, t, n) { "use strict"; var r = function () {function r(e, t) {for (var n = 0; n < t.length; n++) {var r = t[n];r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)}}return function (e, t, n) {return t && r(e.prototype, t), n && r(e, n), e}}(),initAR = a(e("./initAR")), initThree = a(e("./initThree.js"));! function (e) { { if (e && e.__esModule) return; var t = {}; if (null != e) for (var n in e) Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]); t.default = e } }(e("../libs/three.module.js")); function a(e) { return e && e.__esModule ? e : { default: e } } new (function () { function t() { ! function (e, t) { if (!(e instanceof t)) throw new TypeError("Class cannot be called as function") }(this, t);
 
                 var e = navigator.userAgent.toLowerCase();
                 this.isAndroid = /android/i.test(e);
@@ -15,10 +15,9 @@
 
                     // html references
                     // pages+ buttons
-                    this.initAR = new i.default,
+                    this.initAR = new initAR.default,
                     this.preload = new createjs.LoadQueue(!1),
                     this.bodyElement = $("#body"),
-
                     this.pStartAR = $(".pStartAR"),
                     this.pScanning = $(".pScanning"),
                     this.posterBox = $(".posterBox"),
@@ -52,20 +51,17 @@
 
             }
             return r(t, [{
-                key: "onPlaying",
-                value: function () {
+                key: "onPlaying", value: function () {
                     this.myvideo[0].pause()
                 }
             }, {
-                key: "onResize",
-                value: function () {
+                key: "onResize", value: function () {
                     console.log("window height = " + window.innerHeight),
                         this.video.style.height = window.innerHeight + "px"
                 }
             }, {
                 // 初始化preloader函数，示例如下：
-                key: "preloader",
-                value: function () {
+                key: "preloader", value: function () {
                     var e = $("#pLoading"),
                         t = $("#progress"),
                         n = $(".contentBox"),
@@ -99,8 +95,7 @@
                         ])
                 }
             }, {
-                key: "checkCamera",
-                value: function () {
+                key: "checkCamera", value: function () {
                     var t = this,
                         n = this;
                     this.initAR.listCamera().then(function (e) {
@@ -111,13 +106,11 @@
                     })
                 }
             }, {
-                key: "handleSafariCheck",
-                value: function () {
+                key: "handleSafariCheck", value: function () {
                     this.isSafari && this.isIphone ? this.resizeSafariBrowser() : console.log("this is not safari browser");
                 }
             }, {
-                key: "resizeSafariBrowser",
-                value: function () {
+                key: "resizeSafariBrowser", value: function () {
                     document.getElementById("scanTip").style.top = "2%",
                         document.getElementById("scanTop").style.height = "8%",
                         document.getElementById("scanBody").style.top = "8%",
@@ -129,16 +122,14 @@
                         }
                 }
             }, {
-                key: "getWindowSize",
-                value: function () {
+                key: "getWindowSize", value: function () {
                     var t = $(window).height(),
                         n = $(window).width(),
                         o = $(window).outerHeight();
                     alert("windowHeight: " + t + " windowWidth: " + n + " windowOuterHeight " + o);
                 }
             }, {
-                key: "ARcontroller", // 开始 AR
-                value: function () {
+                key: "ARcontroller", value: function () { // 开始 AR
                     var n = this;
                     this.bStartAR.on("click", function () {
                         if (n.pStartAR.hide(), n.supportVideo) {
@@ -188,20 +179,17 @@
                     })
                 }
             }, {
-                key: "setARcontent",
-                value: function () {
+                key: "setARcontent", value: function () {
                     $("#myvideo").html('<source src="resources/1.mp4"/>'),
                         $(".pIntro .content").html('<img src="resources/intro.png"/>')
                 }
             }, {
-                key: "fail",
-                value: function () {
+                key: "fail", value: function () {
                     2 <= this.iosversion.length && (this.iosversion = 11 <= this.iosversion[1]),
                         this.isIphone && this.isWeChat && this.iosversion ? $(".ioswxPanel").show() : this.supportVideo = !1
                 }
             }, {
-                key: "scan", // 开始扫描
-                value: function () {
+                key: "scan", value: function () { // 开始扫描
                     this.bMore.hide(),
                         this.pScanning.hide(),
                         this.posterBox.show(),
@@ -211,8 +199,7 @@
                         this.pDisplay.css("background", "none");
                 }
             }, {
-                key: "openCamera",
-                value: function () {
+                key: "openCamera", value: function () {
                     console.log(this.deviceId),
                         this.initAR.openCamera(this.video, this.deviceId).then(function (e) {
                             video.setAttribute("height", window.innerHeight.toString() + "px")
@@ -221,8 +208,7 @@
                         })
                 }
             }, {
-                key: "getQueryString",
-                value: function (e) {
+                key: "getQueryString", value: function (e) {
                     var t = new RegExp("(^|&)" + e + "=([^&]*)(&|$)", "i"),
                         n = window.location.search.substr(1).match(t);
                     return null != n ? unescape(n[2]) : null
@@ -256,13 +242,11 @@
                     this.initvidplane = new a.default(this.camera, this.scene)
                 }
                 return r(n, [{
-                    key: "getVideo",
-                    value: function () {
+                    key: "getVideo", value: function () {
                         return this.initvidplane
                     }
                 }, {
-                    key: "update",
-                    value: function () {
+                    key: "update", value: function () {
                         var e = this;
                         this.renderer.animate(function () {
                             e.controls.update(),
@@ -299,8 +283,7 @@
                     this.mesh.scale.x = this.scale
                 }
                 return i(n, [{
-                    key: "show",
-                    value: function (e, t) {
+                    key: "show", value: function (e, t) {
                         var n = this.height * (.5 * window.innerHeight - (e + .5 * t)) / t,
                             r = -this.height * window.innerHeight / (2 * t * Math.tan(s.Math.degToRad(.5 * this.camera.fov)));
                         this.mesh.position.set(0, n, r),
@@ -310,8 +293,7 @@
                         this.scene.add(this.mesh)
                     }
                 }, {
-                    key: "hide",
-                    value: function () {
+                    key: "hide", value: function () {
                         this.scene.remove(this.mesh)
                     }
                 }]), n }(); n.default = initvidplane }, { "../libs/jquery-3.3.1.js": 5, "../libs/three.module.js": 6 }],
