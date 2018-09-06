@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+            <state relative-caret-position="69">
+              <caret line="106" column="43" lean-forward="true" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -32,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="370" column="77" selection-start-line="370" selection-start-column="77" selection-end-line="370" selection-end-column="77" />
+            <state relative-caret-position="414">
+              <caret line="155" column="58" lean-forward="true" selection-start-line="155" selection-start-column="58" selection-end-line="155" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -53,7 +53,14 @@
       <find>innerhtml</find>
       <find>setTime</find>
       <find>startAR</find>
+      <find>setIntroInfo</find>
+      <find>bindEvent</find>
+      <find>mixers</find>
     </findStrings>
+    <replaceStrings>
+      <replace>setARcontent</replace>
+      <replace>ARcontroller</replace>
+    </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -73,10 +80,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="752" />
-    <option name="y" value="48" />
-    <option name="width" value="1183" />
-    <option name="height" value="1044" />
+    <option name="x" value="953" />
+    <option name="y" value="40" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -86,7 +93,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/UnityWorkspace/WebAR6/00-optimization" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Jinhong/WebAR/magicastXYZ-mongo" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -114,14 +121,15 @@
       <updated>1532588663944</updated>
       <workItem from="1532588665174" duration="5768000" />
       <workItem from="1532656008447" duration="558000" />
+      <workItem from="1536213418191" duration="1459000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7726000" />
+    <option name="totallyTimeSpent" value="9185000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="752" y="48" width="1183" height="1044" extended-state="0" />
+    <frame x="953" y="40" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2105644" />
@@ -162,6 +170,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16077">
+          <caret line="699" column="21" selection-start-line="699" selection-start-column="21" selection-end-line="699" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8510">
+          <caret line="370" column="77" selection-start-line="370" selection-start-column="77" selection-end-line="370" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2392">
+          <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8717">
@@ -183,13 +212,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="370" column="77" selection-start-line="370" selection-start-column="77" selection-end-line="370" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="772">
@@ -199,8 +221,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+        <state relative-caret-position="69">
+          <caret line="106" column="43" lean-forward="true" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="155" column="58" lean-forward="true" selection-start-line="155" selection-start-column="58" selection-end-line="155" selection-end-column="58" />
         </state>
       </provider>
     </entry>

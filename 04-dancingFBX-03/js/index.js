@@ -285,9 +285,9 @@
             // use promise callback to list media devices and
             // pick those with videoinputs
             return new Promise (function (t, n) {
-                navigator.mediaDevices.enumerateDevices().then(function(e){
-                    console.log(e),
-                    e.find(function(device){
+                navigator.mediaDevices.enumerateDevices().then(function(devices){
+                    console.log(devices),
+                    devices.find(function(device){
                         if ("videoinput" === device.kind) {
                             var videoDevices = {};
                             videoDevices.name = device.label || "camera",
