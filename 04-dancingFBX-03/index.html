@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="">
-
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -9,93 +8,23 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="yes" name="apple-touch-fullscreen" />
     <meta content="telephone=no,email=no" name="format-detection" />
-
-    <title>MorphoMRweb</title>
-    <!-- Place favicon.ico in the root directory -->
+    <title>MRH5 内蒙古</title>
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!--lib-flexible (https://github.com/amfe/lib-flexible)-->
     <script>
-        (function (window) {
-            var STD_WIDTH = 750,
-                STD_FONT_SIZE = 100,
-                root = document.documentElement,
-                fontSize, scale, tDelayResize = null,
-                onResizeCbs = [],
-                pxToRem = function (px) {
-                    return px / fontSize
-                },
-                stdPxToRem = function (stdPx) {
-                    return stdPx / STD_FONT_SIZE
-                },
-                remToPx = function (rem) {
-                    return rem * fontSize
-                },
-                remToStdPx = function (rem) {
-                    return rem * STD_FONT_SIZE
-                },
-                pxToStdPx = function (px) {
-                    return px / scale
-                },
-                stdPxToPx = function (px) {
-                    return px * scale
-                },
-                resize = function () {
-                    scale = root.clientWidth / STD_WIDTH;
-                    var ratio = root.clientWidth / root.clientHeight;
-                    var std_ratio = 750 / 1206;
-                    if (ratio > std_ratio) {
-                        scale = std_ratio * root.clientHeight / 750
-                    }
-                    var newFontSize = scale * STD_FONT_SIZE;
-                    if (fontSize != newFontSize) {
-                        fontSize = newFontSize;
-                        autoRem.fontSize = fontSize;
-                        autoRem.scale = scale;
-                        root.style.fontSize = fontSize + "px";
-                        onResizeCbs.forEach(function (onResizeCb) {
-                            onResizeCb()
-                        })
-                    }
-                },
-                delayResize = function () {
-                    clearTimeout(tDelayResize);
-                    tDelayResize = setTimeout(resize, 100)
-                },
-                onResize = function (onResizeCb) {
-                    if (onResizeCb) {
-                        onResizeCbs.push(onResizeCb)
-                    }
-                },
-                offResize = function (onResizeCb) {
-                    if (onResizeCb) {
-                        var idx = onResizeCbs.indexOf(onResizeCb);
-                        if (~idx) {
-                            onResizeCbs.splice(idx, 1)
-                        }
-                    } else {
-                        onResizeCbs = []
-                    }
-                },
-                autoRem = {
-                    pxToRem: pxToRem,
-                    stdPxToRem: stdPxToRem,
-                    remToPx: remToPx,
-                    remToStdPx: remToStdPx,
-                    pxToStdPx: pxToStdPx,
-                    stdPxToPx: stdPxToPx,
-                    STD_FONT_SIZE: STD_FONT_SIZE,
-                    STD_WIDTH: STD_WIDTH,
-                    fontSize: null,
-                    scale: null,
-                    onResize: onResize,
-                    offResize: offResize
-                };
-            resize();
-            window.addEventListener("resize", delayResize, false);
-            window.autoRem = autoRem
-        })(window);
+        (function (window){var STD_WIDTH=750, STD_FONT_SIZE=100,
+    root=document.documentElement, fontSize, scale, tDelayResize=null, onResizeCbs=[], pxToRem=function (px){return px / fontSize},
+    stdPxToRem=function (stdPx){return stdPx / STD_FONT_SIZE}, remToPx=function (rem){return rem * fontSize}, remToStdPx=function (rem){return rem
+        * STD_FONT_SIZE}, pxToStdPx=function (px){return px / scale}, stdPxToPx=function (px){return px * scale},
+    resize=function (){scale=root.clientWidth / STD_WIDTH; var ratio=root.clientWidth / root.clientHeight; var std_ratio=750 / 1206;
+        if (ratio > std_ratio){scale=std_ratio * root.clientHeight / 750}var newFontSize=scale * STD_FONT_SIZE;
+        if (fontSize !=newFontSize){fontSize=newFontSize; autoRem.fontSize=fontSize; autoRem.scale=scale; root.style.fontSize=fontSize + "px";
+            onResizeCbs.forEach(function (onResizeCb){onResizeCb()})}}, delayResize=function (){clearTimeout(tDelayResize);
+        tDelayResize=setTimeout(resize, 100)}, onResize=function (onResizeCb){if (onResizeCb){onResizeCbs.push(onResizeCb)}},
+    offResize=function (onResizeCb){if (onResizeCb){var idx=onResizeCbs.indexOf(onResizeCb); if (~idx){onResizeCbs.splice(idx, 1)}}
+    else{onResizeCbs=[]}}, autoRem={pxToRem: pxToRem, stdPxToRem: stdPxToRem, remToPx: remToPx, remToStdPx: remToStdPx, pxToStdPx: pxToStdPx,
+        stdPxToPx: stdPxToPx, STD_FONT_SIZE: STD_FONT_SIZE, STD_WIDTH: STD_WIDTH, fontSize: null, scale: null, onResize: onResize,
+        offResize: offResize}; resize(); window.addEventListener("resize", delayResize, false); window.autoRem=autoRem})(window);
     </script>
-
     <script src="js/libs/adapter.min.js"></script>
     <script src="js/libs/three.min.js"></script>
     <script src="js/libs/Detector.js"></script>
@@ -104,11 +33,8 @@
     <script src="js/libs/MTLLoader.js"></script>
     <script src="js/libs/FBXLoader.min.js"></script>
     <script src="js/libs/inflate.min.js"></script>
-
     <script src="js/libs/createjs.min.js"></script>
     <script src="js/libs/jquery-3.3.1.min.js"></script>
-
-    <!-- lib-flexible end-->
     <link rel="stylesheet" href="css/index.css">
 </head>
 
@@ -122,16 +48,13 @@
         <div class="progressBar"></div>
     </div>
 </div>
-
+<!--主要内容区分-->
 <div class="contentBox" id="contentBox">
-    <div id="newPage"></div>
-
     <div class="bgShade" style="display: none"></div>
     <div class="pLoadContent" id="pLoadContent" style="display: none">
         <span id="loadingPercent"></span>
         <div class="load-wrapp">
             <div class="load-3">
-
                 <div class="loadingTip">
                     <img src="img/loadingTip.png" />
                 </div>
@@ -141,45 +64,34 @@
             </div>
         </div>
     </div>
-
-    <!--background camera feed-->
+    <!-- 摄像机在背景播放 -->
     <video id="video" playsinline=""></video>
-
-    <!--videoPlane-->
+    <!-- AR 视频 -->
     <div class="videobox" ontouchmove="return false;" style="display: none;z-index: -1">
         <video id="myvideo" x5-video-player-type="h5" style="display:none" height="512" width="256" loop
                x5-playsinline="" playsinline="" webkit-playsinline="" poster=""
                preload="auto"></video>
     </div>
-
     <div class="pStartAR">
-        <!-- <div class="s-title"></div>
-        <div class="m-title"></div>
-        <div class="arrow">
-        </div> -->
         <div class="bgbg">
             <a id="bStartAR" class="bStartAR" href="javascript:;" /></a>
         </div>
         <img src="img/openanim-landscape2.jpg" />
     </div>
-
-    <!--safari-->
-    <!--scanning page-->
+    <!--扫描-->
     <div class="pScanning">
         <div class="scanTip" id="scanTip"></div>
         <div class="scanTop" id="scanTop"></div>
         <div class="scanBody" id="scanBody"></div>
         <div class="bReady" id="bReady"></div>
     </div>
-
-    <!--display page (poster + videoPlane)-->
+    <!--AR 内容-->
     <div class="pDisplay">
         <div class="posterBox">
             <div class="posterPic" id="posterPic"></div>
         </div>
     </div>
-
-    <!--intro page-->
+    <!--了解更多-->
     <div class="introMask"></div>
     <div class="bIntroBox">
         <a href="javascript:;" class="bBack"></a>
@@ -187,23 +99,16 @@
     <div class="pIntro">
         <div class="content"></div>
     </div>
-
 </div>
 <!--横竖屏提示-->
 <div class="mask lock flex flex-v flex-align-center flex-pack-center">
     <div class="lock-bg">
     </div>
 </div>
-<!--<div class='wrap' id="threecontainer">-->
-    <!--<canvas class="wrap" id="three_container"></canvas>-->
-<!--</div>-->
-
 <div class='wrap' id="threecontainer" style="z-index: 1000; display: none;">
     <div class="bMore" id="bMore"></div>
     <canvas class="wrap" id="three_container"></canvas>
 </div>
-
 <script src="js/index.js"></script>
 </body>
-
 </html>

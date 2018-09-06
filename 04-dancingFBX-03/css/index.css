@@ -517,9 +517,9 @@ contentBox.safariBottomOffset {
 }
 
 .pDisplay .posterPic {
-    background: url(../img/r2d2.jpg) no-repeat;
+    background: url(../img/mongo.png) no-repeat;
     background-size: 100% 100%;
-    width: 6rem;
+    width: 65vh;
     height: 65vh;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;

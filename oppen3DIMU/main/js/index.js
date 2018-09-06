@@ -530,8 +530,6 @@
                     value: function (e, t) {
                         var n = this.height * (.5 * window.innerHeight - (e + .5 * t)) / t,
                             r = -this.height * window.innerHeight / (2 * t * Math.tan(s.Math.degToRad(.5 * this.camera.fov)));
-                        console.log(n);
-                        console.log(r);
                         this.mesh.position.set(0, n, r);
                         // this.camera.updateMatrixWorld(!0),
                         // this.camera.localToWorld(this.mesh.position),
@@ -568,7 +566,7 @@
                         // model
                         this.fbxLoader = new THREE.FBXLoader();
                         this.fbxLoader.load(
-                            'assets/SambaDancing.fbx',
+                            'assets/MongoFemale.fbx',
                             function ( object ) {
                                 ke.modelObject = object;
                                 object.mixer = new THREE.AnimationMixer( object );
@@ -577,13 +575,7 @@
                                 var action = object.mixer.clipAction( object.animations[ 0 ] );
                                 action.play();
 
-                                ke.modelObject.position.set(0, -100, -300); // SambaDancing
-                                // object.position.set(0, -2, -30); // Audi
-
-                                // ke.camera.updateMatrixWorld(!0);
-                                // ke.camera.localToWorld(ke.modelObject.position);
-                                // ke.camera.getWorldQuaternion(ke.modelObject.quaternion);
-                                // alert("ref to SambaDancing");
+                                ke.modelObject.position.set(0, -1, -4);
 
                                 ke.scene.add( object );
                             },

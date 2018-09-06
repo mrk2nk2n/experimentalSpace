@@ -486,7 +486,6 @@
         var fbxLoader = new THREE.FBXLoader();
         fbxLoader.load(
             'assets/fbx/Samba Dancing.fbx',
-            // 'https://threejs.org/examples/models/fbx/Samba%20Dancing.fbx',
             function ( object ) {
                 object.mixer = new THREE.AnimationMixer( object );
                 mixers.push( object.mixer );

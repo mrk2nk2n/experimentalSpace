@@ -9,7 +9,9 @@
     <meta content="yes" name="apple-touch-fullscreen" />
     <meta content="telephone=no,email=no" name="format-detection" />
     <title>MRH5 人鱼</title>
-    <link rel="apple-touch-icon" href="apple-touch-icon.png"> <script>(function (window){var STD_WIDTH=750, STD_FONT_SIZE=100,
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <script>
+        (function (window){var STD_WIDTH=750, STD_FONT_SIZE=100,
     root=document.documentElement, fontSize, scale, tDelayResize=null, onResizeCbs=[], pxToRem=function (px){return px / fontSize},
     stdPxToRem=function (stdPx){return stdPx / STD_FONT_SIZE}, remToPx=function (rem){return rem * fontSize}, remToStdPx=function (rem){return rem
         * STD_FONT_SIZE}, pxToStdPx=function (px){return px / scale}, stdPxToPx=function (px){return px * scale},
@@ -21,7 +23,8 @@
     offResize=function (onResizeCb){if (onResizeCb){var idx=onResizeCbs.indexOf(onResizeCb); if (~idx){onResizeCbs.splice(idx, 1)}}
     else{onResizeCbs=[]}}, autoRem={pxToRem: pxToRem, stdPxToRem: stdPxToRem, remToPx: remToPx, remToStdPx: remToStdPx, pxToStdPx: pxToStdPx,
         stdPxToPx: stdPxToPx, STD_FONT_SIZE: STD_FONT_SIZE, STD_WIDTH: STD_WIDTH, fontSize: null, scale: null, onResize: onResize,
-        offResize: offResize}; resize(); window.addEventListener("resize", delayResize, false); window.autoRem=autoRem})(window); </script>
+        offResize: offResize}; resize(); window.addEventListener("resize", delayResize, false); window.autoRem=autoRem})(window);
+    </script>
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -37,7 +40,7 @@
         <div id="newPage"></div>
         <!-- 摄像机在背景播放 -->
         <video id="video" playsinline=""></video>
-        <!-- AR视频 -->
+        <!-- AR 视频 -->
         <div class="videobox" ontouchmove="return false;" style="display: none;z-index: -1">
             <video id="myvideo" x5-video-player-type="h5" style="display:none" height="512" width="256" loop
                    x5-playsinline="" playsinline="" webkit-playsinline="" poster=""
