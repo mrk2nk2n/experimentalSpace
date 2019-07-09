@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Static Alpha | seeThru | HTML5 video with alpha channel transparencies</title>
+<!--     <link href="//fonts.googleapis.com/css?family=Lekton:400,700" rel="stylesheet" type="text/css" /> -->
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      body {
+        font-family: Lekton, Arial, Helvetica;
+        text-align: center;
+      }
+      #wrap {
+        height: 100%;
+        width: 600px;
+        margin: auto;
+        background-color: white;
+        box-shadow: inset 5px 0 5px -5px #333, inset -5px 0 5px -5px #333;
+        background-color: #b3b3b3;
+      }
+      h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-top: 24px;
+      }
+      h2 {
+        font-weight: normal;
+        font-size: 90%;
+        margin-top: 0px;
+      }
+      h3 {
+        font-weight: bold;
+      }
+      .demo {
+        padding: 20px 20px 20px 20px;
+        border-bottom: 1px dotted white;
+      }
+      code {
+        background-color: white;
+      }
+      #alphaToggle {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      #content {
+        border-top: 1px dotted white;
+      }
+      .button {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    </style>
+<!--     <script type="text/javascript" src="https://unpkg.com/seethru@latest/dist/seeThru.min.js"></script> -->
+    <script type="text/javascript" src="seeThru.min.js"></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>seeThru</h1>
+      <h2>Alpha channel transparencies for HTML5 &lt;video&gt;-elements</h2>
+      <div id="content">
+        <div class="demo">
+          <h3>Static alpha sourced from an image</h3>
+          <video onended="this.play();" autoplay loop>
+<!--             <source src="../video/robbe.webm" type="video/webm">
+              <source src="../video/robbe.mp4" type="video/mp4">
+                <source src="../video/robbe.ogg" type="video/ogg"> -->
+            <source src="robbe.webm" type="video/webm">
+              <source src="robbe.mp4" type="video/mp4">
+                <source src="robbe.ogg" type="video/ogg">
+          </video>
+          <p>and</p>
+<!--           <img src="../img/robbe-mask.png" alt="Mask"> -->
+		  <img src="robbe-mask.png" alt="Mask">
+          <p>with <code>seeThru.create('#select', {mask:'#myMask'});</code> results in:</p>
+          <video class="inAction" id="staticAlphaDemo" autoplay loop>
+<!--             <source src="../video/robbe.webm" type="video/webm">
+              <source src="../video/robbe.mp4" type="video/mp4">
+                <source src="../video/robbe.ogg" type="video/ogg"> -->
+            <source src="robbe.webm" type="video/webm">
+              <source src="robbe.mp4" type="video/mp4">
+                <source src="robbe.ogg" type="video/ogg">
+          </video>
+<!--           <img id="staticAlphaMask" src="../img/robbe-mask.png" alt="Mask" style="display: none;"> -->
+          <img id="staticAlphaMask" src="robbe-mask.png" alt="Mask" style="display: none;">
+        </div>
+        <div class="demo">Back to
+          <a href="https://github.com/m90/seeThru">GitHub</a> 
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            seeThru.create('#staticAlphaDemo', {
+              mask: '#staticAlphaMask'
+            });
+          });
+        </script>
+      </div>
+    </div>
+    <script>
+      if (/iPad|iPhone|iPod|Android/g.test(navigator.userAgent)) {
+        alert('Oh Hi! Unfortunately this script does not work on iOS and Android. Read the docs for further info on that!');
+      }
+    </script>
+  </body>
+</html>
